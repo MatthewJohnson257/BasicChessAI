@@ -13,15 +13,19 @@ class Piece(ABC):
 
 class Pawn(Piece):
     def move(self):
-        
+        coordsList = []
 
         # black pawn
         if(self.color == 'b'):
-            
+            if(self.y != 7):
+                coordsList.append([self.x, self.y + 1])
 
         # white pawn
         else:
+            if(self.y != 0):
+                coordsList.append([self.x, self.y - 1])
 
+        return(coordsList)
         print("Stub: Move Pawn")
 
 class Rook(Piece):

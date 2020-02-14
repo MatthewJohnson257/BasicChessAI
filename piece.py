@@ -13,6 +13,15 @@ class Piece(ABC):
 
 class Pawn(Piece):
     def move(self):
+        
+
+        # black pawn
+        if(self.color == 'b'):
+            
+
+        # white pawn
+        else:
+
         print("Stub: Move Pawn")
 
 class Rook(Piece):
@@ -32,7 +41,7 @@ class Queen(Piece):
         print("Stub: Move Queen")
 
 class King(Piece):
-    def __init__(self, )
+    # def __init__(self):
 
     def move(self):
         print("Stub: Move King")

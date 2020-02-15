@@ -118,9 +118,6 @@ class Board():
         window = Tk()
         window.title("Our Chess Board")
 
-        board = PhotoImage(file = "chessboard.png")
-        Label(window, image = board, bg = "grey")
-
         images = [[None for x in range(8)] for y in range(8)]
         backgrounds = [[None for x in range(8)] for y in range(8)]
         for i in range(0,8):

@@ -1,6 +1,7 @@
 # board.py
 
 from piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
+from tkinter import *
 
 class Board():
 
@@ -42,6 +43,10 @@ class Board():
                         self.grid[i][j] = King(i, j, 'w', 'K')
                     elif(grid[i][j] == 'k'):
                         self.grid[i][j] = King(i, j, 'b', 'k')
+                    elif(grid[i][j] == 'R'):
+                        self.grid[i][j] = Rook(i, j, 'w', 'R')
+                    elif(grid[i][j] == 'r'):
+                        self.grid[i][j] = Rook(i, j, 'b', 'r')
             self.whiteInCheck = self.isWhiteInCheck()
             self.blackInCheck = self.isBlackInCheck()
         else:
@@ -105,3 +110,65 @@ class Board():
             print('|', end = '')
             print()
         print("    ◘----------------◘")
+
+
+
+    # takes in a board, produces a single window for a graphical representation of the board
+    def graphicalBoard(self):
+        window = Tk()
+        window.title("Our Chess Board")
+
+        board = PhotoImage(file = "chessboard.png")
+        Label(window, image = board, bg = "grey")
+
+        images = [[None for x in range(8)] for y in range(8)]
+        backgrounds = [[None for x in range(8)] for y in range(8)]
+        for i in range(0,8):
+            for j in range(0,8):
+                if ((i + j) % 2 == 0):
+                    backgrounds[i][j] = "white"
+                else:
+                    backgrounds[i][j] = "grey"
+                if(self.grid[i][j] != None):
+                    if(self.grid[i][j].id == 'P'):
+                        images[i][j] = PhotoImage(file = "whitepawn.png")
+                        Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
+                    elif(self.grid[i][j].id == 'p'):
+                        images[i][j] = PhotoImage(file = "blackpawn.png")
+                        Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
+                    elif(self.grid[i][j].id == 'N'):
+                        images[i][j] = PhotoImage(file = "whiteknight.png")
+                        Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
+                    elif(self.grid[i][j].id == 'n'):
+                        images[i][j] = PhotoImage(file = "blackknight.png")
+                        Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
+                    elif(self.grid[i][j].id == 'B'):
+                        images[i][j] = PhotoImage(file = "whitebishop.png")
+                        Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
+                    elif(self.grid[i][j].id == 'b'):
+                        images[i][j] = PhotoImage(file = "blackbishop.png")
+                        Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
+                    elif(self.grid[i][j].id == 'Q'):
+                        images[i][j] = PhotoImage(file = "whitequeen.png")
+                        Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
+                    elif(self.grid[i][j].id == 'q'):
+                        images[i][j] = PhotoImage(file = "blackqueen.png")
+                        Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
+                    elif(self.grid[i][j].id == 'K'):
+                        images[i][j] = PhotoImage(file = "whiteking.png")
+                        Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
+                    elif(self.grid[i][j].id == 'k'):
+                        images[i][j] = PhotoImage(file = "blackking.png")
+                        Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
+                    elif(self.grid[i][j].id == 'R'):
+                        images[i][j] = PhotoImage(file = "whiterook.png")
+                        Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
+                    elif(self.grid[i][j].id == 'r'):
+                        images[i][j] = PhotoImage(file = "blackrook.png")
+                        Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
+                else:
+                    images[i][j] = PhotoImage(file = "blanksquare.png")
+                    Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
+                    
+
+        window.mainloop()

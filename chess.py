@@ -13,11 +13,22 @@ inputA = [['_', '_', '_', '_', '_', '_', 'q', 'k'],
 ['_', '_', '_', '_', '_', 'P', 'P', '_'],
 ['_', '_', '_', '_', 'R', '_', 'K', '_']]
 
+inputDefault = [['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
+['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+['_', '_', '_', '_', '_', '_', '_', '_'],
+['_', '_', '_', '_', '_', '_', '_', '_'],
+['_', '_', '_', '_', '_', '_', '_', '_'],
+['_', '_', '_', '_', '_', '_', '_', '_'],
+['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']]
+
 boardA = Board(inputA, True)
-
 boardA.printBoard()
+boardA.graphicalBoard()
 
-
+# boardDefault = Board(inputDefault, True)
+# boardDefault.printBoard()
+# boardDefault.graphicalBoard()
 
 
 

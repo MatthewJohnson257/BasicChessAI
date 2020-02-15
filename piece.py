@@ -18,8 +18,6 @@ class Piece(ABC):
         pass
 
 class Pawn(Piece):
-    def __init__(self, i, j, color, id):
-        super().__init__(i, j, color, id)
 
     # this method returns a list of coordinates that a Pawn would be able to move to
     # from its position if the rest of the board was completely empty

@@ -13,7 +13,7 @@ inputA = [['_', '_', '_', '_', '_', '_', 'q', 'k'],
 ['_', '_', '_', '_', '_', 'P', 'P', '_'],
 ['_', '_', '_', '_', 'R', '_', 'K', '_']]
 
-boardA = Board(inputA)
+boardA = Board(inputA, True)
 
 boardA.printBoard()
 

@@ -15,32 +15,35 @@ class Board():
     #           like Java's 'this'
 #a = [[0 for x in range(columns)] for y in range(rows)]
 
-    def __init__(self, grid):
-        self.grid = [[None for x in range(0,8)] for y in range(0,8)]
-        for i in range(0,8):
-            for j in range(0,8):
-                if(grid[i][j] == '_' or grid[i][j] == '-'):
-                    self.grid[i][j] = None
-                elif(grid[i][j] == 'P'):
-                    self.grid[i][j] = Pawn(i, j, 'w', 'P')
-                elif(grid[i][j] == 'p'):
-                    self.grid[i][j] = Pawn(i, j, 'b', 'p')
-                elif(grid[i][j] == 'N'):
-                    self.grid[i][j] = Knight(i, j, 'w', 'N')
-                elif(grid[i][j] == 'n'):
-                    self.grid[i][j] = Knight(i, j, 'b', 'n')
-                elif(grid[i][j] == 'B'):
-                    self.grid[i][j] = Bishop(i, j, 'w', 'B')
-                elif(grid[i][j] == 'b'):
-                    self.grid[i][j] = Bishop(i, j, 'b', 'b')
-                elif(grid[i][j] == 'Q'):
-                    self.grid[i][j] = Queen(i, j, 'w', 'Q')
-                elif(grid[i][j] == 'q'):
-                    self.grid[i][j] = Queen(i, j, 'b', 'q')
-                elif(grid[i][j] == 'K'):
-                    self.grid[i][j] = King(i, j, 'w', 'K')
-                elif(grid[i][j] == 'k'):
-                    self.grid[i][j] = King(i, j, 'b', 'k')
+    def __init__(self, grid, newBoard):
+        if(newBoard == True):
+            self.grid = [[None for x in range(0,8)] for y in range(0,8)]
+            for i in range(0,8):
+                for j in range(0,8):
+                    if(grid[i][j] == '_' or grid[i][j] == '-'):
+                        self.grid[i][j] = None
+                    elif(grid[i][j] == 'P'):
+                        self.grid[i][j] = Pawn(i, j, 'w', 'P')
+                    elif(grid[i][j] == 'p'):
+                        self.grid[i][j] = Pawn(i, j, 'b', 'p')
+                    elif(grid[i][j] == 'N'):
+                        self.grid[i][j] = Knight(i, j, 'w', 'N')
+                    elif(grid[i][j] == 'n'):
+                        self.grid[i][j] = Knight(i, j, 'b', 'n')
+                    elif(grid[i][j] == 'B'):
+                        self.grid[i][j] = Bishop(i, j, 'w', 'B')
+                    elif(grid[i][j] == 'b'):
+                        self.grid[i][j] = Bishop(i, j, 'b', 'b')
+                    elif(grid[i][j] == 'Q'):
+                        self.grid[i][j] = Queen(i, j, 'w', 'Q')
+                    elif(grid[i][j] == 'q'):
+                        self.grid[i][j] = Queen(i, j, 'b', 'q')
+                    elif(grid[i][j] == 'K'):
+                        self.grid[i][j] = King(i, j, 'w', 'K')
+                    elif(grid[i][j] == 'k'):
+                        self.grid[i][j] = King(i, j, 'b', 'k')
+        else:
+            self.grid = grid
 
 
     # takes in which color's turn it is, generates all valid moves for that player

@@ -15,7 +15,7 @@ class Board():
     #           like Java's 'this'
 #a = [[0 for x in range(columns)] for y in range(rows)]
 
-    def __init__(self, grid, newBoard):
+    def __init__(self, grid, newBoard = False, whiteInCheck = False, blackInCheck = False):
         if(newBoard == True):
             self.grid = [[None for x in range(0,8)] for y in range(0,8)]
             for i in range(0,8):
@@ -42,8 +42,14 @@ class Board():
                         self.grid[i][j] = King(i, j, 'w', 'K')
                     elif(grid[i][j] == 'k'):
                         self.grid[i][j] = King(i, j, 'b', 'k')
+            self.whiteInCheck = self.isWhiteInCheck()
+            self.blackInCheck = self.isBlackInCheck()
         else:
             self.grid = grid
+            self.whiteInCheck = whiteInCheck
+            self.blackInCheck = blackInCheck
+
+        self.evalValue = self.evaluationFunction()
 
 
     # takes in which color's turn it is, generates all valid moves for that player
@@ -63,9 +69,31 @@ class Board():
 
 
 
-    def printBoard(self):
 
-        #print(" 0 1 2 3 4 5 6 7 ")
+
+    def evaluationFunction(self):
+        GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
+        return(0) # STUB
+
+
+
+
+
+    def isWhiteInCheck(self):
+        GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
+        return(False) # STUB
+
+
+    def isBlackInCheck(self):
+        GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
+        return(False) # STUB
+
+    
+
+
+
+    # takes in a board, and prints to output a character representation of that board
+    def printBoard(self):
         print("    ◘----------------◘")
         for i in range(0,8):
             print('    |', end = '')

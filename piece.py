@@ -9,7 +9,7 @@ class Piece(ABC):
         self.j = j
         self.color = color
         self.id = id
-        # print("oh yeah we a piece man")  # debut print statement I guess lol
+        # print("oh yeah we a piece man")  # debug print statement I guess lol
 
 
     # this method returns a list of coordinates that a piece would be able to move to

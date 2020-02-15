@@ -86,7 +86,7 @@ class Board():
 
     def isBlackInCheck(self):
         GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
-        return(False) # STUB
+        return(False) # STUB 
 
     
 

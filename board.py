@@ -41,11 +41,15 @@ class Board():
 
 
     # takes in which color's turn it is, generates all valid moves for that player
+    #
+    # we will more fully implement this after we get all the move() methods in Piece.py done
     def generateMoves(self, color):
         if(color == 'b'):
             GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
-            # STUB - search the entire grid for black pieces, call move() for them
-            # then check to see if they are valid coordinate moves for that piece
+
+            # STUB - search the entire grid for black pieces, call move() for each of them
+            # then check to see if what is returned are valid coordinate moves for that piece
+            # (this will be more clear when you see what I wrote in Piece.py)
 
         if(color == 'w'):
             GucciMane = 1 # just here as a temporary placeholder so no errors are thrown

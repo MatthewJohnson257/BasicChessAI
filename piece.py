@@ -40,7 +40,11 @@ class Pawn(Piece):
             if(self.i != 0): # this line checks to make sure a white pawn isn't at the very top of the board
                 coordsList.append([self.i, self.j - 1])
 
-        return(coordsList)  
+        return(coordsList)  # return the list of coordinates - a method in board.py will then check to see if the coords
+                            # conflict with existing pieces or make the King in check and all that complicated stuff
+
+
+
         print("Stub: Move Pawn")
 
 class Rook(Piece):

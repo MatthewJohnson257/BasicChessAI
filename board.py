@@ -13,31 +13,34 @@ class Board():
     #       - any method that says '__init__' is a constructor.
     #       - 'self' just references to the specific object's instance, kind of
     #           like Java's 'this'
+#a = [[0 for x in range(columns)] for y in range(rows)]
+
     def __init__(self, grid):
-        for i in grid:
-            for j in grid[0]:
-                if(grid[i][j] == '-'):
-                    grid[i][j] = None
+        self.grid = [[None for x in range(0,8)] for y in range(0,8)]
+        for i in range(0,8):
+            for j in range(0,8):
+                if(grid[i][j] == '_' or grid[i][j] == '-'):
+                    self.grid[i][j] = None
                 elif(grid[i][j] == 'P'):
-                    grid[i][j] = Pawn(i, j, 'w')
+                    self.grid[i][j] = Pawn(i, j, 'w', 'P')
                 elif(grid[i][j] == 'p'):
-                    grid[i][j] = Pawn(i, j, 'b')
+                    self.grid[i][j] = Pawn(i, j, 'b', 'p')
                 elif(grid[i][j] == 'N'):
-                    grid[i][j] = Knight(i, j, 'w')
+                    self.grid[i][j] = Knight(i, j, 'w', 'N')
                 elif(grid[i][j] == 'n'):
-                    grid[i][j] = Knight(i, j, 'b')
+                    self.grid[i][j] = Knight(i, j, 'b', 'n')
                 elif(grid[i][j] == 'B'):
-                    grid[i][j] = Bishop(i, j, 'w')
+                    self.grid[i][j] = Bishop(i, j, 'w', 'B')
                 elif(grid[i][j] == 'b'):
-                    grid[i][j] = Bishop(i, j, 'b')
+                    self.grid[i][j] = Bishop(i, j, 'b', 'b')
                 elif(grid[i][j] == 'Q'):
-                    grid[i][j] = Queen(i, j, 'w')
+                    self.grid[i][j] = Queen(i, j, 'w', 'Q')
                 elif(grid[i][j] == 'q'):
-                    grid[i][j] = Queen(i, j, 'b')
+                    self.grid[i][j] = Queen(i, j, 'b', 'q')
                 elif(grid[i][j] == 'K'):
-                    grid[i][j] = King(i, j, 'w')
+                    self.grid[i][j] = King(i, j, 'w', 'K')
                 elif(grid[i][j] == 'k'):
-                    grid[i][j] = King(i, j, 'b')
+                    self.grid[i][j] = King(i, j, 'b', 'k')
 
 
     # takes in which color's turn it is, generates all valid moves for that player
@@ -56,3 +59,18 @@ class Board():
             # STUB
 
 
+
+    def printBoard(self):
+
+        #print(" 0 1 2 3 4 5 6 7 ")
+        print("    ◘----------------◘")
+        for i in range(0,8):
+            print('    |', end = '')
+            for j in range(0,8):
+                if(self.grid[i][j] == None):
+                    print(" ", end = ' ')
+                else:
+                    print(self.grid[i][j].id, end = ' ')
+            print('|', end = '')
+            print()
+        print("    ◘----------------◘")

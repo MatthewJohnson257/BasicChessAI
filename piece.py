@@ -35,11 +35,11 @@ class Pawn(Piece):
         # black pawn
         if(self.color == 'b'):
             if(self.i != 7): # this line checks to make sure a black pawn isn't at the very bottom of the board
-                if(board.grid[i+1][j] == None): #pawn can move forward normally
+                if(board.grid[self.i+1][j] == None): #pawn can move forward normally
                     coordsList.append([self.i + 1, self.j])
-                if(board.grid[i+1][j-1] != None and board.grid[i+1][j-1].color != self.color and j > 0 and board.grid[i+1][j-1].kink != True): #pawn captures
+                if(self.j > 0 and board.grid[self.i+1][self.j-1] != None and board.grid[self.i+1][self.j-1].color != self.color and board.grid[self.i+1][self.j-1].kink != True): #pawn captures
                     coordsList.append([self.i + 1, self.j - 1])
-                if(board.grid[i+1][j+1] != None and board.grid[i+1][j+1].color != self.color and j < 8 and board.grid[i+1][j+1].kink != True): #pawn captures
+                if(self.j < 7 and board.grid[self.i+1][self.j+1] != None and board.grid[self.i+1][self.j+1].color != self.color and board.grid[self.i+1][self.j+1].kink != True): #pawn captures
                     coordsList.append([self.i + 1, self.j + 1])
 
 
@@ -49,11 +49,11 @@ class Pawn(Piece):
         # white pawn
         else:
             if(self.i != 0): # this line checks to make sure a white pawn isn't at the very top of the board
-                if(board.grid[i-1][j] == None): #pawn can move forward normally
+                if(board.grid[self.i-1][self.j] == None): #pawn can move forward normally
                     coordsList.append([self.i - 1, self.j])
-                if(board.grid[i-1][j-1] != None and board.grid[i-1][j-1].color != self.color and j > 0 and board.grid[i-1][j-1].kink != True): #pawn captures
+                if(self.j > 0 and board.grid[self.i-1][self.j-1] != None and board.grid[self.i-1][self.j-1].color != self.color and board.grid[self.i-1][self.j-1].kink != True): #pawn captures
                     coordsList.append([self.i + 1, self.j - 1])
-                if(board.grid[i-1][j+1] != None and board.grid[i-1][j+1].color != self.color and j < 8 and board.grid[i-1][j+1].kink != True): #pawn captures
+                if(self.j < 7 and board.grid[self.i-1][self.j+1] != None and board.grid[self.i-1][self.j+1].color != self.color and board.grid[self.i-1][self.j+1].kink != True): #pawn captures
                     coordsList.append([self.i + 1, self.j + 1])
 
 

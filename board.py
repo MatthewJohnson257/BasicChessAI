@@ -55,6 +55,7 @@ class Board():
             self.blackInCheck = blackInCheck
 
         self.evalValue = self.evaluationFunction()
+        self.testMoveMethodPawn()
 
 
     # takes in which color's turn it is, generates all valid moves for that player
@@ -72,7 +73,13 @@ class Board():
             GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
             # STUB
 
-
+    # temporary method to test move() methods
+    def testMoveMethodPawn(self):
+        for i in range(8):
+            for j in range(8):
+                if(self.grid[i][j] != None):
+                    if(self.grid[i][j].id == 'P'):
+                        print(self.grid[i][j].move(self))
 
 
 

@@ -96,7 +96,6 @@ class Board():
                     jKing = j
                     break
 
-        # check for knights attacking
 
         # check for horizontal attacks from left
 
@@ -113,6 +112,8 @@ class Board():
         # check for diagonal from top right
 
         # check for diagonal from bottom left
+
+        # check for knights attacking
         
         
         return(False) # STUB
@@ -196,5 +197,6 @@ class Board():
                     images[i][j] = PhotoImage(file = "blanksquare.png")
                     Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
                     
-
+        # b = Button(window, text="OK", command=callback)
         window.mainloop()
+        print("WOEIRJEIJ")

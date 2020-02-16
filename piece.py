@@ -25,7 +25,7 @@ class Pawn(Piece):
 
     # this method returns a list of coordinates that a Pawn would be able to move to
     # from its position if the rest of the board was completely empty
-    def move(self):
+    def move(self, board):
 
         coordsList = []   # this is a list of (i,j) coordinates where a pawn can move.
                           # each move() method will need a list like this.  For a pawn, the list
@@ -66,7 +66,7 @@ class Pawn(Piece):
 
 
 class Rook(Piece):
-    def move(self):
+    def move(self, board):
         coordsList = []
 
         m = self.i
@@ -99,7 +99,7 @@ class Rook(Piece):
 
 
 class Knight(Piece):
-    def move(self):
+    def move(self, board):
         coordsList = []
         x = self.i
         y = self.j
@@ -127,7 +127,7 @@ class Knight(Piece):
         print("Stub: Move Knight")
 
 class Bishop(Piece):
-    def move(self):
+    def move(self, board):
         coordsList = []
         m = self.i
         x = m + 0  #cause i was lazy to deep copy and dont wanna copy by reference
@@ -167,7 +167,7 @@ class Bishop(Piece):
 
 
 class Queen(Piece): #for queen you can reuse rook and bishop moves
-    def move(self):
+    def move(self, board):
         coordsList = []
         m = self.i
         x = m + 0  #cause i was lazy to deep copy and dont wanna copy by reference
@@ -229,7 +229,7 @@ class Queen(Piece): #for queen you can reuse rook and bishop moves
 
 
 class King(Piece):
-    def move(self):
+    def move(self, board):
         coordsList = []
         x = self.i
         y = self.j

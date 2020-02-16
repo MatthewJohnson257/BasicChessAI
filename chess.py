@@ -22,13 +22,13 @@ inputDefault = [['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
 ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
 ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']]
 
-boardA = Board(inputA, True)
-boardA.printBoard()
-boardA.graphicalBoard()
+# boardA = Board(inputA, True)
+# boardA.printBoard()
+# boardA.graphicalBoard()
 
-# boardDefault = Board(inputDefault, True)
-# boardDefault.printBoard()
-# boardDefault.graphicalBoard()
+boardDefault = Board(inputDefault, True)
+boardDefault.printBoard()
+boardDefault.graphicalBoard()
 
 
 

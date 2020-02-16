@@ -52,9 +52,9 @@ class Pawn(Piece):
                 if(board.grid[self.i-1][self.j] == None): #pawn can move forward normally
                     coordsList.append([self.i - 1, self.j])
                 if(self.j > 0 and board.grid[self.i-1][self.j-1] != None and board.grid[self.i-1][self.j-1].color != self.color and board.grid[self.i-1][self.j-1].kink != True): #pawn captures
-                    coordsList.append([self.i + 1, self.j - 1])
+                    coordsList.append([self.i - 1, self.j - 1])
                 if(self.j < 7 and board.grid[self.i-1][self.j+1] != None and board.grid[self.i-1][self.j+1].color != self.color and board.grid[self.i-1][self.j+1].kink != True): #pawn captures
-                    coordsList.append([self.i + 1, self.j + 1])
+                    coordsList.append([self.i - 1, self.j + 1])
 
 
         return(coordsList)  # return the list of coordinates - a method in board.py will then check to see if the coords

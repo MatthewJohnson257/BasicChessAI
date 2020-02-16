@@ -75,25 +75,25 @@ class Rook(Piece):
 
         while(x < 7): #move rook to all legal  upward rows
             x = x + 1
-            if( (board.grid[x][n] == '-' or board.grid[x][n].color != self.color) and board.grid[x][n].kink != True):
+            if( (board.grid[x][n] == None or board.grid[x][n].color != self.color) and board.grid[x][n].kink != True):
                 coordsList.append([x,n])
 
         x = m + 0
         while(x > 0): # move rook to all legal downward rows
             x = x - 1
-            if( (board.grid[x][n] == '-' or board.grid[x][n].color != self.color) and board.grid[x][n].kink != True):
+            if( (board.grid[x][n] == None or board.grid[x][n].color != self.color) and board.grid[x][n].kink != True):
                 coordsList.append([x,n])
 
         x = n + 0   #cause i was lazy to deep copy and dont wanna copy by reference
         while(x < 7): #move rook to all legal  rightward columns
             x = x + 1
-            if( (board.grid[m][x] == '-' or board.grid[m][x].color != self.color) and board.grid[m][x].kink != True):
+            if( (board.grid[m][x] == None or board.grid[m][x].color != self.color) and board.grid[m][x].kink != True):
                 coordsList.append([m,x])
 
         x = m + 0 #cause i was lazy to deep copy and dont wanna copy by reference
         while(x > 0): # move rook to all legal leftward columns
             x = x - 1
-            if( (board.grid[m][x] == '-' or board.grid[m][x].color != self.color) and board.grid[m][x].kink != True):
+            if( (board.grid[m][x] == None or board.grid[m][x].color != self.color) and board.grid[m][x].kink != True):
                 coordsList.append([m,x])
         print("Stub: Move Rook")
 
@@ -137,7 +137,7 @@ class Bishop(Piece):
         while(x < 7 and z < 7): #move bishop to all right diagonals upwards
             x = x + 1
             z = z + 1
-            if( (board.grid[x][z] == '-' or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
+            if( (board.grid[x][z] == None or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
                 coordsList.append([x,z])
                 flag = True
             if not flag: # if(!flag)
@@ -147,21 +147,21 @@ class Bishop(Piece):
         while(x > 0 and n > 0): # move bishop  left diagonal downwards
             x = x - 1
             z = z - 1
-            if( (board.grid[x][z] == '-' or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
+            if( (board.grid[x][z] == None or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
                 coordsList.append([x,z])
         x = m + 0   #cause i was lazy to deep copy and dont wanna copy by reference
         z = n + 0   #switching pointers for rows and columns
         while(x < 7 and z > 0): #move bishop
             x = x + 1
             z = z - 1
-            if( (board.grid[x][z] == '-' or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
+            if( (board.grid[x][z] == None or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
                 coordsList.append([x,z])
         x = m + 0 #cause i was lazy to deep copy and dont wanna copy by reference
         z = n + 0
         while(x > 0 and z < 8): # move bishop
             x = x - 1
             z = z + 1
-            if( (board.grid[x][z] == '-' or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
+            if( (board.grid[x][z] == None or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
                 coordsList.append([x,z])
         print("Stub: Move Bishop")
 
@@ -175,19 +175,19 @@ class Queen(Piece): #for queen you can reuse rook and bishop moves
 
         while(x < 7): #move rook to all legal  upward rows
             x = x + 1
-            if( (board.grid[x][n] == '-' or board.grid[x][n].color != self.color) and board.grid[x][n].kink != True):
+            if( (board.grid[x][n] == None or board.grid[x][n].color != self.color) and board.grid[x][n].kink != True):
                 coordsList.append([x,n])
 
         x = m + 0
         while(x > 0): # move rook to all legal downward rows
             x = x - 1
-            if( (board.grid[x][n] == '-' or board.grid[x][n].color != self.color) and board.grid[x][n].kink != True):
+            if( (board.grid[x][n] == None or board.grid[x][n].color != self.color) and board.grid[x][n].kink != True):
                 coordsList.append([x,n])
 
         x = n + 0   #cause i was lazy to deep copy and dont wanna copy by reference
         while(x < 7): #move rook to all legal  rightward columns
             x = x + 1
-            if( (board.grid[m][x] == '-' or board.grid[m][x].color != self.color) and board.grid[m][x].kink != True):
+            if( (board.grid[m][x] == None or board.grid[m][x].color != self.color) and board.grid[m][x].kink != True):
                 coordsList.append([m,x])
 
         x = m + 0 #cause i was lazy to deep copy and dont wanna copy by reference
@@ -202,28 +202,28 @@ class Queen(Piece): #for queen you can reuse rook and bishop moves
         while(x < 7 and z < 7): #move bishop to all right diagonals upwards
             x = x + 1
             z = z + 1
-            if( (board.grid[x][z] == '-' or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
+            if( (board.grid[x][z] == None or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
                 coordsList.append([x,z])
         x = m + 0
         z = n + 0
         while(x > 0 and n > 0): # move bishop  left diagonal downwards
             x = x - 1
             z = z - 1
-            if( (board.grid[x][z] == '-' or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
+            if( (board.grid[x][z] == None or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
                 coordsList.append([x,z])
         x = m + 0   #cause i was lazy to deep copy and dont wanna copy by reference
         z = n + 0   #switching pointers for rows and columns
         while(x < 7 and z > 0): #move bishop
             x = x + 1
             z = z - 1
-            if( (board.grid[x][z] == '-' or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
+            if( (board.grid[x][z] == None or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
                 coordsList.append([x,z])
         x = m + 0 #cause i was lazy to deep copy and dont wanna copy by reference
         z = n + 0
         while(x > 0 and z < 8): # move bishop
             x = x - 1
             z = z + 1
-            if( (board.grid[x][z] == '-' or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
+            if( (board.grid[x][z] == None or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
                 coordsList.append([x,z])
         print("Stub: Move Queen")
 
@@ -233,20 +233,20 @@ class King(Piece):
         coordsList = []
         x = self.i
         y = self.j
-        if( (x < 7) and (board.grid[x+1][y] ==  '-' or board.grid[x+1][y].color =! self.color or board.grid[x+1][y].kink != True)  ):
+        if( (x < 7) and (board.grid[x+1][y] ==  None or board.grid[x+1][y].color =! self.color or board.grid[x+1][y].kink != True)  ):
             coordsList.append([x,y])
-        if( (x > 0) and (board.grid[x-1][y] ==  '-' or board.grid[x-1][y].color =! self.color or board.grid[x-1][y].kink != True)  ):
+        if( (x > 0) and (board.grid[x-1][y] ==  None or board.grid[x-1][y].color =! self.color or board.grid[x-1][y].kink != True)  ):
             coordsList.append([x,y])
-        if( (y > 0) and (board.grid[x][y-1] ==  '-' or board.grid[x][y-1].color =! self.color or board.grid[x][y-1].kink != True)  ):
+        if( (y > 0) and (board.grid[x][y-1] ==  None or board.grid[x][y-1].color =! self.color or board.grid[x][y-1].kink != True)  ):
             coordsList.append([x,y])
-        if( (y > 0) and (board.grid[x][y+1] ==  '-' or board.grid[x][y+1].color =! self.color or board.grid[x][y+1].kink != True)  ):
+        if( (y > 0) and (board.grid[x][y+1] ==  None or board.grid[x][y+1].color =! self.color or board.grid[x][y+1].kink != True)  ):
             coordsList.append([x,y])
-        if( (x < 7) and (y < 7) and (board.grid[x+1][y+1] ==  '-' or board.grid[x+1][y+1].color =! self.color or board.grid[x+1][y+1].kink != True)  ):
+        if( (x < 7) and (y < 7) and (board.grid[x+1][y+1] ==  None or board.grid[x+1][y+1].color =! self.color or board.grid[x+1][y+1].kink != True)  ):
             coordsList.append([x,y])
-        if( (x < 7) and (y > 0) and (board.grid[x+1][y-1] ==  '-' or board.grid[x+1][y-1].color =! self.color or board.grid[x+1][y-1].kink != True)  ):
+        if( (x < 7) and (y > 0) and (board.grid[x+1][y-1] ==  None or board.grid[x+1][y-1].color =! self.color or board.grid[x+1][y-1].kink != True)  ):
             coordsList.append([x,y])
-        if( (x > 0) and (y > 0) and (board.grid[x-1][y-1] ==  '-' or board.grid[x-1][y-1].color =! self.color or board.grid[x-1][y-1].kink != True)  ):
+        if( (x > 0) and (y > 0) and (board.grid[x-1][y-1] ==  None or board.grid[x-1][y-1].color =! self.color or board.grid[x-1][y-1].kink != True)  ):
             coordsList.append([x,y])
-        if( (x > 0) and (y < 7) and (board.grid[x-1][y+1] ==  '-' or board.grid[x-1][y+1].color =! self.color or board.grid[x-1][y+1].kink != True)  ):
+        if( (x > 0) and (y < 7) and (board.grid[x-1][y+1] ==  None or board.grid[x-1][y+1].color =! self.color or board.grid[x-1][y+1].kink != True)  ):
             coordsList.append([x,y])
         print("Stub: Move King")

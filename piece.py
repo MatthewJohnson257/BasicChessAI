@@ -35,11 +35,11 @@ class Pawn(Piece):
         # black pawn
         if(self.color == 'b'):
             if(self.i != 7): # this line checks to make sure a black pawn isn't at the very bottom of the board
-                if(board.grid[i+1][j] == '-') #pawn can move forward normally
+                if(board.grid[i+1][j] == None): #pawn can move forward normally
                     coordsList.append([self.i + 1, self.j])
-                if(board.grid[i+1][j-1] != '-' and board.grid[i+1][j-1].color != self.color and j > 0 and board.grid[i+1][j-1].kink != True) #pawn captures
+                if(board.grid[i+1][j-1] != None and board.grid[i+1][j-1].color != self.color and j > 0 and board.grid[i+1][j-1].kink != True): #pawn captures
                     coordsList.append([self.i + 1, self.j - 1])
-                if(board.grid[i+1][j+1] != '-' and board.grid[i+1][j+1].color != self.color and j < 8 and board.grid[i+1][j+1].kink != True) #pawn captures
+                if(board.grid[i+1][j+1] != None and board.grid[i+1][j+1].color != self.color and j < 8 and board.grid[i+1][j+1].kink != True): #pawn captures
                     coordsList.append([self.i + 1, self.j + 1])
 
 
@@ -49,11 +49,11 @@ class Pawn(Piece):
         # white pawn
         else:
             if(self.i != 0): # this line checks to make sure a white pawn isn't at the very top of the board
-                if(board.grid[i-1][j] == '-'): #pawn can move forward normally
+                if(board.grid[i-1][j] == None): #pawn can move forward normally
                     coordsList.append([self.i - 1, self.j])
-                if(board.grid[i-1][j-1] != '-' and board.grid[i-1][j-1].color != self.color and j > 0 and board.grid[i-1][j-1].kink != True): #pawn captures
+                if(board.grid[i-1][j-1] != None and board.grid[i-1][j-1].color != self.color and j > 0 and board.grid[i-1][j-1].kink != True): #pawn captures
                     coordsList.append([self.i + 1, self.j - 1])
-                if(board.grid[i-1][j+1] != '-' and board.grid[i-1][j+1].color != self.color and j < 8 and board.grid[i-1][j+1].kink != True): #pawn captures
+                if(board.grid[i-1][j+1] != None and board.grid[i-1][j+1].color != self.color and j < 8 and board.grid[i-1][j+1].kink != True): #pawn captures
                     coordsList.append([self.i + 1, self.j + 1])
 
 
@@ -103,21 +103,21 @@ class Knight(Piece):
         coordsList = []
         x = self.i
         y = self.j
-        if( x < 6 and y < 7  and (board.grid[x+2][y+1] == '-' or board.grid[x+2][y+1].color != self.color) and board.grid[x+2][y+1].kink != True):
+        if( x < 6 and y < 7  and (board.grid[x+2][y+1] == None or board.grid[x+2][y+1].color != self.color) and board.grid[x+2][y+1].kink != True):
             coordsList.append([x+2,y+1])
-        if( x < 6 and y > 0 and (board.grid[x+2][y-1] == '-' or board.grid[x+2][y-1].color != self.color) and board.grid[x+2][y-1].kink != True):
+        if( x < 6 and y > 0 and (board.grid[x+2][y-1] == None or board.grid[x+2][y-1].color != self.color) and board.grid[x+2][y-1].kink != True):
             coordsList.append([x+2,y-1])
-        if( x < 7 and y < 6 and (board.grid[x+1][y+2] == '-' or board.grid[x+1][y+2].color != self.color) and board.grid[x+1][y+2].kink != True):
+        if( x < 7 and y < 6 and (board.grid[x+1][y+2] == None or board.grid[x+1][y+2].color != self.color) and board.grid[x+1][y+2].kink != True):
             coordsList.append([x+1,y+2])
-        if( x < 7 and y > 1 and (board.grid[x+1][y-2] == '-' or board.grid[x+1][y-2].color != self.color) and board.grid[x+1][y-2].kink != True):
+        if( x < 7 and y > 1 and (board.grid[x+1][y-2] == None or board.grid[x+1][y-2].color != self.color) and board.grid[x+1][y-2].kink != True):
             coordsList.append([x+1,y-2])
-        if( x > 1 and y < 7  and (board.grid[x-2][y+1] == '-' or board.grid[x-2][y+1].color != self.color) and board.grid[x-2][y+1].kink != True):
+        if( x > 1 and y < 7  and (board.grid[x-2][y+1] == None or board.grid[x-2][y+1].color != self.color) and board.grid[x-2][y+1].kink != True):
             coordsList.append([x-2,y+1])
-        if( x > 1 and y > 0  and (board.grid[x-2][y-1] == '-' or board.grid[x-2][y-1].color != self.color) and board.grid[x-2][y-1].kink != True):
+        if( x > 1 and y > 0  and (board.grid[x-2][y-1] == None or board.grid[x-2][y-1].color != self.color) and board.grid[x-2][y-1].kink != True):
             coordsList.append([x-2,y-1])
-        if( x > 0 and y > 1 and (board.grid[x-1][y-2] == '-' or board.grid[x-1][y-2].color != self.color) and board.grid[x-1][y-2].kink != True):
+        if( x > 0 and y > 1 and (board.grid[x-1][y-2] == None or board.grid[x-1][y-2].color != self.color) and board.grid[x-1][y-2].kink != True):
             coordsList.append([x-1,y-2])
-        if( x > 0 and y < 6 and (board.grid[x-1][y+2] == '-' or board.grid[x-1][y+2].color != self.color) and board.grid[x-1][y+2].kink != True):
+        if( x > 0 and y < 6 and (board.grid[x-1][y+2] == None or board.grid[x-1][y+2].color != self.color) and board.grid[x-1][y+2].kink != True):
             coordsList.append([x-1,y+2])
 
 
@@ -193,7 +193,7 @@ class Queen(Piece): #for queen you can reuse rook and bishop moves
         x = m + 0 #cause i was lazy to deep copy and dont wanna copy by reference
         while(x > 0): # move rook to all legal leftward columns
             x = x - 1
-            if( (board.grid[m][x] == '-' or board.grid[m][x].color != self.color) and board.grid[m][x].kink != True):
+            if( (board.grid[m][x] == None or board.grid[m][x].color != self.color) and board.grid[m][x].kink != True):
                 coordsList.append([m,x])
         m = self.i
         x = m + 0  #cause i was lazy to deep copy and dont wanna copy by reference

@@ -85,7 +85,36 @@ class Board():
 
 
     def isWhiteInCheck(self):
-        GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
+
+        # find where the white king is
+        iKing = 0
+        jKing = 0
+        for i in range(8):
+            for j in range(8):
+                if(self.grid[i][j] != None and self.grid[i][j].id == 'K'):
+                    iKing = i
+                    jKing = j
+                    break
+
+        # check for knights attacking
+
+        # check for horizontal attacks from left
+
+        # check for horizontal attacks from right
+
+        # check for vertical attacks from above
+
+        # check for vertical attacks from below
+
+        # check for diagonal from top left
+
+        # check for diagonal from bottom left
+
+        # check for diagonal from top right
+
+        # check for diagonal from bottom left
+        
+        
         return(False) # STUB
 
 

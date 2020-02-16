@@ -292,19 +292,19 @@ class King(Piece):
         x = self.i
         y = self.j
         if( (x < 7) and (board.grid[x+1][y] ==  None or board.grid[x+1][y].color != self.color or board.grid[x+1][y].kink != True)  ):
-            coordsList.append([x,y])
+            coordsList.append([x+1,y])
         if( (x > 0) and (board.grid[x-1][y] ==  None or board.grid[x-1][y].color != self.color or board.grid[x-1][y].kink != True)  ):
-            coordsList.append([x,y])
+            coordsList.append([x-1,y])
         if( (y > 0) and (board.grid[x][y-1] ==  None or board.grid[x][y-1].color != self.color or board.grid[x][y-1].kink != True)  ):
-            coordsList.append([x,y])
+            coordsList.append([x,y-1])
         if( (y > 0) and (board.grid[x][y+1] ==  None or board.grid[x][y+1].color != self.color or board.grid[x][y+1].kink != True)  ):
-            coordsList.append([x,y])
+            coordsList.append([x,y+1])
         if( (x < 7) and (y < 7) and (board.grid[x+1][y+1] ==  None or board.grid[x+1][y+1].color != self.color or board.grid[x+1][y+1].kink != True)  ):
-            coordsList.append([x,y])
+            coordsList.append([x+1,y+1])
         if( (x < 7) and (y > 0) and (board.grid[x+1][y-1] ==  None or board.grid[x+1][y-1].color != self.color or board.grid[x+1][y-1].kink != True)  ):
-            coordsList.append([x,y])
+            coordsList.append([x+1,y-1])
         if( (x > 0) and (y > 0) and (board.grid[x-1][y-1] ==  None or board.grid[x-1][y-1].color != self.color or board.grid[x-1][y-1].kink != True)  ):
-            coordsList.append([x,y])
+            coordsList.append([x-1,y-1])
         if( (x > 0) and (y < 7) and (board.grid[x-1][y+1] ==  None or board.grid[x-1][y+1].color != self.color or board.grid[x-1][y+1].kink != True)  ):
-            coordsList.append([x,y])
+            coordsList.append([x-,y+1])
         print("Stub: Move King")

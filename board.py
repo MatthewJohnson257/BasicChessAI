@@ -125,7 +125,7 @@ class Board():
                 if ((i + j) % 2 == 0):
                     backgrounds[i][j] = "white"
                 else:
-                    backgrounds[i][j] = "grey"
+                    backgrounds[i][j] = "mediumpurple1"
                 if(self.grid[i][j] != None):
                     if(self.grid[i][j].id == 'P'):
                         images[i][j] = PhotoImage(file = "whitepawn.png")

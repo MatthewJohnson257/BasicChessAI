@@ -277,7 +277,7 @@ class Board():
                             self.bMobility = self.bMobility + self.REval[i][j]
                         elif self.grid[i][j].id == 'k':
                             blackCount = blackCount + 20000
-                            self.bMobility = self.bMobility + self.kEval[i][j]
+                            self.bMobility = self.bMobility + self.KEval[i][j]
 
         return(whiteCount - blackCount + self.mobility - self.bMobility) # STUB
 

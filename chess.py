@@ -15,12 +15,12 @@ inputA = [['_', '_', '_', '_', '_', '_', 'q', 'k'],
 
 inputDefault = [['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
 ['p', 'p', 'N', 'p', 'p', 'p', '_', 'p'],
-['P', '_', '_', 'P', '_', '_', 'R', '_'],
-['_', '_', '_', 'B', 'N', '_', 'p', '_'],
+['P', '_', '_', 'P', '_', 'K', 'R', '_'],
+['_', '_', 'Q', 'B', 'N', '_', 'p', '_'],
 ['_', '_', '_', '_', '_', '_', '_', 'P'],
 ['_', '_', '_', '_', '_', '_', '_', '_'],
 ['_', 'P', 'P', '_', 'P', 'P', 'P', '_'],
-['R', '_', 'B', 'Q', 'K', '_', '_', '_']]
+['R', '_', 'B', '_', '_', '_', '_', '_']]
 
 # boardA = Board(inputA, True)
 # boardA.printBoard()
@@ -28,7 +28,6 @@ inputDefault = [['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
 
 boardDefault = Board(inputDefault, True)
 boardDefault.printBoard()
-
 boardDefault.graphicalBoard()
 
 

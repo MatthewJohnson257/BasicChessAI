@@ -165,7 +165,7 @@ class Bishop(Piece):
                 break
         x = m + 0
         z = n + 0
-        while(x > 0 and n > 0): # move bishop left diagonal downwards
+        while(x > 0 and z > 0): # move bishop left diagonal downwards
             x = x - 1
             z = z - 1
             if(board.grid[x][z] == None):
@@ -270,7 +270,7 @@ class Queen(Piece): #for queen you can reuse rook and bishop moves
                 break
         x = m + 0
         z = n + 0
-        while(x > 0 and n > 0): # move bishop left diagonal downwards
+        while(x > 0 and z > 0): # move bishop left diagonal downwards
             x = x - 1
             z = z - 1
             if(board.grid[x][z] == None):

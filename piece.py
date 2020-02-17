@@ -154,36 +154,36 @@ class Bishop(Piece):
         x = m + 0  #cause i was lazy to deep copy and dont wanna copy by reference
         n = self.j
         z = n + 0
-        flag = False
         while(x < 7 and z < 7): #move bishop to all right diagonals upwards
             x = x + 1
             z = z + 1
-            if( (board.grid[x][z] == None or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
+            if(board.grid[x][z] == None):
                 coordsList.append([x,z])
-                flag = True
-                if not flag: # if(!flag)
-                    break
+            elif(board.grid[x][z].color != self.color and board.grid[x][z].kink != True):
+                coordsList.append([x,z])
+                break
+            else:
+                break
         x = m + 0
         z = n + 0
-        flag = False
-        while(x > 0 and n > 0): # move bishop  left diagonal downwards
+        while(x > 0 and n > 0): # move bishop left diagonal downwards
             x = x - 1
             z = z - 1
-            if( (board.grid[x][z] == None or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
+            if(board.grid[x][z] == None):
                 coordsList.append([x,z])
-            flag = True
-            if not flag: # if(!flag)
+            elif(board.grid[x][z].color != self.color and board.grid[x][z].kink != True):
+                coordsList.append([x,z])
+                break
+            else:
                 break
         x = m + 0   #cause i was lazy to deep copy and dont wanna copy by reference
         z = n + 0   #switching pointers for rows and columns
-        flag = False
         while(x < 7 and z > 0): #move bishop
             x = x + 1
             z = z - 1
             if( (board.grid[x][z] == None or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
                 coordsList.append([x,z])
-            flag = True
-            if not flag: # if(!flag)
+            else:
                 break
         x = m + 0 #cause i was lazy to deep copy and dont wanna copy by reference
         z = n + 0
@@ -197,6 +197,8 @@ class Bishop(Piece):
             if not flag: # if(!flag)
                 break
         print("Stub: Move Bishop")
+
+        return(coordsList)
 
 
 class Queen(Piece): #for queen you can reuse rook and bishop moves

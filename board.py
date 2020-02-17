@@ -54,7 +54,7 @@ class Board():
             self.whiteInCheck = whiteInCheck
             self.blackInCheck = blackInCheck
 
-        self.evalValue = self.evaluationFunction()
+        self.evalValue = self.evaluationFunction()            
         #self.testMoveMethodWhitePawn()
         #self.testMoveMethodWhiteRook()
         self.testMoveMethodWhiteKnight()

@@ -104,7 +104,7 @@ class Board():
                         elif self.grid[i][j].id == 'N':
                             whiteCount = whiteCount + 3
                         elif self.grid[i][j].id == 'B':
-                            whiteCount = whiteCount + 3
+                            whiteCount = whiteCount + 3.07
                         elif self.grid[i][j].id == 'Q':
                             whiteCount = whiteCount + 9
                         elif self.grid[i][j].id == 'R':
@@ -115,7 +115,7 @@ class Board():
                         elif self.grid[i][j].id == 'n':
                             blackCount = blackCount + 3
                         elif self.grid[i][j].id == 'b':
-                            blackCount = blackCount + 3
+                            blackCount = blackCount + 3.07
                         elif self.grid[i][j].id == 'q':
                             blackCount = blackCount + 9
                         elif self.grid[i][j].id == 'r':

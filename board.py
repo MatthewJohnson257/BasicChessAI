@@ -55,8 +55,8 @@ class Board():
             self.blackInCheck = blackInCheck
 
         self.evalValue = self.evaluationFunction()
-        self.testMoveMethodWhitePawn()
-        #self.testMoveMethodWhiteRook()
+        #self.testMoveMethodWhitePawn()
+        self.testMoveMethodWhiteRook()
 
 
     # takes in which color's turn it is, generates all valid moves for that player
@@ -97,28 +97,29 @@ class Board():
 
         for i in range(8):
             for j in range(8):
-                if self.grid[i][j].color == 'w':
-                    if self.grid[i][j].id == 'P':
-                        whiteCount = whiteCount + 1
-                    elif self.grid[i][j].id == 'N':
-                        whiteCount = whiteCount + 3
-                    elif self.grid[i][j].id == 'B':
-                        whiteCount = whiteCount + 3
-                    elif self.grid[i][j].id == 'Q':
-                        whiteCount = whiteCount + 9
-                    elif self.grid[i][j].id == 'R':
-                        whiteCount = whiteCount + 5
-                if self.grid[i][j].color == 'b':
-                    if self.grid[i][j].id == 'p':
-                        blackCount = blackCount + 1
-                    elif self.grid[i][j].id == 'n':
-                        blackCount = blackCount + 3
-                    elif self.grid[i][j].id == 'b':
-                        blackCount = blackCount + 3
-                    elif self.grid[i][j].id == 'q':
-                        blackCount = blackCount + 9
-                    elif self.grid[i][j].id == 'r':
-                        blackCount = blackCount + 5
+                if self.grid[i][j] != None:
+                    if self.grid[i][j].color == 'w':
+                        if self.grid[i][j].id == 'P':
+                            whiteCount = whiteCount + 1
+                        elif self.grid[i][j].id == 'N':
+                            whiteCount = whiteCount + 3
+                        elif self.grid[i][j].id == 'B':
+                            whiteCount = whiteCount + 3
+                        elif self.grid[i][j].id == 'Q':
+                            whiteCount = whiteCount + 9
+                        elif self.grid[i][j].id == 'R':
+                            whiteCount = whiteCount + 5
+                    if self.grid[i][j].color == 'b':
+                        if self.grid[i][j].id == 'p':
+                            blackCount = blackCount + 1
+                        elif self.grid[i][j].id == 'n':
+                            blackCount = blackCount + 3
+                        elif self.grid[i][j].id == 'b':
+                            blackCount = blackCount + 3
+                        elif self.grid[i][j].id == 'q':
+                            blackCount = blackCount + 9
+                        elif self.grid[i][j].id == 'r':
+                            blackCount = blackCount + 5
 
         return(whiteCount-blackCount) # STUB
 
@@ -241,4 +242,4 @@ class Board():
 
         # b = Button(window, text="OK", command=callback)
         window.mainloop()
-        print("WOEIRJEIJ")
+        # print("WOEIRJEIJ")

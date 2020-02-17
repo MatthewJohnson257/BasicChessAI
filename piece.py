@@ -72,45 +72,52 @@ class Rook(Piece):
         m = self.i
         x = m + 0  #cause i was lazy to deep copy and dont wanna copy by reference
         n = self.j
-        flag = False
-        while(x < 7): #move rook to all legal  upward rows
+        while(x < 7): #move rook to all legal downward rows
             x = x + 1
-            if( (board.grid[x][n] == None or board.grid[x][n].color != self.color) and board.grid[x][n].kink != True):
+            if(board.grid[x][n] == None):
                 coordsList.append([x,n])
-            flag = True
-            if not flag: # if(!flag)
+            elif(board.grid[x][n].color != self.color and board.grid[x][n].kink != True):
+                coordsList.append([x,n])
+                break
+            else:
                 break
 
 
         x = m + 0
-        flag = False
-        while(x > 0): # move rook to all legal downward rows
+        while(x > 0): # move rook to all legal upward rows
             x = x - 1
-            if( (board.grid[x][n] == None or board.grid[x][n].color != self.color) and board.grid[x][n].kink != True):
+            if(board.grid[x][n] == None):
                 coordsList.append([x,n])
-            flag = True
-            if not flag: # if(!flag)
+            elif(board.grid[x][n].color != self.color and board.grid[x][n].kink != True):
+                coordsList.append([x,n])
+                break
+            else:
                 break
 
         x = n + 0   #cause i was lazy to deep copy and dont wanna copy by reference
-        flag = False
-        while(x < 7): #move rook to all legal  rightward columns
+        while(x < 7): #move rook to all legal rightward columns
             x = x + 1
-            if( (board.grid[m][x] == None or board.grid[m][x].color != self.color) and board.grid[m][x].kink != True):
+            if(board.grid[m][x] == None):
                 coordsList.append([m,x])
-            flag = True
-            if not flag: # if(!flag)
+            elif(board.grid[m][x].color != self.color and board.grid[m][x].kink != True):
+                coordsList.append([m,x])
+                break
+            else:
                 break
 
-        x = m + 0 #cause i was lazy to deep copy and dont wanna copy by reference
+        x = n + 0 #cause i was lazy to deep copy and dont wanna copy by reference
         while(x > 0): # move rook to all legal leftward columns
             x = x - 1
-            if( (board.grid[m][x] == None or board.grid[m][x].color != self.color) and board.grid[m][x].kink != True):
+            if(board.grid[m][x] == None):
                 coordsList.append([m,x])
-            flag = True
-            if not flag: # if(!flag)
+            elif(board.grid[m][x].color != self.color and board.grid[m][x].kink != True):
+                coordsList.append([m,x])
+                break
+            else:
                 break
         print("Stub: Move Rook")
+
+        return(coordsList)
 
 
 class Knight(Piece):
@@ -306,5 +313,5 @@ class King(Piece):
         if( (x > 0) and (y > 0) and (board.grid[x-1][y-1] ==  None or board.grid[x-1][y-1].color != self.color or board.grid[x-1][y-1].kink != True)  ):
             coordsList.append([x-1,y-1])
         if( (x > 0) and (y < 7) and (board.grid[x-1][y+1] ==  None or board.grid[x-1][y+1].color != self.color or board.grid[x-1][y+1].kink != True)  ):
-            coordsList.append([x-,y+1])
+            coordsList.append([x-1,y+1])
         print("Stub: Move King")

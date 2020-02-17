@@ -9,8 +9,8 @@ class Board():
     # then scans it for the values, and creates the appropriate 'Piece' object,
     # but a blank space is given the value 'None', which is Python's version of
     # null
-    # 
-    # For reference: 
+    #
+    # For reference:
     #       - any method that says '__init__' is a constructor.
     #       - 'self' just references to the specific object's instance, kind of
     #           like Java's 'this'
@@ -92,8 +92,35 @@ class Board():
 
 
     def evaluationFunction(self):
-        GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
-        return(0) # STUB
+        whiteCount = 0
+        blackCount = 0
+
+        for i in range(8):
+            for j in range(8):
+                if self.grid[i][j].color == 'w':
+                    if self.grid[i][j].id == 'P':
+                        whiteCount = whiteCount + 1
+                    elif self.grid[i][j].id == 'N':
+                        whiteCount = whiteCount + 3
+                    elif self.grid[i][j].id == 'B':
+                        whiteCount = whiteCount + 3
+                    elif self.grid[i][j].id == 'Q':
+                        whiteCount = whiteCount + 9
+                    elif self.grid[i][j].id == 'R':
+                        whiteCount = whiteCount + 5
+                if self.grid[i][j].color == 'b':
+                    if self.grid[i][j].id == 'p':
+                        blackCount = blackCount + 1
+                    elif self.grid[i][j].id == 'n':
+                        blackCount = blackCount + 3
+                    elif self.grid[i][j].id == 'b':
+                        blackCount = blackCount + 3
+                    elif self.grid[i][j].id == 'q':
+                        blackCount = blackCount + 9
+                    elif self.grid[i][j].id == 'r':
+                        blackCount = blackCount + 5
+
+        return(whiteCount-blackCount) # STUB
 
 
 
@@ -129,16 +156,16 @@ class Board():
         # check for diagonal from bottom left
 
         # check for knights attacking
-        
-        
+
+
         return(False) # STUB
 
 
     def isBlackInCheck(self):
         GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
-        return(False) # STUB 
+        return(False) # STUB
 
-    
+
 
 
 
@@ -211,7 +238,7 @@ class Board():
                 else:
                     images[i][j] = PhotoImage(file = "blanksquare.png")
                     Label(window, image = images[i][j], bg = backgrounds[i][j]).grid(row = i, column = j)
-                    
+
         # b = Button(window, text="OK", command=callback)
         window.mainloop()
         print("WOEIRJEIJ")

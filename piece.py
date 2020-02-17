@@ -125,7 +125,7 @@ class Knight(Piece):
         coordsList = []
         x = self.i
         y = self.j
-        if( x < 6 and y < 7  and (board.grid[x+2][y+1] == None or board.grid[x+2][y+1].color != self.color) and board.grid[x+2][y+1].kink != True):
+        if( x < 6 and y < 7  and ((board.grid[x+2][y+1] == None) or (board.grid[x+2][y+1].color != self.color and board.grid[x+2][y+1].kink != True)):
             coordsList.append([x+2,y+1])
         if( x < 6 and y > 0 and (board.grid[x+2][y-1] == None or board.grid[x+2][y-1].color != self.color) and board.grid[x+2][y-1].kink != True):
             coordsList.append([x+2,y-1])
@@ -143,10 +143,9 @@ class Knight(Piece):
             coordsList.append([x-1,y+2])
 
 
-
-
-
         print("Stub: Move Knight")
+
+        return (coordsList)
 
 class Bishop(Piece):
     def move(self, board):

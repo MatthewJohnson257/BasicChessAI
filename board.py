@@ -56,7 +56,8 @@ class Board():
 
         self.evalValue = self.evaluationFunction()
         #self.testMoveMethodWhitePawn()
-        self.testMoveMethodWhiteRook()
+        #self.testMoveMethodWhiteRook()
+        self.testMoveMethodWhiteKnight()
 
 
     # takes in which color's turn it is, generates all valid moves for that player
@@ -89,7 +90,12 @@ class Board():
                     if(self.grid[i][j].id == 'R'):
                         print(self.grid[i][j].move(self))
 
-
+    def testMoveMethodWhiteKnight(self):
+        for i in range(8):
+            for j in range(8):
+                if(self.grid[i][j] != None):
+                    if(self.grid[i][j].id == 'N'):
+                        print(self.grid[i][j].move(self))
 
     def evaluationFunction(self):
         whiteCount = 0

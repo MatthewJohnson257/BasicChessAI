@@ -325,7 +325,7 @@ class King(Piece):
             coordsList.append([x-1,y])
         if( (y > 0) and ((board.grid[x][y-1] ==  None) or (board.grid[x][y-1].color != self.color and board.grid[x][y-1].kink != True))):
             coordsList.append([x,y-1])
-        if( (y > 0) and ((board.grid[x][y+1] ==  None) or (board.grid[x][y+1].color != self.color and board.grid[x][y+1].kink != True))):
+        if( (y < 7) and ((board.grid[x][y+1] ==  None) or (board.grid[x][y+1].color != self.color and board.grid[x][y+1].kink != True))):
             coordsList.append([x,y+1])
         if( (x < 7) and (y < 7) and ((board.grid[x+1][y+1] ==  None) or (board.grid[x+1][y+1].color != self.color and board.grid[x+1][y+1].kink != True))):
             coordsList.append([x+1,y+1])

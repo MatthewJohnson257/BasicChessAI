@@ -2,6 +2,7 @@
 
 from piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
 from tkinter import *
+import copy
 
 class Board():
 
@@ -356,7 +357,7 @@ class Board():
         for i in range(0,8):
                 for j in range(0,8):
                     if ((i + j) % 2 == 0):
-                        backgrounds[i][j] = "white"
+                        backgrounds[i][j] = "slategray1"
                     else:
                         backgrounds[i][j] = "mediumpurple1"
 
@@ -367,27 +368,50 @@ class Board():
             #print("i:", coords[0], "j:", coords[1])
             if(outsiders[0] == True):
                 
-                if(not(coords[0] == outsiders[1] and coords[1] == outsiders[2])):
-                    
-                    images[coords[0]][coords[1]] = images[outsiders[1]][outsiders[2]]
-                    labels[coords[0]][coords[1]] = Label(window, image = images[coords[0]][coords[1]], bg = backgrounds[coords[0]][coords[1]])
-                    labels[coords[0]][coords[1]].grid(row = coords[0], column = coords[1])
-                    data = [coords[0], coords[1]]
-                    labels[coords[0]][coords[1]].bind("<Button-1>", lambda event, arg=data: mouseClicked(event, arg))
+                if(self.grid[outsiders[1]][outsiders[2]] != None and not (coords[0] == outsiders[1] and coords[1] == outsiders[2])):
+                    tempCoords = [coords[0], coords[1]]
+                    viableCoords = self.grid[outsiders[1]][outsiders[2]].move(self)
+                    #print("viableCoords:", viableCoords)
+                    if(tempCoords in viableCoords):
 
-                    images[outsiders[1]][outsiders[2]] = PhotoImage(file = "blanksquare.png")
-                    labels[outsiders[1]][outsiders[2]] = Label(window, image = images[outsiders[1]][outsiders[2]], bg = backgrounds[outsiders[1]][outsiders[2]])
-                    labels[outsiders[1]][outsiders[2]].grid(row = outsiders[1], column = outsiders[2])
-                    data = [outsiders[1], outsiders[2]]
-                    labels[outsiders[1]][outsiders[2]].bind("<Button-1>", lambda event, arg=data: mouseClicked(event, arg))
+                        images[coords[0]][coords[1]] = images[outsiders[1]][outsiders[2]]
+                        labels[coords[0]][coords[1]] = Label(window, image = images[coords[0]][coords[1]], bg = backgrounds[coords[0]][coords[1]])
+                        labels[coords[0]][coords[1]].grid(row = coords[0], column = coords[1])
+                        data = [coords[0], coords[1]]
+                        labels[coords[0]][coords[1]].bind("<Button-1>", lambda event, arg=data: mouseClicked(event, arg))
+                        self.grid[coords[0]][coords[1]] = self.grid[outsiders[1]][outsiders[2]]
+                        self.grid[coords[0]][coords[1]].i = coords[0]
+                        self.grid[coords[0]][coords[1]].j = coords[1]
 
+                        images[outsiders[1]][outsiders[2]] = PhotoImage(file = "blanksquare.png")
+                        labels[outsiders[1]][outsiders[2]] = Label(window, image = images[outsiders[1]][outsiders[2]], bg = backgrounds[outsiders[1]][outsiders[2]])
+                        labels[outsiders[1]][outsiders[2]].grid(row = outsiders[1], column = outsiders[2])
+                        data = [outsiders[1], outsiders[2]]
+                        labels[outsiders[1]][outsiders[2]].bind("<Button-1>", lambda event, arg=data: mouseClicked(event, arg))
+                        self.grid[outsiders[1]][outsiders[2]] = None
+                        for z in viableCoords:
+                            labels[z[0]][z[1]].config(bg = backgrounds[z[0]][z[1]])
+                    else:
+                        for z in viableCoords:
+                            labels[z[0]][z[1]].config(bg = backgrounds[z[0]][z[1]])
+                elif (coords[0] == outsiders[1] and coords[1] == outsiders[2] and self.grid[coords[0]][coords[1]] != None):
+                    viableCoords = self.grid[outsiders[1]][outsiders[2]].move(self)
+                    for z in viableCoords:
+                            labels[z[0]][z[1]].config(bg = backgrounds[z[0]][z[1]])
                 outsiders[0] = False
-                
+                labels[outsiders[1]][outsiders[2]].config(bg = backgrounds[outsiders[1]][outsiders[2]])
                 #print("Click Change")
             else:
                 outsiders[1] = coords[0]
                 outsiders[2] = coords[1]
                 outsiders[0] = True
+                labels[outsiders[1]][outsiders[2]].config(bg = "gold")
+                if(self.grid[outsiders[1]][outsiders[2]] != None):
+                    #print(self.grid[outsiders[1]][outsiders[2]].id)
+                    viableCoords = self.grid[outsiders[1]][outsiders[2]].move(self)
+                    #print("viableCoords:", viableCoords)
+                    for z in viableCoords:
+                        labels[z[0]][z[1]].config(bg = "palegreen3")
                 #print("Click Set")
 
         

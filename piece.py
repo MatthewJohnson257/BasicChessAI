@@ -35,7 +35,7 @@ class Pawn(Piece):
         # black pawn
         if(self.color == 'b'):
             if(self.i != 7): # this line checks to make sure a black pawn isn't at the very bottom of the board
-                if(board.grid[self.i+1][j] == None): #pawn can move forward normally
+                if(board.grid[self.i+1][self.j] == None): #pawn can move forward normally
                     coordsList.append([self.i + 1, self.j])
                 if(self.j > 0 and board.grid[self.i+1][self.j-1] != None and board.grid[self.i+1][self.j-1].color != self.color and board.grid[self.i+1][self.j-1].kink != True): #pawn captures
                     coordsList.append([self.i + 1, self.j - 1])
@@ -189,7 +189,7 @@ class Bishop(Piece):
                 break
         x = m + 0 #cause i was lazy to deep copy and dont wanna copy by reference
         z = n + 0
-        while(x > 0 and z < 8): # move bishop
+        while(x > 0 and z < 7): # move bishop
             x = x - 1
             z = z + 1
             if(board.grid[x][z] == None):
@@ -294,7 +294,7 @@ class Queen(Piece): #for queen you can reuse rook and bishop moves
                 break
         x = m + 0 #cause i was lazy to deep copy and dont wanna copy by reference
         z = n + 0
-        while(x > 0 and z < 8): # move bishop
+        while(x > 0 and z < 7): # move bishop
             x = x - 1
             z = z + 1
             if(board.grid[x][z] == None):

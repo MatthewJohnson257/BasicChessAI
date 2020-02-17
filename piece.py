@@ -23,6 +23,10 @@ class Piece(ABC):
 
 class Pawn(Piece):
 
+    def __init___(self, i, j, color, id):
+        super(self, i, j, color, id)
+        self.hasMoved = False
+    
     # this method returns a list of coordinates that a Pawn would be able to move to
     # from its position if the rest of the board was completely empty
     def move(self, board):

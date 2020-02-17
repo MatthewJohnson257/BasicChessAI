@@ -125,21 +125,21 @@ class Knight(Piece):
         coordsList = []
         x = self.i
         y = self.j
-        if( x < 6 and y < 7  and ((board.grid[x+2][y+1] == None) or (board.grid[x+2][y+1].color != self.color and board.grid[x+2][y+1].kink != True)):
+        if( x < 6 and y < 7 and ((board.grid[x+2][y+1] == None) or (board.grid[x+2][y+1].color != self.color and board.grid[x+2][y+1].kink != True))):
             coordsList.append([x+2,y+1])
-        if( x < 6 and y > 0 and (board.grid[x+2][y-1] == None or board.grid[x+2][y-1].color != self.color) and board.grid[x+2][y-1].kink != True):
+        if( x < 6 and y > 0 and ((board.grid[x+2][y-1] == None) or (board.grid[x+2][y-1].color != self.color and board.grid[x+2][y-1].kink != True))):
             coordsList.append([x+2,y-1])
-        if( x < 7 and y < 6 and (board.grid[x+1][y+2] == None or board.grid[x+1][y+2].color != self.color) and board.grid[x+1][y+2].kink != True):
+        if( x < 7 and y < 6 and ((board.grid[x+1][y+2] == None) or (board.grid[x+1][y+2].color != self.color and board.grid[x+1][y+2].kink != True))):
             coordsList.append([x+1,y+2])
-        if( x < 7 and y > 1 and (board.grid[x+1][y-2] == None or board.grid[x+1][y-2].color != self.color) and board.grid[x+1][y-2].kink != True):
+        if( x < 7 and y > 1 and ((board.grid[x+1][y-2] == None) or (board.grid[x+1][y-2].color != self.color and board.grid[x+1][y-2].kink != True))):
             coordsList.append([x+1,y-2])
-        if( x > 1 and y < 7  and (board.grid[x-2][y+1] == None or board.grid[x-2][y+1].color != self.color) and board.grid[x-2][y+1].kink != True):
+        if( x > 1 and y < 7 and ((board.grid[x-2][y+1] == None) or (board.grid[x-2][y+1].color != self.color and board.grid[x-2][y+1].kink != True))):
             coordsList.append([x-2,y+1])
-        if( x > 1 and y > 0  and (board.grid[x-2][y-1] == None or board.grid[x-2][y-1].color != self.color) and board.grid[x-2][y-1].kink != True):
+        if( x > 1 and y > 0 and ((board.grid[x-2][y-1] == None) or (board.grid[x-2][y-1].color != self.color and board.grid[x-2][y-1].kink != True))):
             coordsList.append([x-2,y-1])
-        if( x > 0 and y > 1 and (board.grid[x-1][y-2] == None or board.grid[x-1][y-2].color != self.color) and board.grid[x-1][y-2].kink != True):
+        if( x > 0 and y > 1 and ((board.grid[x-1][y-2] == None) or (board.grid[x-1][y-2].color != self.color and board.grid[x-1][y-2].kink != True))):
             coordsList.append([x-1,y-2])
-        if( x > 0 and y < 6 and (board.grid[x-1][y+2] == None or board.grid[x-1][y+2].color != self.color) and board.grid[x-1][y+2].kink != True):
+        if( x > 0 and y < 6 and ((board.grid[x-1][y+2] == None) or (board.grid[x-1][y+2].color != self.color and board.grid[x-1][y+2].kink != True))):
             coordsList.append([x-1,y+2])
 
 

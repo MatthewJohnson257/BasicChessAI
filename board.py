@@ -54,7 +54,61 @@ class Board():
             self.whiteInCheck = whiteInCheck
             self.blackInCheck = blackInCheck
 
-        self.evalValue = self.evaluationFunction()            
+        self.evalValue = self.evaluationFunction()
+        self.pEval = [0,  0,  0,  0,  0,  0,  0,  0]
+                [50, 50, 50, 50, 50, 50, 50, 50]
+                [10, 10, 20, 30, 30, 20, 10, 10]
+                [5,  5, 10, 25, 25, 10,  5,  5]
+                [0,  0,  0, 20, 20,  0,  0,  0]
+                [5, -5,-10,  0,  0,-10, -5,  5]
+                [5, 10, 10,-20,-20, 10, 10,  5]
+                [0,  0,  0,  0,  0,  0,  0,  0]
+
+        self.nEval = [-50,-40,-30,-30,-30,-30,-40,-50]
+                [-40,-20,  0,  0,  0,  0,-20,-40]
+                [-30,  0, 10, 15, 15, 10,  0,-30]
+                [-30,  5, 15, 20, 20, 15,  5,-30]
+                [-30,  0, 15, 20, 20, 15,  0,-30]
+                [-30,  5, 10, 15, 15, 10,  5,-30]
+                [-40,-20,  0,  5,  5,  0,-20,-40]
+                [-50,-40,-30,-30,-30,-30,-40,-50]
+
+        self.bEval = [-20,-10,-10,-10,-10,-10,-10,-20]
+                [-10,  0,  0,  0,  0,  0,  0,-10]
+                [-10,  0,  5, 10, 10,  5,  0,-10]
+                [-10,  5,  5, 10, 10,  5,  5,-10]
+                [-10,  0, 10, 10, 10, 10,  0,-10]
+                [-10, 10, 10, 10, 10, 10, 10,-10]
+                [-10,  5,  0,  0,  0,  0,  5,-10]
+                [-20,-10,-10,-10,-10,-10,-10,-20]
+
+        self.rEval = [0,  0,  0,  0,  0,  0,  0,  0]
+                [5, 10, 10, 10, 10, 10, 10,  5]
+                [-5,  0,  0,  0,  0,  0,  0, -5]
+                [-5,  0,  0,  0,  0,  0,  0, -5]
+                [-5,  0,  0,  0,  0,  0,  0, -5]
+                [-5,  0,  0,  0,  0,  0,  0, -5]
+                [-5,  0,  0,  0,  0,  0,  0, -5]
+                [0,  0,  0,  5,  5,  0,  0,  0]
+
+        self.qEval = [-20,-10,-10, -5, -5,-10,-10,-20]
+                [-10,  0,  0,  0,  0,  0,  0,-10]
+                [-10,  0,  5,  5,  5,  5,  0,-10]
+                [-5,  0,  5,  5,  5,  5,  0, -5]
+                [0,  0,  5,  5,  5,  5,  0, -5]
+                [-10,  5,  5,  5,  5,  5,  0,-10]
+                [-10,  0,  5,  0,  0,  0,  0,-10]
+                [-20,-10,-10, -5, -5,-10,-10,-20]
+
+        self.kEval = [-30,-40,-40,-50,-50,-40,-40,-30]
+                [-30,-40,-40,-50,-50,-40,-40,-30]
+                [-30,-40,-40,-50,-50,-40,-40,-30]
+                [-30,-40,-40,-50,-50,-40,-40,-30]
+                [-20,-30,-30,-40,-40,-30,-30,-20]
+                [-10,-20,-20,-20,-20,-20,-20,-10]
+                [20, 20,  0,  0,  0,  0, 20, 20]
+                [20, 30, 10,  0,  0, 10, 30, 20]
+        self.mobility = 0
         #self.testMoveMethodWhitePawn()
         #self.testMoveMethodWhiteRook()
         #self.testMoveMethodWhiteKnight()
@@ -130,28 +184,33 @@ class Board():
                 if self.grid[i][j] != None:
                     if self.grid[i][j].color == 'w':
                         if self.grid[i][j].id == 'P':
-                            whiteCount = whiteCount + 1
+                            whiteCount = whiteCount + 100
+                            self.mobility = self.mobility + self.pEval[i][j]
                         elif self.grid[i][j].id == 'N':
-                            whiteCount = whiteCount + 3
+                            whiteCount = whiteCount + 320
+                            self.mobility = self.mobility + self.nEval[i][j]
                         elif self.grid[i][j].id == 'B':
-                            whiteCount = whiteCount + 3.07
+                            whiteCount = whiteCount + 330
+                            self.mobility = self.mobility + self.bEval[i][j]
                         elif self.grid[i][j].id == 'Q':
-                            whiteCount = whiteCount + 9
+                            whiteCount = whiteCount + 900
+                            self.mobility = self.mobility + qEval[i][j]
                         elif self.grid[i][j].id == 'R':
-                            whiteCount = whiteCount + 5
+                            whiteCount = whiteCount + 500
+                            self.mobility = self.mobility + rEval[i][j]
                     if self.grid[i][j].color == 'b':
                         if self.grid[i][j].id == 'p':
-                            blackCount = blackCount + 1
+                            blackCount = blackCount + 100
                         elif self.grid[i][j].id == 'n':
-                            blackCount = blackCount + 3
+                            blackCount = blackCount + 320
                         elif self.grid[i][j].id == 'b':
-                            blackCount = blackCount + 3.07
+                            blackCount = blackCount + 330
                         elif self.grid[i][j].id == 'q':
-                            blackCount = blackCount + 9
+                            blackCount = blackCount + 900
                         elif self.grid[i][j].id == 'r':
-                            blackCount = blackCount + 5
+                            blackCount = blackCount + 500
 
-        return(whiteCount-blackCount) # STUB
+        return(whiteCount - blackCount + self.mobility) # STUB
 
 
 

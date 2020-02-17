@@ -181,20 +181,24 @@ class Bishop(Piece):
         while(x < 7 and z > 0): #move bishop
             x = x + 1
             z = z - 1
-            if( (board.grid[x][z] == None or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
+            if(board.grid[x][z] == None):
                 coordsList.append([x,z])
+            elif(board.grid[x][z].color != self.color and board.grid[x][z].kink != True):
+                coordsList.append([x,z])
+                break
             else:
                 break
         x = m + 0 #cause i was lazy to deep copy and dont wanna copy by reference
         z = n + 0
-        flag = False
         while(x > 0 and z < 8): # move bishop
             x = x - 1
             z = z + 1
-            if( (board.grid[x][z] == None or board.grid[x][z].color != self.color) and board.grid[x][z].kink != True):
+            if(board.grid[x][z] == None):
                 coordsList.append([x,z])
-            flag = True
-            if not flag: # if(!flag)
+            elif(board.grid[x][z].color != self.color and board.grid[x][z].kink != True):
+                coordsList.append([x,z])
+                break
+            else:
                 break
         print("Stub: Move Bishop")
 

@@ -15,6 +15,15 @@ inputA = [['_', '_', '_', '_', '_', '_', 'q', 'k'],
 ['_', '_', '_', '_', '_', 'P', 'P', '_'],
 ['_', '_', '_', '_', 'R', '_', 'K', '_']]
 
+inputFull = [['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
+['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+['_', '_', '_', '_', '_', '_', '_', '_'],
+['_', '_', '_', '_', '_', '_', '_', '_'],
+['_', '_', '_', '_', '_', '_', '_', '_'],
+['_', '_', '_', '_', '_', '_', '_', '_'],
+['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']]
+
 inputDefault = [['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
 ['p', 'p', 'N', 'p', 'p', 'p', '_', 'p'],
 ['P', '_', '_', 'P', '_', '_', 'R', '_'],
@@ -29,7 +38,7 @@ def graphicalBoard(board):
     window = Tk()
     window.title("Our Chess Board")
 
-    outsiders = [False, 0, 0]            
+    outsiders = [False, 0, 0]
 
     images = [[None for x in range(8)] for y in range(8)]
     backgrounds = [[None for x in range(8)] for y in range(8)]
@@ -43,10 +52,10 @@ def graphicalBoard(board):
     labels = [[None for x in range(8)] for y in range(8)]
 
     def mouseClicked(event, coords):
-        
+
         # When you click where to move
         if(outsiders[0] == True):
-            
+
             # if the select piece is not None and you didn't click the same place twice
             if(board.grid[outsiders[1]][outsiders[2]] != None and not (coords[0] == outsiders[1] and coords[1] == outsiders[2])):
                 tempCoords = [coords[0], coords[1]]
@@ -85,7 +94,7 @@ def graphicalBoard(board):
             outsiders[0] = False
             labels[outsiders[1]][outsiders[2]].config(bg = backgrounds[outsiders[1]][outsiders[2]])
             #print("Click Change")
-        
+
         # when you click on a piece to select it
         else:
             outsiders[1] = coords[0]
@@ -100,7 +109,7 @@ def graphicalBoard(board):
                     labels[z[0]][z[1]].config(bg = "palegreen3")
             #print("Click Set")
 
-    
+
     def updatePhotos():
         for i in range(0,8):
             for j in range(0,8):
@@ -185,7 +194,7 @@ def graphicalBoard(board):
                     labels[i][j].bind("<Button-1>", lambda event, arg=data: mouseClicked(event, arg))
         return(window)
 
-        
+
     window = updatePhotos()
     window.mainloop()
 
@@ -201,7 +210,7 @@ def graphicalBoard(board):
 # boardA.graphicalBoard()
 
 
-boardDefault = Board(inputDefault, True)
+boardDefault = Board(inputFull, True)
 boardDefault.printBoard()
 graphicalBoard(boardDefault)
 
@@ -222,8 +231,8 @@ graphicalBoard(boardDefault)
 #----------------------------------chess.py-----------------------------------#
 # 1. Input of all the examples he gave us, also maybe just a regular chess board
 # 2. All functionality related to alpha-beta pruning (where board is a state)
-# 3. 
-# 4. 
+# 3.
+# 4.
 # 5.
 # 6.
 #----------------------------------board.py-----------------------------------#
@@ -233,11 +242,11 @@ graphicalBoard(boardDefault)
 #    method represent a valid move (i.e. no pieces are in the way, the king is
 #    not put in check)
 # 3. Methods to check whether or not the kings are in check
-# 4. 
-# 5. 
+# 4.
+# 5.
 # 6.
 #----------------------------------piece.py-----------------------------------#
 # 1. Implement functionality for each piece's move() method
 # 2.
 # 3.
-# 4. 
+# 4.

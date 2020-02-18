@@ -166,6 +166,8 @@ class Board():
             self.blackInCheck = blackInCheck
 
         self.evalValue = self.evaluationFunction()
+        print(self.evalValue)
+
 
 
         #self.testMoveMethodWhitePawn()
@@ -322,8 +324,14 @@ class Board():
 
 
     def isBlackInCheck(self):
-        GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
-        return(False) # STUB
+        iKing = 0
+        jKing = 0
+        for i in range(8):
+            for j in range(8):
+                if(self.grid[i][j] != None and self.grid[i][j].id == 'k'):
+                    iKing = i
+                    jKing = j
+                    break
 
 
 
@@ -342,5 +350,3 @@ class Board():
             print('|', end = '')
             print()
         print("    ◘----------------◘")
-
-

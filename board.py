@@ -170,13 +170,7 @@ class Board():
 
 
 
-        #self.testMoveMethodWhitePawn()
-        #self.testMoveMethodWhiteRook()
-        #self.testMoveMethodWhiteKnight()
-        #self.testMoveMethodWhiteBishop()
-        #self.testMoveMethodWhiteKing()
-        #self.testMoveMethodWhiteQueen()
-
+        
 
     # takes in which color's turn it is, generates all valid moves for that player
     #
@@ -193,48 +187,7 @@ class Board():
             GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
             # STUB
 
-    # temporary method to test move() methods
-    def testMoveMethodWhitePawn(self):
-        for i in range(8):
-            for j in range(8):
-                if(self.grid[i][j] != None):
-                    if(self.grid[i][j].id == 'P'):
-                        print(self.grid[i][j].move(self))
-
-    def testMoveMethodWhiteRook(self):
-        for i in range(8):
-            for j in range(8):
-                if(self.grid[i][j] != None):
-                    if(self.grid[i][j].id == 'R'):
-                        print(self.grid[i][j].move(self))
-
-    def testMoveMethodWhiteKnight(self):
-        for i in range(8):
-            for j in range(8):
-                if(self.grid[i][j] != None):
-                    if(self.grid[i][j].id == 'N'):
-                        print(self.grid[i][j].move(self))
-
-    def testMoveMethodWhiteBishop(self):
-        for i in range(8):
-            for j in range(8):
-                if(self.grid[i][j] != None):
-                    if(self.grid[i][j].id == 'B'):
-                        print(self.grid[i][j].move(self))
-
-    def testMoveMethodWhiteKing(self):
-        for i in range(8):
-            for j in range(8):
-                if(self.grid[i][j] != None):
-                    if(self.grid[i][j].id == 'K'):
-                        print(self.grid[i][j].move(self))
-
-    def testMoveMethodWhiteQueen(self):
-        for i in range(8):
-            for j in range(8):
-                if(self.grid[i][j] != None):
-                    if(self.grid[i][j].id == 'Q'):
-                        print(self.grid[i][j].move(self))
+    
 
     def evaluationFunction(self):
         whiteCount = 0

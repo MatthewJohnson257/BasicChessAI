@@ -68,7 +68,7 @@ class Piece(ABC):
                 boolList[x] = False
 
             # checks by pawn to the right
-            if(kingI < 7 and kingJ < 7 and (tempGrid[kingI - 1][kingJ + 1] == 'p' or tempGrid[kingI - 1][kingJ + 1] == 'k')):
+            if(kingI > 0 and kingJ < 7 and (tempGrid[kingI - 1][kingJ + 1] == 'p' or tempGrid[kingI - 1][kingJ + 1] == 'k')):
                 boolList[x] = False
 
 
@@ -248,11 +248,11 @@ class Piece(ABC):
                     kingJ = newJ
 
                 # checks by pawn to the left
-                if(kingI > 0 and kingJ > 0 and (tempGrid[kingI - 1][kingJ - 1] == 'p' or tempGrid[kingI - 1][kingJ - 1] == 'K')):
+                if(kingI < 7 and kingJ > 0 and (tempGrid[kingI + 1][kingJ - 1] == 'P' or tempGrid[kingI + 1][kingJ - 1] == 'K')):
                     boolList[x] = False
 
                 # checks by pawn to the right
-                if(kingI < 7 and kingJ < 7 and (tempGrid[kingI - 1][kingJ + 1] == 'p' or tempGrid[kingI - 1][kingJ + 1] == 'K')):
+                if(kingI < 7 and kingJ < 7 and (tempGrid[kingI + 1][kingJ + 1] == 'P' or tempGrid[kingI + 1][kingJ + 1] == 'K')):
                     boolList[x] = False
 
 
@@ -263,14 +263,14 @@ class Piece(ABC):
                 # left
                 if(kingJ > 0 and tempGrid[kingI][kingJ - 1] == 'K'):
                     boolList[x] = False
-                # left below
-                if(kingJ > 0 and kingI < 7 and tempGrid[kingI + 1][kingJ - 1] == 'K'):
+                # left above
+                if(kingJ > 0 and kingI > 0 and tempGrid[kingI - 1][kingJ - 1] == 'K'):
                     boolList[x] = False
                 # below
                 if(kingI < 7 and tempGrid[kingI + 1][kingJ] == 'K'):
                     boolList[x] = False
-                # below right
-                if(kingI < 7 and kingJ < 7 and tempGrid[kingI + 1][kingJ + 1] == 'K'):
+                # above right
+                if(kingI > 0 and kingJ < 7 and tempGrid[kingI - 1][kingJ + 1] == 'K'):
                     boolList[x] = False
                 # right
                 if(kingJ < 7 and tempGrid[kingI][kingJ + 1] == 'K'):

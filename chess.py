@@ -33,6 +33,15 @@ inputDefault = [['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
 ['_', 'P', 'P', '_', 'P', 'P', 'P', '_'],
 ['R', '_', 'B', '_', '_', '_', '_', '_']]
 
+inputTest1 = [['_', '_', '_', '_', 'k', '_', '_', '_'],
+['_', '_', '_', '_', '_', '_', '_', '_'],
+['_', '_', '_', '_', '_', '_', '_', '_'],
+['_', '_', '_', '_', '_', '_', '_', '_'],
+['_', '_', '_', '_', 'K', '_', '_', '_'],
+['_', '_', '_', '_', '_', '_', '_', '_'],
+['_', '_', '_', '_', '_', '_', '_', '_'],
+['_', '_', '_', '_', '_', '_', '_', '_']]
+
 # takes in a board, produces a single window for a graphical representation of the board
 def graphicalBoard(board):
     window = Tk()
@@ -210,7 +219,7 @@ def graphicalBoard(board):
 # boardA.graphicalBoard()
 
 
-boardDefault = Board(inputFull, True)
+boardDefault = Board(inputTest1, True)
 boardDefault.printBoard()
 graphicalBoard(boardDefault)
 

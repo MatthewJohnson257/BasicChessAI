@@ -1,5 +1,6 @@
 # piece.py
 from abc import ABC, abstractmethod     # for abstract classes
+import copy
 
 class Piece(ABC):
     def __init__(self, i, j, color, id): # STUB!! get rid of default values later
@@ -20,6 +21,202 @@ class Piece(ABC):
     # from its position if the rest of the board was completely empty
     def move(self):
         pass
+
+
+
+
+
+    def isWhiteInCheck(self, grid, coordsList):
+        tempGrid = [[None for x in range(0,8)] for y in range(0,8)]
+        for x in range(8):
+            for y in range(8):
+                if(grid[x][y] != None):
+                    tempGrid[x][y] = grid[x][y].id
+                else:
+                    tempGrid[x][y] = '_'
+
+        boolList = [True for x in range(len(coordsList))]
+
+
+
+        # find white king
+        kingI = -1
+        kingJ = -1
+        if(self.id != 'K'):
+            for g in range(8):
+                for h in range(8):
+                    if tempGrid[g][h] == 'K':
+                        kingI = g
+                        kingJ = h
+                        break
+
+
+        # test each coordinate pair in the parameter
+        for x in range(len(coordsList)):
+            newI = coordsList[x][0]
+            newJ = coordsList[x][1]
+            formerPiece = tempGrid[newI][newJ]
+            tempGrid[newI][newJ] = tempGrid[self.i][self.j]
+            tempGrid[self.i][self.j] = '_'
+            
+            if(self.id == 'K'):
+                kingI = newI
+                kingJ = newJ
+            
+            # checks by pawn to the left
+            if(kingI > 0 and kingJ > 0 and (tempGrid[kingI - 1][kingJ - 1] == 'p' or tempGrid[kingI - 1][kingJ - 1] == 'k')):
+                boolList[x] = False
+            
+            # checks by pawn to the right
+            if(kingI < 7 and kingJ < 7 and (tempGrid[kingI - 1][kingJ + 1] == 'p' or tempGrid[kingI - 1][kingJ + 1] == 'k')): 
+                boolList[x] = False
+
+
+            # all the surroundings for kings
+            # above
+            if(kingI > 0 and tempGrid[kingI - 1][kingJ] == 'k'):
+                boolList[x] = False
+            # left
+            if(kingJ > 0 and tempGrid[kingI][kingJ - 1] == 'k'):
+                boolList[x] = False
+            # left below
+            if(kingJ > 0 and kingI < 7 and tempGrid[kingI + 1][kingJ - 1] == 'k'):
+                boolList[x] = False
+            # below
+            if(kingI < 7 and tempGrid[kingI + 1][kingJ] == 'k'):
+                boolList[x] = False
+            # below right
+            if(kingI < 7 and kingJ < 7 and tempGrid[kingI + 1][kingJ + 1] == 'k'):
+                boolList[x] = False
+            # right
+            if(kingJ < 7 and tempGrid[kingI][kingJ + 1] == 'k'):
+                boolList[x] = False
+
+            # check from horizontal left
+            tempI = kingI
+            tempJ = kingJ - 1
+            while(tempJ >= 0):
+                if(tempGrid[tempI][tempJ] != '_'):
+                    if(tempGrid[tempI][tempJ] == 'q' or tempGrid[tempI][tempJ] == 'r'):
+                        boolList[x] = False
+                    else:
+                        break
+                tempJ = tempJ - 1
+
+            # check from horizontal right
+            tempI = kingI
+            tempJ = kingJ + 1
+            while(tempJ <= 7):
+                if(tempGrid[tempI][tempJ] != '_'):
+                    if(tempGrid[tempI][tempJ] == 'q' or tempGrid[tempI][tempJ] == 'r'):
+                        boolList[x] = False
+                    else:
+                        break
+                tempJ = tempJ + 1
+
+            # check from vertical above
+            tempI = kingI - 1
+            tempJ = kingJ
+            while(tempI >= 0):
+                if(tempGrid[tempI][tempJ] != '_'):
+                    if(tempGrid[tempI][tempJ] == 'q' or tempGrid[tempI][tempJ] == 'r'):
+                        boolList[x] = False
+                    else:
+                        break
+                tempI = tempI - 1
+
+            # check from vertical below
+            tempI = kingI + 1
+            tempJ = kingJ
+            while(tempI <= 7):
+                if(tempGrid[tempI][tempJ] != '_'):
+                    if(tempGrid[tempI][tempJ] == 'q' or tempGrid[tempI][tempJ] == 'r'):
+                        boolList[x] = False
+                    else:
+                        break
+                tempI = tempI + 1
+            
+            # check from diagonal upper left
+            tempI = kingI - 1
+            tempJ = kingJ - 1
+            while(tempI >= 0 and tempJ >= 0):
+                if(tempGrid[tempI][tempJ] != '_'):
+                    if(tempGrid[tempI][tempJ] == 'q' or tempGrid[tempI][tempJ] == 'b'):
+                        boolList[x] = False
+                    else:
+                        break
+                tempI = tempI - 1
+                tempJ = tempJ - 1 
+
+            # check from diagonal upper right
+            tempI = kingI - 1
+            tempJ = kingJ + 1
+            while(tempI >= 0 and tempJ <= 7):
+                if(tempGrid[tempI][tempJ] != '_'):
+                    if(tempGrid[tempI][tempJ] == 'q' or tempGrid[tempI][tempJ] == 'b'):
+                        boolList[x] = False
+                    else:
+                        break
+                tempI = tempI - 1
+                tempJ = tempJ + 1 
+
+            # check from diagonal bottom left
+            tempI = kingI + 1
+            tempJ = kingJ - 1
+            while(tempI <= 7 and tempJ >= 0):
+                if(tempGrid[tempI][tempJ] != '_'):
+                    if(tempGrid[tempI][tempJ] == 'q' or tempGrid[tempI][tempJ] == 'b'):
+                        boolList[x] = False
+                    else:
+                        break
+                tempI = tempI + 1
+                tempJ = tempJ - 1 
+
+            # check from diagonal bottom right
+            tempI = kingI + 1
+            tempJ = kingJ + 1
+            while(tempI <= 7 and tempJ <= 7):
+                if(tempGrid[tempI][tempJ] != '_'):
+                    if(tempGrid[tempI][tempJ] == 'q' or tempGrid[tempI][tempJ] == 'b'):
+                        boolList[x] = False
+                    else:
+                        break
+                tempI = tempI + 1
+                tempJ = tempJ + 1 
+
+            # check from knight
+
+            if(kingI < 6 and kingJ < 7 and tempGrid[kingI + 2][kingJ + 1] == 'n'):
+                boolList[x] = False
+            if(kingI < 6 and kingJ > 0 and tempGrid[kingI + 2][kingJ - 1] == 'n'):
+                boolList[x] = False
+            if(kingI < 7 and kingJ < 6 and tempGrid[kingI + 1][kingJ + 2] == 'n'):
+                boolList[x] = False
+            if(kingI < 7 and kingJ > 1 and tempGrid[kingI + 1][kingJ - 2] == 'n'):
+                boolList[x] = False
+            if(kingI > 1 and kingJ < 7 and tempGrid[kingI - 2][kingJ + 1] == 'n'):
+                boolList[x] = False
+            if(kingI > 1 and kingJ > 0 and tempGrid[kingI - 2][kingJ - 1] == 'n'):
+                boolList[x] = False
+            if(kingI > 0 and kingJ > 1 and tempGrid[kingI - 1][kingJ - 2] == 'n'):
+                boolList[x] = False
+            if(kingI > 0 and kingJ < 1 and tempGrid[kingI - 1][kingJ + 2] == 'n'):
+                boolList[x] = False
+
+            # reset what was moved
+            tempGrid[self.i][self.j] = self.id
+            tempGrid[newI][newJ] = formerPiece
+
+        return(boolList)
+            
+
+
+
+
+
+
+
+
 
 class Pawn(Piece):
 
@@ -47,9 +244,6 @@ class Pawn(Piece):
                     coordsList.append([self.i + 1, self.j + 1])
 
 
-
-
-
         # white pawn
         else:
             if(self.i != 0): # this line checks to make sure a white pawn isn't at the very top of the board
@@ -59,6 +253,13 @@ class Pawn(Piece):
                     coordsList.append([self.i - 1, self.j - 1])
                 if(self.j < 7 and board.grid[self.i-1][self.j+1] != None and board.grid[self.i-1][self.j+1].color != self.color and board.grid[self.i-1][self.j+1].kink != True): #pawn captures
                     coordsList.append([self.i - 1, self.j + 1])
+
+        if(self.color == 'w'):
+            inCheckList = self.isWhiteInCheck(board.grid, coordsList)
+            for x in range(len(inCheckList)):
+                if(inCheckList[x] == False):
+                    coordsList[x] = None
+            coordsList = list(filter(lambda a: a != None, coordsList))
 
 
         return(coordsList)  # return the list of coordinates - a method in board.py will then check to see if the coords
@@ -120,6 +321,13 @@ class Rook(Piece):
                 break
         print("Stub: Move Rook")
 
+        if(self.color == 'w'):
+            inCheckList = self.isWhiteInCheck(board.grid, coordsList)
+            for x in range(len(inCheckList)):
+                if(inCheckList[x] == False):
+                    coordsList[x] = None
+            coordsList = list(filter(lambda a: a != None, coordsList))
+
         return(coordsList)
 
 
@@ -145,6 +353,13 @@ class Knight(Piece):
         if( x > 0 and y < 6 and ((board.grid[x-1][y+2] == None) or (board.grid[x-1][y+2].color != self.color and board.grid[x-1][y+2].kink != True))):
             coordsList.append([x-1,y+2])
 
+
+        if(self.color == 'w'):
+            inCheckList = self.isWhiteInCheck(board.grid, coordsList)
+            for x in range(len(inCheckList)):
+                if(inCheckList[x] == False):
+                    coordsList[x] = None
+            coordsList = list(filter(lambda a: a != None, coordsList))
 
         print("Stub: Move Knight")
 
@@ -204,6 +419,13 @@ class Bishop(Piece):
             else:
                 break
         print("Stub: Move Bishop")
+
+        if(self.color == 'w'):
+            inCheckList = self.isWhiteInCheck(board.grid, coordsList)
+            for x in range(len(inCheckList)):
+                if(inCheckList[x] == False):
+                    coordsList[x] = None
+            coordsList = list(filter(lambda a: a != None, coordsList))
 
         return(coordsList)
 
@@ -309,6 +531,12 @@ class Queen(Piece): #for queen you can reuse rook and bishop moves
             else:
                 break
 
+        if(self.color == 'w'):
+            inCheckList = self.isWhiteInCheck(board.grid, coordsList)
+            for x in range(len(inCheckList)):
+                if(inCheckList[x] == False):
+                    coordsList[x] = None
+            coordsList = list(filter(lambda a: a != None, coordsList))
 
         print("Stub: Move Queen")
 
@@ -336,4 +564,12 @@ class King(Piece):
         if( (x > 0) and (y < 7) and ((board.grid[x-1][y+1] ==  None) or (board.grid[x-1][y+1].color != self.color and board.grid[x-1][y+1].kink != True))):
             coordsList.append([x-1,y+1])
         print("Stub: Move King")
+
+        if(self.color == 'w'):
+            inCheckList = self.isWhiteInCheck(board.grid, coordsList)
+            for x in range(len(inCheckList)):
+                if(inCheckList[x] == False):
+                    coordsList[x] = None
+            coordsList = list(filter(lambda a: a != None, coordsList))
+
         return(coordsList)

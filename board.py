@@ -188,41 +188,41 @@ class Board():
                     if self.grid[i][j].color == 'w':
                         if self.grid[i][j].id == 'P':
                             whiteCount = whiteCount + 100
-                            self.mobility = self.mobility + Board.pEval[i][j]
+                            self.mobility = self.mobility + Board.PEval[i][j]
                         elif self.grid[i][j].id == 'N':
                             whiteCount = whiteCount + 320
-                            self.mobility = self.mobility + Board.nEval[i][j]
+                            self.mobility = self.mobility + Board.NEval[i][j]
                         elif self.grid[i][j].id == 'B':
                             whiteCount = whiteCount + 330
-                            self.mobility = self.mobility + Board.bEval[i][j]
+                            self.mobility = self.mobility + Board.BEval[i][j]
                         elif self.grid[i][j].id == 'Q':
                             whiteCount = whiteCount + 900
-                            self.mobility = self.mobility + Board.qEval[i][j]
+                            self.mobility = self.mobility + Board.QEval[i][j]
                         elif self.grid[i][j].id == 'R':
                             whiteCount = whiteCount + 500
-                            self.mobility = self.mobility + Board.rEval[i][j]
+                            self.mobility = self.mobility + Board.REval[i][j]
                         elif self.grid[i][j].id == 'K':
                             whiteCount = whiteCount + 20000
-                            self.mobility = self.mobility + Board.kEval[i][j]
+                            self.mobility = self.mobility + Board.KEval[i][j]
                     if self.grid[i][j].color == 'b':
                         if self.grid[i][j].id == 'p':
                             blackCount = blackCount + 100
-                            self.bMobility = self.bMobility + Board.PEval[i][j]
+                            self.bMobility = self.bMobility + Board.pEval[i][j]
                         elif self.grid[i][j].id == 'n':
                             blackCount = blackCount + 320
-                            self.bMobility = self.bMobility + Board.NEval[i][j]
+                            self.bMobility = self.bMobility + Board.nEval[i][j]
                         elif self.grid[i][j].id == 'b':
                             blackCount = blackCount + 330
-                            self.bMobility = self.bMobility + Board.BEval[i][j]
+                            self.bMobility = self.bMobility + Board.bEval[i][j]
                         elif self.grid[i][j].id == 'q':
                             blackCount = blackCount + 900
-                            self.bMobility = self.bMobility + Board.QEval[i][j]
+                            self.bMobility = self.bMobility + Board.qEval[i][j]
                         elif self.grid[i][j].id == 'r':
                             blackCount = blackCount + 500
-                            self.bMobility = self.bMobility + Board.REval[i][j]
+                            self.bMobility = self.bMobility + Board.rEval[i][j]
                         elif self.grid[i][j].id == 'k':
                             blackCount = blackCount + 20000
-                            self.bMobility = self.bMobility + Board.KEval[i][j]
+                            self.bMobility = self.bMobility + Board.kEval[i][j]
 
         return(whiteCount - blackCount + self.mobility - self.bMobility) # STUB
 

@@ -10,7 +10,7 @@ class chessGUI():
     def __init__(self, board):
         self.window = Tk()
         self.window.title("Our Chess Board")
-        # board.generateAllWhiteMoves()
+        
         self.selected = [False, 0, 0]
         self.board = board
         self.ourTree = None
@@ -36,7 +36,7 @@ class chessGUI():
         self.ourTree = None
         self.ourTree = decisionTree(self.board, 'w')
         self.board = self.ourTree.alphaBetaPruning()
-        print("Ayy we're done!")
+        print("The AI has selected a move!")
         self.initializePhotos(self.board)
 
 
@@ -54,7 +54,7 @@ class chessGUI():
             # When you click where to move
             if(self.selected[0] == True):
 
-                # if the select piece is not None and you didn't click the same place twice
+                # if the selected piece is not None and you didn't click the same place twice
                 if(self.board.grid[self.selected[1]][self.selected[2]] != None and not (coords[0] == self.selected[1] and coords[1] == self.selected[2])):
                     tempCoords = [coords[0], coords[1]]
                     viableCoords = self.board.grid[self.selected[1]][self.selected[2]].move(self.board)
@@ -102,7 +102,9 @@ class chessGUI():
                         self.labels[z[0]][z[1]].config(bg = "palegreen3")
 
 
-
+    # takes a board object, and will refresh the entire GUI to reflect that board
+    # each square in the grid gets a 'Label' object, which holds the picture
+    # also, a 'Button' is bound to each square so that it can be clicked on
     def initializePhotos(self, newBoard):
         for i in range(0,8):
             for j in range(0,8):

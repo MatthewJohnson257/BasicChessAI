@@ -21,6 +21,7 @@ class decisionTree():
                 print("LENGTH OF CHILDREN:", len(children))
                 for x in children:
                     tempChild = x
+                    self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
                     v = max(v, self.minNode(x, alpha, beta, 'b', depth + 1))
                     if v >= beta:
                         self.numberPrunes = self.numberPrunes + 1
@@ -31,6 +32,8 @@ class decisionTree():
                             return(v)
                     alpha = max(v, alpha)
                 if(depth == 0):
+                    print("Number of prunes:", self.numberPrunes)
+                    print("Number of nodes examined:", self.numberTerminalNodesExamined)
                     print("have my child 2")
                     return(tempChild)
                 else:
@@ -40,6 +43,7 @@ class decisionTree():
                 tempChild = None
                 for x in children:
                     tempChild = x
+                    self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
                     v = max(v, self.minNode(x, alpha, beta, 'w', depth + 1))
                     if v >= beta:
                         self.numberPrunes = self.numberPrunes + 1
@@ -66,6 +70,7 @@ class decisionTree():
             if(color == 'w'):
                 children = parentBoard.generateAllWhiteMoves()
                 for x in children:
+                    self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
                     v = min(v, self.maxNode(x, alpha, beta, 'b', depth + 1))
                     if v <= alpha:
                         self.numberPrunes = self.numberPrunes + 1
@@ -75,6 +80,7 @@ class decisionTree():
             else:
                 children = parentBoard.generateAllBlackMoves()
                 for x in children:
+                    self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
                     v = min(v, self.maxNode(x, alpha, beta, 'w', depth + 1))
                     if v <= alpha:
                         self.numberPrunes = self.numberPrunes + 1

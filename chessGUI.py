@@ -77,7 +77,7 @@ class chessGUI():
                         self.board.grid[self.selected[1]][self.selected[2]] = None
                         for z in viableCoords:
                             self.labels[z[0]][z[1]].config(bg = self.backgrounds[z[0]][z[1]])
-                        canComputerGoNow = True
+                        self.initialClick = False
                     else:
                         for z in viableCoords:
                             self.labels[z[0]][z[1]].config(bg = self.backgrounds[z[0]][z[1]])
@@ -87,8 +87,6 @@ class chessGUI():
                             self.labels[z[0]][z[1]].config(bg = self.backgrounds[z[0]][z[1]])
                 self.selected[0] = False
                 self.labels[self.selected[1]][self.selected[2]].config(bg = self.backgrounds[self.selected[1]][self.selected[2]])
-                if(canComputerGoNow == True):
-                    self.computerMove()
 
 
             # when you click on a piece to select it
@@ -101,6 +99,9 @@ class chessGUI():
                     viableCoords = self.board.grid[self.selected[1]][self.selected[2]].move(self.board)
                     for z in viableCoords:
                         self.labels[z[0]][z[1]].config(bg = "palegreen3")
+
+            # if(canComputerGoNow == True):
+            #         self.computerMove()
 
 
     def initializePhotos(self, newBoard):

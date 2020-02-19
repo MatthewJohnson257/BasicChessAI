@@ -37,8 +37,6 @@ class Piece(ABC):
 
         boolList = [True for x in range(len(coordsList))]
 
-
-
         # find white king
         kingI = -1
         kingJ = -1
@@ -66,31 +64,39 @@ class Piece(ABC):
             # checks by pawn to the left
             if(kingI > 0 and kingJ > 0 and (tempGrid[kingI - 1][kingJ - 1] == 'p' or tempGrid[kingI - 1][kingJ - 1] == 'k')):
                 boolList[x] = False
+                continue
 
             # checks by pawn to the right
             if(kingI > 0 and kingJ < 7 and (tempGrid[kingI - 1][kingJ + 1] == 'p' or tempGrid[kingI - 1][kingJ + 1] == 'k')):
                 boolList[x] = False
+                continue
 
 
             # all the surroundings for kings
             # above
             if(kingI > 0 and tempGrid[kingI - 1][kingJ] == 'k'):
                 boolList[x] = False
+                continue
             # left
             if(kingJ > 0 and tempGrid[kingI][kingJ - 1] == 'k'):
                 boolList[x] = False
+                continue
             # left below
             if(kingJ > 0 and kingI < 7 and tempGrid[kingI + 1][kingJ - 1] == 'k'):
                 boolList[x] = False
+                continue
             # below
             if(kingI < 7 and tempGrid[kingI + 1][kingJ] == 'k'):
                 boolList[x] = False
+                continue
             # below right
             if(kingI < 7 and kingJ < 7 and tempGrid[kingI + 1][kingJ + 1] == 'k'):
                 boolList[x] = False
+                continue
             # right
             if(kingJ < 7 and tempGrid[kingI][kingJ + 1] == 'k'):
                 boolList[x] = False
+                continue
 
             # check from horizontal left
             tempI = kingI
@@ -188,20 +194,28 @@ class Piece(ABC):
 
             if(kingI < 6 and kingJ < 7 and tempGrid[kingI + 2][kingJ + 1] == 'n'):
                 boolList[x] = False
+                continue
             if(kingI < 6 and kingJ > 0 and tempGrid[kingI + 2][kingJ - 1] == 'n'):
                 boolList[x] = False
+                continue
             if(kingI < 7 and kingJ < 6 and tempGrid[kingI + 1][kingJ + 2] == 'n'):
                 boolList[x] = False
+                continue
             if(kingI < 7 and kingJ > 1 and tempGrid[kingI + 1][kingJ - 2] == 'n'):
                 boolList[x] = False
+                continue
             if(kingI > 1 and kingJ < 7 and tempGrid[kingI - 2][kingJ + 1] == 'n'):
                 boolList[x] = False
+                continue
             if(kingI > 1 and kingJ > 0 and tempGrid[kingI - 2][kingJ - 1] == 'n'):
                 boolList[x] = False
+                continue
             if(kingI > 0 and kingJ > 1 and tempGrid[kingI - 1][kingJ - 2] == 'n'):
                 boolList[x] = False
+                continue
             if(kingI > 0 and kingJ < 1 and tempGrid[kingI - 1][kingJ + 2] == 'n'):
                 boolList[x] = False
+                continue
 
             # reset what was moved
             tempGrid[self.i][self.j] = self.id

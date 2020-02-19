@@ -13,6 +13,7 @@ class chessGUI():
         # board.generateAllWhiteMoves()
         self.selected = [False, 0, 0]
         self.board = board
+        self.ourTree = None
 
         self.initialClick = False
         self.images = [[None for x in range(8)] for y in range(8)]
@@ -32,10 +33,11 @@ class chessGUI():
 
 
     def computerMove(self):
-        alphaBetaTree = decisionTree(self.board, 'w')
-        nextBoard = alphaBetaTree.alphaBetaPruning()
+        self.ourTree = None
+        self.ourTree = decisionTree(self.board, 'w')
+        self.board = self.ourTree.alphaBetaPruning()
         print("Ayy we're done!")
-        self.initializePhotos(nextBoard)
+        self.initializePhotos(self.board)
 
 
 
@@ -48,7 +50,6 @@ class chessGUI():
             self.computerMove()
 
         else:
-            canComputerGoNow = False
 
             # When you click where to move
             if(self.selected[0] == True):
@@ -100,8 +101,6 @@ class chessGUI():
                     for z in viableCoords:
                         self.labels[z[0]][z[1]].config(bg = "palegreen3")
 
-            # if(canComputerGoNow == True):
-            #         self.computerMove()
 
 
     def initializePhotos(self, newBoard):

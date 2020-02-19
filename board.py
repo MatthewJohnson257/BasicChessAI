@@ -160,17 +160,19 @@ class Board():
                         self.grid[i][j] = Rook(i, j, 'b', 'r')
             self.whiteInCheck = self.isWhiteInCheck()
             self.blackInCheck = self.isBlackInCheck()
+            
         else:
             self.grid = grid
             self.whiteInCheck = whiteInCheck
             self.blackInCheck = blackInCheck
 
         self.evalValue = self.evaluationFunction()
+
         print(self.evalValue)
 
 
 
-        
+
 
     # takes in which color's turn it is, generates all valid moves for that player
     #
@@ -187,7 +189,7 @@ class Board():
             GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
             # STUB
 
-    
+
 
     def evaluationFunction(self):
         whiteCount = 0

@@ -14,6 +14,8 @@ class Piece(ABC):
             self.kink = True
         else:
             self.kink = False
+        self.canMove = True
+
         # print("oh yeah we a piece man")  # debug print statement I guess lol
 
 
@@ -436,6 +438,8 @@ class Pawn(Piece):
                 if(inCheckList[x] == False):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
+            count = 0
+
 
         elif(self.color == 'b'):
             inCheckList = self.isBlackInCheck(board.grid, coordsList)
@@ -443,6 +447,14 @@ class Pawn(Piece):
                 if(inCheckList[x] == False):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
+            count = 0
+        for x in range(len(coordsList)):
+            if coordsList[x] is None:
+                count = count + 1
+                if(count == len(coordsList)):
+                    self.canMove = False
+
+
 
 
         return(coordsList)  # return the list of coordinates - a method in board.py will then check to see if the coords
@@ -510,6 +522,9 @@ class Rook(Piece):
                 if(inCheckList[x] == False):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
+            if len(coordsList) != 0:
+                self.canMove = True
+
 
         elif(self.color == 'b'):
             inCheckList = self.isBlackInCheck(board.grid, coordsList)
@@ -517,6 +532,13 @@ class Rook(Piece):
                 if(inCheckList[x] == False):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
+            if len(coordsList) != 0:
+                self.canMove = True
+        for x in range(len(coordsList)):
+            if coordsList[x] is None:
+                count = count + 1
+                if(count == len(coordsList)):
+                    self.canMove = False
 
         return(coordsList)
 
@@ -549,6 +571,8 @@ class Knight(Piece):
             for x in range(len(inCheckList)):
                 if(inCheckList[x] == False):
                     coordsList[x] = None
+                if len(coordsList) != 0:
+                    self.canMove = True
             coordsList = list(filter(lambda a: a != None, coordsList))
         elif(self.color == 'b'):
             inCheckList = self.isBlackInCheck(board.grid, coordsList)
@@ -556,6 +580,11 @@ class Knight(Piece):
                 if(inCheckList[x] == False):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
+        for x in range(len(coordsList)):
+            if coordsList[x] is None:
+                count = count + 1
+                if(count == len(coordsList)):
+                    self.canMove = False
 
         print("Stub: Move Knight")
 
@@ -628,6 +657,11 @@ class Bishop(Piece):
                 if(inCheckList[x] == False):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
+        for x in range(len(coordsList)):
+            if coordsList[x] is None:
+                count = count + 1
+                if(count == len(coordsList)):
+                    self.canMove = False
 
         return(coordsList)
 
@@ -739,12 +773,17 @@ class Queen(Piece): #for queen you can reuse rook and bishop moves
                 if(inCheckList[x] == False):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
-        if(self.color == 'b'):
+        elif(self.color == 'b'):
             inCheckList = self.isBlackInCheck(board.grid, coordsList)
             for x in range(len(inCheckList)):
                 if(inCheckList[x] == False):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
+        for x in range(len(coordsList)):
+            if coordsList[x] is None:
+                count = count + 1
+                if(count == len(coordsList)):
+                    self.canMove = False
 
         print("Stub: Move Queen")
 
@@ -785,5 +824,10 @@ class King(Piece):
                 if(inCheckList[x] == False):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
+        for x in range(len(coordsList)):
+            if coordsList[x] is None:
+                count = count + 1
+                if(count == len(coordsList)):
+                    self.canMove = False
 
         return(coordsList)

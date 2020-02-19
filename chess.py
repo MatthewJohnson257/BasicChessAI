@@ -48,8 +48,8 @@ inputTest2 = [['_', '_', '_', '_', 'k', '_', '_', '_'],
 def graphicalBoard(board):
     window = Tk()
     window.title("Our Chess Board")
-
-    outsiders = [False, 0, 0]
+    board.generateAllWhiteMoves()
+    selected = [False, 0, 0]
 
     images = [[None for x in range(8)] for y in range(8)]
     backgrounds = [[None for x in range(8)] for y in range(8)]
@@ -65,60 +65,54 @@ def graphicalBoard(board):
     def mouseClicked(event, coords):
 
         # When you click where to move
-        if(outsiders[0] == True):
+        if(selected[0] == True):
 
             # if the select piece is not None and you didn't click the same place twice
-            if(board.grid[outsiders[1]][outsiders[2]] != None and not (coords[0] == outsiders[1] and coords[1] == outsiders[2])):
+            if(board.grid[selected[1]][selected[2]] != None and not (coords[0] == selected[1] and coords[1] == selected[2])):
                 tempCoords = [coords[0], coords[1]]
-                viableCoords = board.grid[outsiders[1]][outsiders[2]].move(board)
-                #print("viableCoords:", viableCoords)
+                viableCoords = board.grid[selected[1]][selected[2]].move(board)
+                 
                 if(tempCoords in viableCoords):
 
-                    images[coords[0]][coords[1]] = images[outsiders[1]][outsiders[2]]
+                    images[coords[0]][coords[1]] = images[selected[1]][selected[2]]
                     labels[coords[0]][coords[1]] = Label(window, image = images[coords[0]][coords[1]], bg = backgrounds[coords[0]][coords[1]])
                     labels[coords[0]][coords[1]].grid(row = coords[0], column = coords[1])
                     data = [coords[0], coords[1]]
                     labels[coords[0]][coords[1]].bind("<Button-1>", lambda event, arg=data: mouseClicked(event, arg))
-                    board.grid[coords[0]][coords[1]] = board.grid[outsiders[1]][outsiders[2]]
+                    board.grid[coords[0]][coords[1]] = board.grid[selected[1]][selected[2]]
                     board.grid[coords[0]][coords[1]].i = coords[0]
                     board.grid[coords[0]][coords[1]].j = coords[1]
 
-                    images[outsiders[1]][outsiders[2]] = PhotoImage(file = "blanksquare.png")
-                    labels[outsiders[1]][outsiders[2]] = Label(window, image = images[outsiders[1]][outsiders[2]], bg = backgrounds[outsiders[1]][outsiders[2]])
-                    labels[outsiders[1]][outsiders[2]].grid(row = outsiders[1], column = outsiders[2])
-                    data = [outsiders[1], outsiders[2]]
-                    labels[outsiders[1]][outsiders[2]].bind("<Button-1>", lambda event, arg=data: mouseClicked(event, arg))
-                    board.grid[outsiders[1]][outsiders[2]] = None
+                    images[selected[1]][selected[2]] = PhotoImage(file = "blanksquare.png")
+                    labels[selected[1]][selected[2]] = Label(window, image = images[selected[1]][selected[2]], bg = backgrounds[selected[1]][selected[2]])
+                    labels[selected[1]][selected[2]].grid(row = selected[1], column = selected[2])
+                    data = [selected[1], selected[2]]
+                    labels[selected[1]][selected[2]].bind("<Button-1>", lambda event, arg=data: mouseClicked(event, arg))
+                    board.grid[selected[1]][selected[2]] = None
                     for z in viableCoords:
                         labels[z[0]][z[1]].config(bg = backgrounds[z[0]][z[1]])
-                    # for g in range(8):
-                    #     for h in range(8):
-                    #         labels[g][h].config(bg = backgrounds[g][h])
-                        #labels[z[0]][z[1]].config(bg = "black")
                 else:
                     for z in viableCoords:
                         labels[z[0]][z[1]].config(bg = backgrounds[z[0]][z[1]])
-            elif (coords[0] == outsiders[1] and coords[1] == outsiders[2] and board.grid[coords[0]][coords[1]] != None):
-                viableCoords = board.grid[outsiders[1]][outsiders[2]].move(board)
+            elif (coords[0] == selected[1] and coords[1] == selected[2] and board.grid[coords[0]][coords[1]] != None):
+                viableCoords = board.grid[selected[1]][selected[2]].move(board)
                 for z in viableCoords:
                         labels[z[0]][z[1]].config(bg = backgrounds[z[0]][z[1]])
-            outsiders[0] = False
-            labels[outsiders[1]][outsiders[2]].config(bg = backgrounds[outsiders[1]][outsiders[2]])
-            #print("Click Change")
+            selected[0] = False
+            labels[selected[1]][selected[2]].config(bg = backgrounds[selected[1]][selected[2]])
+
+
 
         # when you click on a piece to select it
         else:
-            outsiders[1] = coords[0]
-            outsiders[2] = coords[1]
-            outsiders[0] = True
-            labels[outsiders[1]][outsiders[2]].config(bg = "gold")
-            if(board.grid[outsiders[1]][outsiders[2]] != None):
-                #print(board.grid[outsiders[1]][outsiders[2]].id)
-                viableCoords = board.grid[outsiders[1]][outsiders[2]].move(board)
-                #print("viableCoords:", viableCoords)
+            selected[1] = coords[0]
+            selected[2] = coords[1]
+            selected[0] = True
+            labels[selected[1]][selected[2]].config(bg = "gold")
+            if(board.grid[selected[1]][selected[2]] != None):
+                viableCoords = board.grid[selected[1]][selected[2]].move(board)
                 for z in viableCoords:
                     labels[z[0]][z[1]].config(bg = "palegreen3")
-            #print("Click Set")
 
 
     def updatePhotos():
@@ -239,7 +233,6 @@ elif(usedBoard == 4):
 
 
 
-
 boardDefault = Board(inputGrid, True)
 boardDefault.printBoard()
 graphicalBoard(boardDefault)
@@ -249,34 +242,3 @@ graphicalBoard(boardDefault)
 
 
 
-
-
-# List of things we need to implement/figure out:
-#--------------------------------General Stuff--------------------------------#
-# 1. He said it was important to figure out which moves to explore first, since
-#    that determines which/how many nodes get pruned in A-B pruning
-# 2.
-# 3.
-# 4.
-#----------------------------------chess.py-----------------------------------#
-# 1. Input of all the examples he gave us, also maybe just a regular chess board
-# 2. All functionality related to alpha-beta pruning (where board is a state)
-# 3.
-# 4.
-# 5.
-# 6.
-#----------------------------------board.py-----------------------------------#
-# 1. Evalutation function (each board has instance variable named 'evalValue')
-#    for this score
-# 2. Functionality to check if the coordinates returned by a piece's move()
-#    method represent a valid move (i.e. no pieces are in the way, the king is
-#    not put in check)
-# 3. Methods to check whether or not the kings are in check
-# 4.
-# 5.
-# 6.
-#----------------------------------piece.py-----------------------------------#
-# 1. Implement functionality for each piece's move() method
-# 2.
-# 3.
-# 4.

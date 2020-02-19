@@ -462,7 +462,7 @@ class Pawn(Piece):
 
 
 
-        print("Stub: Move Pawn")
+        # print("Stub: Move Pawn")
 
 
 class Rook(Piece):
@@ -514,7 +514,7 @@ class Rook(Piece):
                 break
             else:
                 break
-        print("Stub: Move Rook")
+        # print("Stub: Move Rook")
 
         if(self.color == 'w'):
             inCheckList = self.isWhiteInCheck(board.grid, coordsList)
@@ -586,7 +586,7 @@ class Knight(Piece):
                 if(count == len(coordsList)):
                     self.canMove = False
 
-        print("Stub: Move Knight")
+        # print("Stub: Move Knight")
 
         return (coordsList)
 
@@ -643,7 +643,7 @@ class Bishop(Piece):
                 break
             else:
                 break
-        print("Stub: Move Bishop")
+        # print("Stub: Move Bishop")
 
         if(self.color == 'w'):
             inCheckList = self.isWhiteInCheck(board.grid, coordsList)
@@ -785,7 +785,7 @@ class Queen(Piece): #for queen you can reuse rook and bishop moves
                 if(count == len(coordsList)):
                     self.canMove = False
 
-        print("Stub: Move Queen")
+        # print("Stub: Move Queen")
 
         return(coordsList)
 
@@ -810,7 +810,7 @@ class King(Piece):
             coordsList.append([x-1,y-1])
         if( (x > 0) and (y < 7) and ((board.grid[x-1][y+1] ==  None) or (board.grid[x-1][y+1].color != self.color and board.grid[x-1][y+1].kink != True))):
             coordsList.append([x-1,y+1])
-        print("Stub: Move King")
+        # print("Stub: Move King")
 
         if(self.color == 'w'):
             inCheckList = self.isWhiteInCheck(board.grid, coordsList)

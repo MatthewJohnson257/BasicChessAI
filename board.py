@@ -18,114 +18,115 @@ class Board():
 #a = [[0 for x in range(columns)] for y in range(rows)]
 
     def __init__(self, grid, newBoard = False, whiteInCheck = False, blackInCheck = False):
+        self.pEval = [[0, 0, 0, 0, 0, 0, 0, 0],
+                        [50, 50, 50, 50, 50, 50, 50, 50],
+                        [10, 10, 20, 30, 30, 20, 10, 10],
+                        [5, 5, 10, 25, 25, 10, 5, 5],
+                        [0, 0, 0, 20, 20, 0, 0, 0],
+                        [5, -5, -10, 0, 0, -10, -5, 5],
+                        [5, 10, 10, -20, -20, 10, 10, 5],
+                        [0, 0, 0, 0, 0, 0, 0, 0]]
+
+        self.PEval = [[0, 0, 0, 0, 0, 0, 0, 0],
+                        [5, 10, 10, -20, -20, 10, 10, 5],
+                        [5, -5, -10, 0, 0, -10, -5, 5],
+                        [0, 0, 0, 20, 20, 0, 0, 0],
+                        [5, 5, 10, 25, 25, 10, 5, 5],
+                        [10, 10, 20, 30, 30, 20, 10, 10],
+                        [50, 50, 50, 50, 50, 50, 50, 50],
+                        [0, 0, 0, 0, 0, 0, 0, 0]]
+
+        self.nEval = [[-50, -40, -30, -30, -30, -30, -40, -50],
+                        [-40, -20, 0, 0, 0, 0, -20, -40],
+                        [-30, 0, 10, 15, 15, 10, 0, -30],
+                        [-30, 5, 15, 20, 20, 15, 5, -30],
+                        [-30, 0, 15, 20, 20, 15, 0, -30],
+                        [-30, 5, 10, 15, 15, 10, 5, -30],
+                        [-40, -20, 0, 5, 5, 0, -20, -40],
+                        [-50, -40, -30, -30, -30, -30, -40, -50]]
+
+        self.NEval = [[-50, -40, -30, -30, -30, -30, -40, -50],
+                        [-40, -20, 0, 5, 5, 0, -20, -40],
+                        [-30, 5, 10, 15, 15, 10, 5, -30],
+                        [-30, 0, 15, 20, 20, 15, 0, -30],
+                        [-30, 5, 15, 20, 20, 15, 5, -30],
+                        [-30, 0, 10, 15, 15, 10, 0, -30],
+                        [-40, -20, 0, 0, 0, 0, -20, -40],
+                        [-50, -40, -30, -30, -30, -30, -40, -50]]
+
+        self.bEval = [[-20, -10, -10, -10, -10, -10, -10, -20],
+                        [-10, 0, 0, 0, 0, 0, 0, -10],
+                        [-10, 0, 5, 10, 10, 5, 0, -10],
+                        [-10, 5, 5, 10, 10, 5, 5, -10],
+                        [-10, 0, 10, 10, 10, 10, 0, -10],
+                        [-10, 10, 10, 10, 10, 10, 10, -10],
+                        [-10, 5, 0, 0, 0, 0, 5, -10],
+                        [-20, -10, -10, -10, -10, -10, -10, -20]]
+
+        self.BEval = [[-20, -10, -10, -10, -10, -10, -10, -20],
+                        [-10, 5, 0, 0, 0, 0, 5, -10],
+                        [-10, 10, 10, 10, 10, 10, 10, -10],
+                        [-10, 0, 10, 10, 10, 10, 0, -10],
+                        [-10, 5, 5, 10, 10, 5, 5, -10],
+                        [-10, 0, 5, 10, 10, 5, 0, -10],
+                        [-10, 0, 0, 0, 0, 0, 0, -10],
+                        [-20, -10, -10, -10, -10, -10, -10, -20]]
+
+        self.rEval = [[0, 0, 0, 0, 0, 0, 0, 0],
+                        [5, 10, 10, 10, 10, 10, 10, 5],
+                        [-5, 0, 0, 0, 0, 0, 0, -5],
+                        [-5, 0, 0, 0, 0, 0, 0, -5],
+                        [-5, 0, 0, 0, 0, 0, 0, -5],
+                        [-5, 0, 0, 0, 0, 0, 0, -5],
+                        [-5, 0, 0, 0, 0, 0, 0, -5],
+                        [0, 0, 0, 5, 5, 0, 0, 0]]
+
+        self.REval = [[0, 0, 0, 5, 5, 0, 0, 0],
+                        [-5, 0, 0, 0, 0, 0, 0, -5],
+                        [-5, 0, 0, 0, 0, 0, 0, -5],
+                        [-5, 0, 0, 0, 0, 0, 0, -5],
+                        [-5, 0, 0, 0, 0, 0, 0, -5],
+                        [-5, 0, 0, 0, 0, 0, 0, -5],
+                        [5, 10, 10, 10, 10, 10, 10, 5],
+                        [0, 0, 0, 0, 0, 0, 0, 0]]
+
+        self.qEval = [[-20, -10, -10, -5, -5, -10, -10, -20],
+                        [-10, 0, 0, 0, 0, 0, 0, -10],
+                        [-10, 0, 5, 5, 5, 5, 0, -10],
+                        [-5, 0, 5, 5, 5, 5, 0, -5],
+                        [0, 0, 5, 5, 5, 5, 0, -5],
+                        [-10, 5, 5, 5, 5, 5, 0, -10],
+                        [-10, 0, 5, 0, 0, 0, 0, -10],
+                        [-20, -10, -10, -5, -5, -10, -10, -20]]
+
+        self.QEval = [[-20, -10, -10, -5, -5, -10, -10, -20],
+                        [-10, 0, 5, 0, 0, 0, 0, -10],
+                        [-10, 5, 5, 5, 5, 5, 0, -10],
+                        [0, 0, 5, 5, 5, 5, 0, -5],
+                        [-5, 0, 5, 5, 5, 5, 0, -5],
+                        [-10, 0, 5, 5, 5, 5, 0, -10],
+                        [-10, 0, 0, 0, 0, 0, 0, -10],
+                        [-20, -10, -10, -5, -5, -10, -10, -20]]
+
+        self.kEval = [[-30, -40, -40, -50, -50, -40, -40, -30],
+                        [-30, -40, -40, -50, -50, -40, -40, -30],
+                        [-30, -40, -40, -50, -50, -40, -40, -30],
+                        [-30, -40, -40, -50, -50, -40, -40, -30],
+                        [-20, -30, -30, -40, -40, -30, -30, -20],
+                        [-10, -20, -20, -20, -20, -20, -20, -10],
+                        [20, 20, 0, 0, 0, 0, 20, 20],
+                        [20, 30, 10, 0, 0, 10, 30, 20]]
+
+        self.KEval = [[20, 30, 10, 0, 0, 10, 30, 20],
+                        [20, 20, 0, 0, 0, 0, 20, 20],
+                        [-10, -20, -20, -20, -20, -20, -20, -10],
+                        [-20, -30, -30, -40, -40, -30, -30, -20],
+                        [-30, -40, -40, -50, -50, -40, -40, -30],
+                        [-30, -40, -40, -50, -50, -40, -40, -30],
+                        [-30, -40, -40, -50, -50, -40, -40, -30],
+                        [-30, -40, -40, -50, -50, -40, -40, -30]]
+        
         if(newBoard == True):
-            self.pEval = [[0, 0, 0, 0, 0, 0, 0, 0],
-                          [50, 50, 50, 50, 50, 50, 50, 50],
-                          [10, 10, 20, 30, 30, 20, 10, 10],
-                          [5, 5, 10, 25, 25, 10, 5, 5],
-                          [0, 0, 0, 20, 20, 0, 0, 0],
-                          [5, -5, -10, 0, 0, -10, -5, 5],
-                          [5, 10, 10, -20, -20, 10, 10, 5],
-                          [0, 0, 0, 0, 0, 0, 0, 0]]
-
-            self.PEval = [[0, 0, 0, 0, 0, 0, 0, 0],
-                          [5, 10, 10, -20, -20, 10, 10, 5],
-                          [5, -5, -10, 0, 0, -10, -5, 5],
-                          [0, 0, 0, 20, 20, 0, 0, 0],
-                          [5, 5, 10, 25, 25, 10, 5, 5],
-                          [10, 10, 20, 30, 30, 20, 10, 10],
-                          [50, 50, 50, 50, 50, 50, 50, 50],
-                          [0, 0, 0, 0, 0, 0, 0, 0]]
-
-            self.nEval = [[-50, -40, -30, -30, -30, -30, -40, -50],
-                          [-40, -20, 0, 0, 0, 0, -20, -40],
-                          [-30, 0, 10, 15, 15, 10, 0, -30],
-                          [-30, 5, 15, 20, 20, 15, 5, -30],
-                          [-30, 0, 15, 20, 20, 15, 0, -30],
-                          [-30, 5, 10, 15, 15, 10, 5, -30],
-                          [-40, -20, 0, 5, 5, 0, -20, -40],
-                          [-50, -40, -30, -30, -30, -30, -40, -50]]
-
-            self.NEval = [[-50, -40, -30, -30, -30, -30, -40, -50],
-                          [-40, -20, 0, 5, 5, 0, -20, -40],
-                          [-30, 5, 10, 15, 15, 10, 5, -30],
-                          [-30, 0, 15, 20, 20, 15, 0, -30],
-                          [-30, 5, 15, 20, 20, 15, 5, -30],
-                          [-30, 0, 10, 15, 15, 10, 0, -30],
-                          [-40, -20, 0, 0, 0, 0, -20, -40],
-                          [-50, -40, -30, -30, -30, -30, -40, -50]]
-
-            self.bEval = [[-20, -10, -10, -10, -10, -10, -10, -20],
-                          [-10, 0, 0, 0, 0, 0, 0, -10],
-                          [-10, 0, 5, 10, 10, 5, 0, -10],
-                          [-10, 5, 5, 10, 10, 5, 5, -10],
-                          [-10, 0, 10, 10, 10, 10, 0, -10],
-                          [-10, 10, 10, 10, 10, 10, 10, -10],
-                          [-10, 5, 0, 0, 0, 0, 5, -10],
-                          [-20, -10, -10, -10, -10, -10, -10, -20]]
-
-            self.BEval = [[-20, -10, -10, -10, -10, -10, -10, -20],
-                          [-10, 5, 0, 0, 0, 0, 5, -10],
-                          [-10, 10, 10, 10, 10, 10, 10, -10],
-                          [-10, 0, 10, 10, 10, 10, 0, -10],
-                          [-10, 5, 5, 10, 10, 5, 5, -10],
-                          [-10, 0, 5, 10, 10, 5, 0, -10],
-                          [-10, 0, 0, 0, 0, 0, 0, -10],
-                          [-20, -10, -10, -10, -10, -10, -10, -20]]
-
-            self.rEval = [[0, 0, 0, 0, 0, 0, 0, 0],
-                          [5, 10, 10, 10, 10, 10, 10, 5],
-                          [-5, 0, 0, 0, 0, 0, 0, -5],
-                          [-5, 0, 0, 0, 0, 0, 0, -5],
-                          [-5, 0, 0, 0, 0, 0, 0, -5],
-                          [-5, 0, 0, 0, 0, 0, 0, -5],
-                          [-5, 0, 0, 0, 0, 0, 0, -5],
-                          [0, 0, 0, 5, 5, 0, 0, 0]]
-
-            self.REval = [[0, 0, 0, 5, 5, 0, 0, 0],
-                          [-5, 0, 0, 0, 0, 0, 0, -5],
-                          [-5, 0, 0, 0, 0, 0, 0, -5],
-                          [-5, 0, 0, 0, 0, 0, 0, -5],
-                          [-5, 0, 0, 0, 0, 0, 0, -5],
-                          [-5, 0, 0, 0, 0, 0, 0, -5],
-                          [5, 10, 10, 10, 10, 10, 10, 5],
-                          [0, 0, 0, 0, 0, 0, 0, 0]]
-
-            self.qEval = [[-20, -10, -10, -5, -5, -10, -10, -20],
-                          [-10, 0, 0, 0, 0, 0, 0, -10],
-                          [-10, 0, 5, 5, 5, 5, 0, -10],
-                          [-5, 0, 5, 5, 5, 5, 0, -5],
-                          [0, 0, 5, 5, 5, 5, 0, -5],
-                          [-10, 5, 5, 5, 5, 5, 0, -10],
-                          [-10, 0, 5, 0, 0, 0, 0, -10],
-                          [-20, -10, -10, -5, -5, -10, -10, -20]]
-
-            self.QEval = [[-20, -10, -10, -5, -5, -10, -10, -20],
-                          [-10, 0, 5, 0, 0, 0, 0, -10],
-                          [-10, 5, 5, 5, 5, 5, 0, -10],
-                          [0, 0, 5, 5, 5, 5, 0, -5],
-                          [-5, 0, 5, 5, 5, 5, 0, -5],
-                          [-10, 0, 5, 5, 5, 5, 0, -10],
-                          [-10, 0, 0, 0, 0, 0, 0, -10],
-                          [-20, -10, -10, -5, -5, -10, -10, -20]]
-
-            self.kEval = [[-30, -40, -40, -50, -50, -40, -40, -30],
-                          [-30, -40, -40, -50, -50, -40, -40, -30],
-                          [-30, -40, -40, -50, -50, -40, -40, -30],
-                          [-30, -40, -40, -50, -50, -40, -40, -30],
-                          [-20, -30, -30, -40, -40, -30, -30, -20],
-                          [-10, -20, -20, -20, -20, -20, -20, -10],
-                          [20, 20, 0, 0, 0, 0, 20, 20],
-                          [20, 30, 10, 0, 0, 10, 30, 20]]
-
-            self.KEval = [[20, 30, 10, 0, 0, 10, 30, 20],
-                          [20, 20, 0, 0, 0, 0, 20, 20],
-                          [-10, -20, -20, -20, -20, -20, -20, -10],
-                          [-20, -30, -30, -40, -40, -30, -30, -20],
-                          [-30, -40, -40, -50, -50, -40, -40, -30],
-                          [-30, -40, -40, -50, -50, -40, -40, -30],
-                          [-30, -40, -40, -50, -50, -40, -40, -30],
-                          [-30, -40, -40, -50, -50, -40, -40, -30]]
 
             self.mobility = 0
             self.bMobility = 0
@@ -158,36 +159,21 @@ class Board():
                         self.grid[i][j] = Rook(i, j, 'w', 'R')
                     elif(grid[i][j] == 'r'):
                         self.grid[i][j] = Rook(i, j, 'b', 'r')
-            self.whiteInCheck = self.isWhiteInCheck()
-            self.blackInCheck = self.isBlackInCheck()
-            
+            self.whiteInCheck = whiteInCheck  # change later maybe?
+            self.blackInCheck = blackInCheck  # change later maybe?
+
         else:
+            self.mobility = 0
+            self.bMobility = 0
             self.grid = grid
-            self.whiteInCheck = whiteInCheck
-            self.blackInCheck = blackInCheck
+            self.whiteInCheck = whiteInCheck  # change later maybe?
+            self.blackInCheck = blackInCheck  # change later maybe?
 
         self.evalValue = self.evaluationFunction()
 
-        print(self.evalValue)
+        print("EvalValue:", self.evalValue)
 
 
-
-
-
-    # takes in which color's turn it is, generates all valid moves for that player
-    #
-    # we will more fully implement this after we get all the move() methods in Piece.py done
-    def generateMoves(self, color):
-        if(color == 'b'):
-            GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
-
-            # STUB - search the entire grid for black pieces, call move() for each of them
-            # then check to see if what is returned are valid coordinate moves for that piece
-            # (this will be more clear when you see what I wrote in Piece.py)
-
-        if(color == 'w'):
-            GucciMane = 1 # just here as a temporary placeholder so no errors are thrown
-            # STUB
 
 
 
@@ -243,50 +229,56 @@ class Board():
 
 
 
-    def isWhiteInCheck(self):
-
-        # find where the white king is
-        iKing = 0
-        jKing = 0
+    # for all white pieces, find their valid moves by calling their move() function
+    # then create a new board for each of those valid moves
+    # return a list of these new boards
+    def generateAllWhiteMoves(self):
+        boardList = []
+        count = 0
+        
         for i in range(8):
             for j in range(8):
-                if(self.grid[i][j] != None and self.grid[i][j].id == 'K'):
-                    iKing = i
-                    jKing = j
-                    break
+                if(self.grid[i][j] != None):
+                    if(self.grid[i][j].color == 'w'):  # all white pieces
+                        
+                        # coordinates where we are moving a particular piece
+                        newMovesCoords = self.grid[i][j].move(self)    
 
+                        # for each of those coordinate pairs, create new board
+                        for x in newMovesCoords:
+                            newBoard = Board(copy.deepcopy(self.grid))
+                            newBoard.grid[x[0]][x[1]] = newBoard.grid[i][j]
+                            newBoard.grid[i][j] = None
+                            newBoard.evalValue = newBoard.evaluationFunction()
+                            boardList.append(newBoard)
+                            count = count + 1
+                            print("Count:", count)
 
-        # check for horizontal attacks from left
-
-        # check for horizontal attacks from right
-
-        # check for vertical attacks from above
-
-        # check for vertical attacks from below
-
-        # check for diagonal from top left
-
-        # check for diagonal from bottom left
-
-        # check for diagonal from top right
-
-        # check for diagonal from bottom left
-
-        # check for knights attacking
-
-
-        return(False) # STUB
-
-
-    def isBlackInCheck(self):
-        iKing = 0
-        jKing = 0
+    
+    # for all black pieces, find their valid moves by calling their move() function
+    # then create a new board for each of those valid moves
+    # return a list of these new boards
+    def generateAllBlackMoves(self):
+        boardList = []
+        count = 0
+        
         for i in range(8):
             for j in range(8):
-                if(self.grid[i][j] != None and self.grid[i][j].id == 'k'):
-                    iKing = i
-                    jKing = j
-                    break
+                if(self.grid[i][j] != None):
+                    if(self.grid[i][j].color == 'b'):  # all white pieces
+                        
+                        # coordinates where we are moving a particular piece
+                        newMovesCoords = self.grid[i][j].move(self)    
+
+                        # for each of those coordinate pairs, create new board
+                        for x in newMovesCoords:
+                            newBoard = Board(copy.deepcopy(self.grid))
+                            newBoard.grid[x[0]][x[1]] = newBoard.grid[i][j]
+                            newBoard.grid[i][j] = None
+                            newBoard.evalValue = newBoard.evaluationFunction()
+                            boardList.append(newBoard)
+                            count = count + 1
+                            print("Count:", count)
 
 
 

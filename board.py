@@ -171,7 +171,7 @@ class Board():
 
         self.evalValue = self.evaluationFunction()
 
-        print("EvalValue:", self.evalValue)
+        # print("EvalValue:", self.evalValue)
 
 
 
@@ -246,13 +246,16 @@ class Board():
 
                         # for each of those coordinate pairs, create new board
                         for x in newMovesCoords:
-                            newBoard = Board(copy.deepcopy(self.grid))
-                            newBoard.grid[x[0]][x[1]] = newBoard.grid[i][j]
-                            newBoard.grid[i][j] = None
-                            newBoard.evalValue = newBoard.evaluationFunction()
-                            boardList.append(newBoard)
+                            boardList.append(Board(copy.deepcopy(self.grid)))
+                            boardList[count].grid[x[0]][x[1]] = boardList[count].grid[i][j]
+                            boardList[count].grid[i][j] = None
+                            boardList[count].evalValue = boardList[count].evaluationFunction()
+                            # print("New evalValue:", boardList[count].evalValue)
+                            # boardList.append(newBoard)
                             count = count + 1
-                            print("Count:", count)
+                            # print("Possible Move Count:", count)
+
+        return(boardList)
 
     
     # for all black pieces, find their valid moves by calling their move() function
@@ -272,13 +275,16 @@ class Board():
 
                         # for each of those coordinate pairs, create new board
                         for x in newMovesCoords:
-                            newBoard = Board(copy.deepcopy(self.grid))
-                            newBoard.grid[x[0]][x[1]] = newBoard.grid[i][j]
-                            newBoard.grid[i][j] = None
-                            newBoard.evalValue = newBoard.evaluationFunction()
-                            boardList.append(newBoard)
+                            boardList.append(Board(copy.deepcopy(self.grid)))
+                            boardList[count].grid[x[0]][x[1]] = boardList[count].grid[i][j]
+                            boardList[count].grid[i][j] = None
+                            boardList[count].evalValue = boardList[count].evaluationFunction()
+                            # print("New evalValue:", boardList[count].evalValue)
+                            #boardList.append(newBoard)
                             count = count + 1
-                            print("Count:", count)
+                            # print("Possible Move Count:", count)
+
+        return(boardList)
 
 
 

@@ -5,7 +5,7 @@ import copy
 class Piece(ABC):
     def __init__(self, i, j, color, id): # STUB!! get rid of default values later
 
-        # these things are instance variables:
+        # instance variables:
         self.i = i
         self.j = j
         self.color = color
@@ -16,9 +16,7 @@ class Piece(ABC):
             self.kink = False
         self.canMove = True
 
-        # print("oh yeah we a piece man")  # debug print statement I guess lol
-
-
+        
     # this method returns a list of coordinates that a piece would be able to move to
     # from its position if the rest of the board was completely empty
     def move(self):

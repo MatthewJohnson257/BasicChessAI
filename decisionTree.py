@@ -2,8 +2,8 @@
 
 class decisionTree():
 
-    def __init__(self, tree, initialBoard, initialColor = 'w'):
-        self.tree = tree
+    def __init__(self, initialBoard, initialColor = 'w'):
+        
         self.initialBoard = initialBoard
         self.initialColor = initialColor
         self.numberPrunes = 0
@@ -17,22 +17,43 @@ class decisionTree():
                                 # python doesn't have a MIN INT
             if(color == 'w'):
                 children = parentBoard.generateAllWhiteMoves()
+                tempChild = None
+                print("LENGTH OF CHILDREN:", len(children))
                 for x in children:
+                    tempChild = x
                     v = max(v, self.minNode(x, alpha, beta, 'b', depth + 1))
                     if v >= beta:
                         self.numberPrunes = self.numberPrunes + 1
-                        return(v)
+                        if(depth == 0):
+                            print("have my child 1")
+                            return(tempChild)
+                        else:
+                            return(v)
                     alpha = max(v, alpha)
-                return(v)
+                if(depth == 0):
+                    print("have my child 2")
+                    return(tempChild)
+                else:
+                    return(v)
             else:
                 children = parentBoard.generateAllBlackMoves()
+                tempChild = None
                 for x in children:
+                    tempChild = x
                     v = max(v, self.minNode(x, alpha, beta, 'w', depth + 1))
                     if v >= beta:
                         self.numberPrunes = self.numberPrunes + 1
-                        return(v)
+                        if(depth == 0):
+                            print("have my child 3")
+                            return(tempChild)
+                        else:
+                            return(v)
                     alpha = max(v, alpha)
-                return(v)
+                if(depth == 0):
+                    print("have my child 4")
+                    return(tempChild)
+                else:
+                    return(v)
             
 
     def minNode(self, parentBoard, alpha, beta, color, depth):

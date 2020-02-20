@@ -6,16 +6,7 @@ import copy
 
 class Board():
 
-    # this is the constructor: it takes in 'grid', which is a 2d array of char
-    # then scans it for the values, and creates the appropriate 'Piece' object,
-    # but a blank space is given the value 'None', which is Python's version of
-    # null
-    #
-    # For reference:
-    #       - any method that says '__init__' is a constructor.
-    #       - 'self' just references to the specific object's instance, kind of
-    #           like Java's 'this'
-
+    
     pEval = [[0, 0, 0, 0, 0, 0, 0, 0],
                 [50, 50, 50, 50, 50, 50, 50, 50],
                 [10, 10, 20, 30, 30, 20, 10, 10],
@@ -231,7 +222,7 @@ class Board():
 
         self.mobility = 0.5*self.mobility
         self.bMobility = 0.5*self.bMobility
-        return(whiteCount - blackCount + self.mobility + self.bMobility) # STUB I eat children
+        return(whiteCount - blackCount + self.mobility + self.bMobility)
 
 
     def isWhiteInCheckmate(self):
@@ -260,30 +251,73 @@ class Board():
     # for all white pieces, find their valid moves by calling their move() function
     # then create a new board for each of those valid moves
     # return a list of these new boards
-    def generateAllWhiteMoves(self):
+    def generateAllWhiteMoves(self, strategy):
         boardList = []
-        count = 0
-        
-        for i in range(8):
-            for j in range(8):
-                if(self.grid[i][j] != None):
-                    if(self.grid[i][j].color == 'w'):  # all white pieces
-                        
-                        # coordinates where we are moving a particular piece
-                        newMovesCoords = self.grid[i][j].move(self)    
+        if(strategy == 1):
+            for i in range(8):
+                for j in range(8):
+                    if(self.grid[i][j] != None):
+                        if(self.grid[i][j].color == 'w'):  # all white pieces
+                            
+                            # coordinates where we are moving a particular piece
+                            newMovesCoords = self.grid[i][j].move(self)    
 
-                        # for each of those coordinate pairs, create new board
-                        for x in newMovesCoords:
-                            tempBoard = Board(copy.deepcopy(self.grid))
-                            tempBoard.grid[x[0]][x[1]] = tempBoard.grid[i][j]
-                            tempBoard.grid[x[0]][x[1]].i = x[0]         # do we need this elsewhere???
-                            tempBoard.grid[x[0]][x[1]].j = x[1]
-                            tempBoard.grid[i][j] = None
-                            #tempBoard.printBoard()
-                            tempBoard.evalValue = tempBoard.evaluationFunction()
-                            boardList.append(copy.deepcopy(tempBoard))
-                            count = count + 1
-                            # print("Possible Move Count:", count)
+                            # for each of those coordinate pairs, create new board
+                            for x in newMovesCoords:
+                                tempBoard = Board(copy.deepcopy(self.grid))
+                                tempBoard.grid[x[0]][x[1]] = tempBoard.grid[i][j]
+                                tempBoard.grid[x[0]][x[1]].i = x[0]         # do we need this elsewhere???
+                                tempBoard.grid[x[0]][x[1]].j = x[1]
+                                tempBoard.grid[i][j] = None
+                                tempBoard.evalValue = tempBoard.evaluationFunction()
+                                boardList.append(copy.deepcopy(tempBoard))
+        if(strategy == 2):
+            queenMoves = []
+            bishopMoves = []
+            rookMoves = []
+            knightMoves = []
+            kingMoves = []
+            pawnMoves = []
+            for i in range(8):
+                for j in range(8):
+                    if(self.grid[i][j] != None):
+                        if(self.grid[i][j].color == 'w'):  # all white pieces
+                            
+                            # coordinates where we are moving a particular piece
+                            newMovesCoords = self.grid[i][j].move(self)    
+
+                            # for each of those coordinate pairs, create new board
+                            for x in newMovesCoords:
+                                tempBoard = Board(copy.deepcopy(self.grid))
+                                tempBoard.grid[x[0]][x[1]] = tempBoard.grid[i][j]
+                                tempBoard.grid[x[0]][x[1]].i = x[0]         # do we need this elsewhere???
+                                tempBoard.grid[x[0]][x[1]].j = x[1]
+                                tempBoard.grid[i][j] = None
+                                tempBoard.evalValue = tempBoard.evaluationFunction()
+                                if(self.grid[i][j].id == 'Q'):
+                                    queenMoves.append(copy.deepcopy(tempBoard))
+                                elif(self.grid[i][j].id == 'B'):
+                                    bishopMoves.append(copy.deepcopy(tempBoard))
+                                elif(self.grid[i][j].id == 'R'):
+                                    rookMoves.append(copy.deepcopy(tempBoard))
+                                elif(self.grid[i][j].id == 'N'):
+                                    knightMoves.append(copy.deepcopy(tempBoard))
+                                elif(self.grid[i][j].id == 'K'):
+                                    kingMoves.append(copy.deepcopy(tempBoard))
+                                elif(self.grid[i][j].id == 'P'):
+                                    pawnMoves.append(copy.deepcopy(tempBoard))
+            for x in queenMoves:
+                boardList.append(x)
+            for x in bishopMoves:
+                boardList.append(x)
+            for x in rookMoves:
+                boardList.append(x)
+            for x in knightMoves:
+                boardList.append(x)
+            for x in kingMoves:
+                boardList.append(x)
+            for x in pawnMoves:
+                boardList.append(x)
 
         return(boardList)
 
@@ -291,30 +325,73 @@ class Board():
     # for all black pieces, find their valid moves by calling their move() function
     # then create a new board for each of those valid moves
     # return a list of these new boards
-    def generateAllBlackMoves(self):
+    def generateAllBlackMoves(self, strategy):
         boardList = []
-        count = 0
-        
-        for i in range(8):
-            for j in range(8):
-                if(self.grid[i][j] != None):
-                    if(self.grid[i][j].color == 'b'):  # all white pieces
-                        
-                        # coordinates where we are moving a particular piece
-                        newMovesCoords = self.grid[i][j].move(self)    
+        if(strategy == 1):
+            for i in range(8):
+                for j in range(8):
+                    if(self.grid[i][j] != None):
+                        if(self.grid[i][j].color == 'b'):  # all white pieces
+                            
+                            # coordinates where we are moving a particular piece
+                            newMovesCoords = self.grid[i][j].move(self)    
 
-                        # for each of those coordinate pairs, create new board
-                        for x in newMovesCoords:
-                            tempBoard = Board(copy.deepcopy(self.grid))
-                            tempBoard.grid[x[0]][x[1]] = tempBoard.grid[i][j]
-                            tempBoard.grid[x[0]][x[1]].i = x[0]         # do we need this elsewhere???
-                            tempBoard.grid[x[0]][x[1]].j = x[1]
-                            tempBoard.grid[i][j] = None
-                            #tempBoard.printBoard()
-                            tempBoard.evalValue = tempBoard.evaluationFunction()
-                            boardList.append(copy.deepcopy(tempBoard))
-                            count = count + 1
-                            # print("Possible Move Count:", count)
+                            # for each of those coordinate pairs, create new board
+                            for x in newMovesCoords:
+                                tempBoard = Board(copy.deepcopy(self.grid))
+                                tempBoard.grid[x[0]][x[1]] = tempBoard.grid[i][j]
+                                tempBoard.grid[x[0]][x[1]].i = x[0]         # do we need this elsewhere???
+                                tempBoard.grid[x[0]][x[1]].j = x[1]
+                                tempBoard.grid[i][j] = None
+                                tempBoard.evalValue = tempBoard.evaluationFunction()
+                                boardList.append(copy.deepcopy(tempBoard))
+        if(strategy == 2):
+            queenMoves = []
+            bishopMoves = []
+            rookMoves = []
+            knightMoves = []
+            kingMoves = []
+            pawnMoves = []
+            for i in range(8):
+                for j in range(8):
+                    if(self.grid[i][j] != None):
+                        if(self.grid[i][j].color == 'b'):  # all white pieces
+                            
+                            # coordinates where we are moving a particular piece
+                            newMovesCoords = self.grid[i][j].move(self)    
+
+                            # for each of those coordinate pairs, create new board
+                            for x in newMovesCoords:
+                                tempBoard = Board(copy.deepcopy(self.grid))
+                                tempBoard.grid[x[0]][x[1]] = tempBoard.grid[i][j]
+                                tempBoard.grid[x[0]][x[1]].i = x[0]         # do we need this elsewhere???
+                                tempBoard.grid[x[0]][x[1]].j = x[1]
+                                tempBoard.grid[i][j] = None
+                                tempBoard.evalValue = tempBoard.evaluationFunction()
+                                if(self.grid[i][j].id == 'q'):
+                                    queenMoves.append(copy.deepcopy(tempBoard))
+                                elif(self.grid[i][j].id == 'b'):
+                                    bishopMoves.append(copy.deepcopy(tempBoard))
+                                elif(self.grid[i][j].id == 'r'):
+                                    rookMoves.append(copy.deepcopy(tempBoard))
+                                elif(self.grid[i][j].id == 'n'):
+                                    knightMoves.append(copy.deepcopy(tempBoard))
+                                elif(self.grid[i][j].id == 'k'):
+                                    kingMoves.append(copy.deepcopy(tempBoard))
+                                elif(self.grid[i][j].id == 'p'):
+                                    pawnMoves.append(copy.deepcopy(tempBoard))
+            for x in queenMoves:
+                boardList.append(x)
+            for x in bishopMoves:
+                boardList.append(x)
+            for x in rookMoves:
+                boardList.append(x)
+            for x in knightMoves:
+                boardList.append(x)
+            for x in kingMoves:
+                boardList.append(x)
+            for x in pawnMoves:
+                boardList.append(x)
 
         return(boardList)
 

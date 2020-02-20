@@ -2,10 +2,10 @@
 
 from piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
 from board import Board
-from tkinter import *
+from tkinter import *           # used for GUI
 from chessGUI import chessGUI
-import argparse         # used to process comand line inputs
-import sys              # used to print error messages
+import argparse                 # used to process comand line inputs
+import sys                      # used to print error messages
 import copy
 
 
@@ -77,10 +77,11 @@ parser.add_argument('Arguments', metavar='N', type=int, nargs='+')
 arguments = parser.parse_args()
 
 # error messages
-if(len(arguments.Arguments) != 1):
-    sys.exit("    Error: Incorrect number of command line arguments supplied; 1 needed")
+if(len(arguments.Arguments) != 2):
+    sys.exit("    Error: Incorrect number of command line arguments supplied; 2 needed")
 
 usedBoard = arguments.Arguments[0]             # which given puzzle to solve
+explorationStrategy = arguments.Arguments[1]
 
 
 # determine which of the initial boards we are using
@@ -98,12 +99,11 @@ elif(usedBoard == 5):
 elif(usedBoard == 6):
     inputGrid = inputTest2
 
-
+depth = 4
 
 boardDefault = Board(inputGrid, True)           # create initial Board object
 boardDefault.printBoard()                       # print to terminal the Board (text)
-#graphicalBoard(boardDefault)                    # launch graphical window of the Board
-chessGUI(boardDefault)
+chessGUI(boardDefault, explorationStrategy, depth)     # create and launch chess GUI
 
 
 

@@ -2,23 +2,24 @@
 
 class decisionTree():
 
-    def __init__(self, initialBoard, initialColor = 'w'):
+    def __init__(self, initialBoard, explorationStrategy, depth, initialColor = 'w'):
         
         self.initialBoard = initialBoard
         self.initialColor = initialColor
         self.numberPrunes = 0
         self.numberTerminalNodesExamined = 0
+        self.explorationStrategy = explorationStrategy
+        self.depth = depth
 
     def maxNode(self, parentBoard, alpha, beta, color, depth):
-        #print("Enter max node")
         #print(self.numberTerminalNodesExamined)
-        if(depth == 4):
+        if(depth == self.depth):
             return(parentBoard.evalValue)
         else:
             v = -999999999      # used to represent negative infinity 
                                 # python doesn't have a MIN INT
             if(color == 'w'):
-                children = parentBoard.generateAllWhiteMoves()
+                children = parentBoard.generateAllWhiteMoves(self.explorationStrategy)
                 tempChild = None
                 for x in children:
                     if(depth == 0):
@@ -40,7 +41,7 @@ class decisionTree():
                 else:
                     return(v)
             else:
-                children = parentBoard.generateAllBlackMoves()
+                children = parentBoard.generateAllBlackMoves(self.explorationStrategy)
                 tempChild = None
                 for x in children:
                     tempChild = x
@@ -60,14 +61,14 @@ class decisionTree():
             
 
     def minNode(self, parentBoard, alpha, beta, color, depth):
-        if(depth == 4):
+        if(depth == self.depth):
             return(parentBoard.evalValue)
         else:
             v = 999999999       # used to represent positive infinity
                                 # python doesn't have a MAX INT
 
             if(color == 'w'):
-                children = parentBoard.generateAllWhiteMoves()
+                children = parentBoard.generateAllWhiteMoves(self.explorationStrategy)
                 for x in children:
                     if(x.isWhiteInCheckmate()):
                             return(x)
@@ -79,7 +80,7 @@ class decisionTree():
                     beta = min(v, beta)
                 return(v)
             else:
-                children = parentBoard.generateAllBlackMoves()
+                children = parentBoard.generateAllBlackMoves(self.explorationStrategy)
                 for x in children:
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
                     v = min(v, self.maxNode(x, alpha, beta, 'w', depth + 1))
@@ -93,5 +94,5 @@ class decisionTree():
     def alphaBetaPruning(self):
         nextBoard = self.maxNode(self.initialBoard, -9999999, 9999999, self.initialColor, 0)
         print("Number of prunes:", self.numberPrunes)
-        print("Number of nodes examined:", self.numberTerminalNodesExamined)
+        print("Number of terminal nodes examined:", self.numberTerminalNodesExamined)
         return(nextBoard)

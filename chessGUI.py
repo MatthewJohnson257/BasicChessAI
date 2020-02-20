@@ -8,13 +8,14 @@ from tkinter import *
 class chessGUI():
 
     # takes in a board, produces a single window for a graphical representation of the board
-    def __init__(self, board):
+    def __init__(self, board, explorationStrategy, depth):
         self.window = Tk()
         self.window.title("Our Chess Board")
-        
+        self.explorationStrategy = explorationStrategy
         self.selected = [False, 0, 0]
         self.board = board
         self.ourTree = None
+        self.depth = depth
 
         self.initialClick = False
         self.images = [[None for x in range(8)] for y in range(8)]
@@ -35,12 +36,12 @@ class chessGUI():
 
     def computerMove(self):
         self.ourTree = None
-        self.ourTree = decisionTree(self.board, 'w')
+        self.ourTree = decisionTree(self.board, self.explorationStrategy, self.depth, 'w')
 
         print("The AI is selecting a move -- PLEASE WAIT, DON'T CLICK ANYTHING PLEASE")
         self.board = self.ourTree.alphaBetaPruning()
         print("The AI has selected a move!")
-        if(self.board.isBlackInCheckmate()):
+        if(self.board != None and self.board.isBlackInCheckmate()):
             for i in range(8):
                 for j in range(8):
                     if(self.board.grid[i][j] != None):

@@ -224,14 +224,14 @@ class Board():
                             blackCount = blackCount + 20000
                             self.bMobility = self.bMobility + Board.rEval[i][j]
 
-        if(self.isWhiteInCheckmate()):
+        if(self.isWhiteInCheckmate() ): 
             return(-100000)
         if(self.isBlackInCheckmate()):
             return(100000)
 
         self.mobility = 0.5*self.mobility
         self.bMobility = 0.5*self.bMobility
-        return(whiteCount - blackCount + self.mobility + self.bMobility) # STUB
+        return(whiteCount - blackCount + self.mobility + self.bMobility) # STUB I eat children
 
 
     def isWhiteInCheckmate(self):

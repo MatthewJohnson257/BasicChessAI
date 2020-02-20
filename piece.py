@@ -432,6 +432,20 @@ class Pawn(Piece):
                     coordsList.append([self.i + 1, self.j - 1])
                 if(self.j < 7 and board.grid[self.i+1][self.j+1] != None and board.grid[self.i+1][self.j+1].color != self.color and board.grid[self.i+1][self.j+1].kink != True): #pawn captures
                     coordsList.append([self.i + 1, self.j + 1])
+                if(self.i == 1 and board.grid[self.i+2][self.j] == None):
+                    coordsList.append([self.i + 2, self.j])
+                    if( (self.j > 0 and board.grid[self.i+2][self.j-1] == 'P') or (self.j < 7 and board.grid[self.i+2][self.j+1] == 'P' )):
+                        self.hasMoved = True
+                if(self.i == 4 and self.j > 0 and board.grid[self.i+1][self.j-1] == None and board.grid[self.i][self.j-1].id == 'P' and board.grid[self.i][self.j-1].hasMoved == True ):
+                    coordsList.append([self.i+1, self.j-1])
+                    if(self.j < 6 and board.grid[self.i][self.j-2] == 'p'):
+                        board.grid[self.i][self.j-1].hasMoved == True
+                    else:
+                        board.grid[self.i][self.j-1].hasMoved == False
+                if(self.i == 4 and self.j < 7 and board.grid[self.i+1][self.j+1] == None and board.grid[self.i][self.j+1].id == 'P' and board.grid[self.i][self.j+1].hasMoved == True ):
+                    coordsList.append([self.i+1, self.j+1])
+                    board.grid[self.i][self.j-1].hasMoved == False
+
 
 
         # white pawn
@@ -443,6 +457,19 @@ class Pawn(Piece):
                     coordsList.append([self.i - 1, self.j - 1])
                 if(self.j < 7 and board.grid[self.i-1][self.j+1] != None and board.grid[self.i-1][self.j+1].color != self.color and board.grid[self.i-1][self.j+1].kink != True): #pawn captures
                     coordsList.append([self.i - 1, self.j + 1])
+                if(self.i == 1 and board.grid[self.i+2][self.j] == None):
+                    coordsList.append([self.i + 2, self.j])
+                    if( (self.j > 0 and board.grid[self.i+2][self.j-1] == 'P') or (self.j < 7 and board.grid[self.i+2][self.j+1] == 'P' )):
+                        self.hasMoved = True
+                if(self.i == 4 and self.j > 0 and board.grid[self.i+1][self.j-1] == None and board.grid[self.i][self.j-1].id == 'P' and board.grid[self.i][self.j-1].hasMoved == True ):
+                    coordsList.append([self.i+1, self.j-1])
+                    if(self.j < 6 and board.grid[self.i][self.j-2] == 'p'):
+                        board.grid[self.i][self.j-1].hasMoved == True
+                    else:
+                        board.grid[self.i][self.j-1].hasMoved == False
+                if(self.i == 4 and self.j < 7 and board.grid[self.i+1][self.j+1] == None and board.grid[self.i][self.j+1].id == 'P' and board.grid[self.i][self.j+1].hasMoved == True ):
+                    coordsList.append([self.i+1, self.j+1])
+                    board.grid[self.i][self.j-1].hasMoved == False
 
         if(self.color == 'w'):
             inCheckList = self.isWhiteInCheck(board.grid, coordsList)

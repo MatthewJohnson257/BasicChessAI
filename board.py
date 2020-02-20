@@ -207,25 +207,52 @@ class Board():
                     if self.grid[i][j].color == 'b':
                         if self.grid[i][j].id == 'p':
                             blackCount = blackCount + 100
-                            self.bMobility = self.bMobility + Board.PEval[i][j]
+                            self.bMobility = self.bMobility + Board.rEval[i][j]
                         elif self.grid[i][j].id == 'n':
                             blackCount = blackCount + 320
-                            self.bMobility = self.bMobility + Board.NEval[i][j]
+                            self.bMobility = self.bMobility + Board.rEval[i][j]
                         elif self.grid[i][j].id == 'b':
                             blackCount = blackCount + 330
-                            self.bMobility = self.bMobility + Board.BEval[i][j]
+                            self.bMobility = self.bMobility + Board.rEval[i][j]
                         elif self.grid[i][j].id == 'q':
                             blackCount = blackCount + 900
-                            self.bMobility = self.bMobility + Board.QEval[i][j]
+                            self.bMobility = self.bMobility + Board.rEval[i][j]
                         elif self.grid[i][j].id == 'r':
                             blackCount = blackCount + 500
-                            self.bMobility = self.bMobility + Board.REval[i][j]
+                            self.bMobility = self.bMobility + Board.rEval[i][j]
                         elif self.grid[i][j].id == 'k':
                             blackCount = blackCount + 20000
-                            self.bMobility = self.bMobility + Board.KEval[i][j]
+                            self.bMobility = self.bMobility + Board.rEval[i][j]
 
-        return(whiteCount - blackCount + self.mobility - self.bMobility) # STUB
+        if(self.isWhiteInCheckmate()):
+            return(-100000)
+        if(self.isBlackInCheckmate()):
+            return(100000)
 
+        self.mobility = 0.5*self.mobility
+        self.bMobility = 0.5*self.bMobility
+        return(whiteCount - blackCount + self.mobility + self.bMobility) # STUB
+
+
+    def isWhiteInCheckmate(self):
+        tempList = None
+        for i in range(8):
+            for j in range(8):
+                if(self.grid[i][j] != None and self.grid[i][j].color == 'w'):
+                    tempList = self.grid[i][j].move(self)
+                    if(len(tempList) != 0):
+                        return(False)
+        return(True)
+
+    def isBlackInCheckmate(self):
+        tempList = None
+        for i in range(8):
+            for j in range(8):
+                if(self.grid[i][j] != None and self.grid[i][j].color == 'b'):
+                    tempList = self.grid[i][j].move(self)
+                    if(len(tempList) != 0):
+                        return(False)
+        return(True)
 
 
 
@@ -247,12 +274,14 @@ class Board():
 
                         # for each of those coordinate pairs, create new board
                         for x in newMovesCoords:
-                            boardList.append(Board(copy.deepcopy(self.grid)))
-                            boardList[count].grid[x[0]][x[1]] = boardList[count].grid[i][j]
-                            boardList[count].grid[i][j] = None
-                            boardList[count].evalValue = boardList[count].evaluationFunction()
-                            # print("New evalValue:", boardList[count].evalValue)
-                            # boardList.append(newBoard)
+                            tempBoard = Board(copy.deepcopy(self.grid))
+                            tempBoard.grid[x[0]][x[1]] = tempBoard.grid[i][j]
+                            tempBoard.grid[x[0]][x[1]].i = x[0]         # do we need this elsewhere???
+                            tempBoard.grid[x[0]][x[1]].j = x[1]
+                            tempBoard.grid[i][j] = None
+                            #tempBoard.printBoard()
+                            tempBoard.evalValue = tempBoard.evaluationFunction()
+                            boardList.append(copy.deepcopy(tempBoard))
                             count = count + 1
                             # print("Possible Move Count:", count)
 
@@ -276,19 +305,21 @@ class Board():
 
                         # for each of those coordinate pairs, create new board
                         for x in newMovesCoords:
-                            boardList.append(Board(copy.deepcopy(self.grid)))
-                            boardList[count].grid[x[0]][x[1]] = boardList[count].grid[i][j]
-                            boardList[count].grid[i][j] = None
-                            boardList[count].evalValue = boardList[count].evaluationFunction()
-                            # print("New evalValue:", boardList[count].evalValue)
-                            #boardList.append(newBoard)
+                            tempBoard = Board(copy.deepcopy(self.grid))
+                            tempBoard.grid[x[0]][x[1]] = tempBoard.grid[i][j]
+                            tempBoard.grid[x[0]][x[1]].i = x[0]         # do we need this elsewhere???
+                            tempBoard.grid[x[0]][x[1]].j = x[1]
+                            tempBoard.grid[i][j] = None
+                            #tempBoard.printBoard()
+                            tempBoard.evalValue = tempBoard.evaluationFunction()
+                            boardList.append(copy.deepcopy(tempBoard))
                             count = count + 1
                             # print("Possible Move Count:", count)
 
         return(boardList)
 
 
-    
+
 
 
     # takes in a board, and prints to output a character representation of that board

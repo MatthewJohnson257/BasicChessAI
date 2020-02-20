@@ -11,7 +11,7 @@ class decisionTree():
 
     def maxNode(self, parentBoard, alpha, beta, color, depth):
         #print("Enter max node")
-        print(self.numberTerminalNodesExamined)
+        #print(self.numberTerminalNodesExamined)
         if(depth == 4):
             return(parentBoard.evalValue)
         else:
@@ -22,9 +22,14 @@ class decisionTree():
                 tempChild = None
                 print("LENGTH OF CHILDREN:", len(children))
                 for x in children:
+                    if(depth == 0):
+                        if(x.isBlackInCheckmate()):
+                            print("WE HAVE RETURNED AN EARLY CHECKMATE")
+                            x.printBoard()
+                            return(x)
                     tempChild = x
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
-                    v = max(v, self.minNode(x, alpha, beta, 'b', depth + 1))
+                    v = max(v, self.minNode(x, alpha, beta, 'b', depth + 1), parentBoard.evalValue)
                     if v >= beta:
                         self.numberPrunes = self.numberPrunes + 1
                         if(depth == 0):
@@ -46,7 +51,7 @@ class decisionTree():
                 for x in children:
                     tempChild = x
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
-                    v = max(v, self.minNode(x, alpha, beta, 'w', depth + 1))
+                    v = max(v, self.minNode(x, alpha, beta, 'w', depth + 1), parentBoard.evalValue)
                     if v >= beta:
                         self.numberPrunes = self.numberPrunes + 1
                         if(depth == 0):
@@ -73,6 +78,10 @@ class decisionTree():
             if(color == 'w'):
                 children = parentBoard.generateAllWhiteMoves()
                 for x in children:
+                    if(x.isWhiteInCheckmate()):
+                            #print("WE HAVE RETURNED AN EARLY CHECKMATE")
+                            #x.printBoard()
+                            return(x)
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
                     v = min(v, self.maxNode(x, alpha, beta, 'b', depth + 1))
                     if v <= alpha:
@@ -93,4 +102,4 @@ class decisionTree():
 
     # starts the entire Alpha Beta Pruning process
     def alphaBetaPruning(self):
-        return(self.maxNode(self.initialBoard, -9999999999, 999999999, self.initialColor, 0))
+        return(self.maxNode(self.initialBoard, -9999999, 9999999, self.initialColor, 0))

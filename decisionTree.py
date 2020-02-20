@@ -20,10 +20,10 @@ class decisionTree():
             if(color == 'w'):
                 children = parentBoard.generateAllWhiteMoves()
                 tempChild = None
-                # print("LENGTH OF CHILDREN:", len(children))
                 for x in children:
                     if(depth == 0):
                         if(x.isBlackInCheckmate()):
+                            print("This is checkmate.")
                             return(x)
                     tempChild = x
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1

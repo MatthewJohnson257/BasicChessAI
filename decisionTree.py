@@ -10,6 +10,7 @@ class decisionTree():
         self.numberTerminalNodesExamined = 0
 
     def maxNode(self, parentBoard, alpha, beta, color, depth):
+        print("Enter max node")
         if(depth == 4):
             return(parentBoard.evalValue)
         else:
@@ -18,7 +19,7 @@ class decisionTree():
             if(color == 'w'):
                 children = parentBoard.generateAllWhiteMoves()
                 tempChild = None
-                print("LENGTH OF CHILDREN:", len(children))
+                # print("LENGTH OF CHILDREN:", len(children))
                 for x in children:
                     tempChild = x
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
@@ -61,11 +62,12 @@ class decisionTree():
             
 
     def minNode(self, parentBoard, alpha, beta, color, depth):
+        print("Enter min node")
         if(depth == 4):
             return(parentBoard.evalValue)
         else:
             v = 999999999       # used to represent positive infinity
-                                # ptyhon doesn't have a MAX INT
+                                # python doesn't have a MAX INT
 
             if(color == 'w'):
                 children = parentBoard.generateAllWhiteMoves()

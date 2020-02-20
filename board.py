@@ -1,9 +1,18 @@
 # board.py
-
+###############################################################################
+#
+# 
+#
+###############################################################################  
 from piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
 from tkinter import *
 import copy
 
+###############################################################################
+#
+# 
+#
+###############################################################################  
 class Board():
 
     
@@ -116,6 +125,11 @@ class Board():
                     [-30, -40, -40, -50, -50, -40, -40, -30]]
 
 
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
     def __init__(self, grid, newBoard = False, whiteInCheck = False, blackInCheck = False):
         
         if(newBoard == True):
@@ -168,7 +182,11 @@ class Board():
 
 
 
-
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
     def evaluationFunction(self):
         whiteCount = 0
         blackCount = 0 
@@ -222,9 +240,16 @@ class Board():
 
         self.mobility = 0.5*self.mobility
         self.bMobility = 0.5*self.bMobility
+
+        #print("Eval: ", whiteCount - blackCount + self.mobility + self.bMobility)
         return(whiteCount - blackCount + self.mobility + self.bMobility)
 
 
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
     def isWhiteInCheckmate(self):
         tempList = None
         for i in range(8):
@@ -235,6 +260,11 @@ class Board():
                         return(False)
         return(True)
 
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
     def isBlackInCheckmate(self):
         tempList = None
         for i in range(8):
@@ -251,6 +281,11 @@ class Board():
     # for all white pieces, find their valid moves by calling their move() function
     # then create a new board for each of those valid moves
     # return a list of these new boards
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
     def generateAllWhiteMoves(self, strategy):
         boardList = []
         if(strategy == 1):
@@ -270,7 +305,8 @@ class Board():
                                 tempBoard.grid[x[0]][x[1]].j = x[1]
                                 tempBoard.grid[i][j] = None
                                 tempBoard.evalValue = tempBoard.evaluationFunction()
-                                boardList.append(copy.deepcopy(tempBoard))
+                                boardList.append(tempBoard)
+                                
         if(strategy == 2):
             queenMoves = []
             bishopMoves = []
@@ -325,6 +361,11 @@ class Board():
     # for all black pieces, find their valid moves by calling their move() function
     # then create a new board for each of those valid moves
     # return a list of these new boards
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
     def generateAllBlackMoves(self, strategy):
         boardList = []
         if(strategy == 1):
@@ -400,6 +441,11 @@ class Board():
 
 
     # takes in a board, and prints to output a character representation of that board
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
     def printBoard(self):
         print("    ◘----------------◘")
         for i in range(0,8):

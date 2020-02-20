@@ -1,13 +1,29 @@
-# chessGUI.py
+###############################################################################
+#
+# 
+#
+###############################################################################
 from piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
 from board import Board
 import copy
 from decisionTree import decisionTree
 from tkinter import *
 
+
+
+###############################################################################
+#
+# 
+#
+###############################################################################
 class chessGUI():
 
-    # takes in a board, produces a single window for a graphical representation of the board
+    ###############################################################################
+    #
+    # takes in a board, produces a single window for a graphical representation of
+    # the board
+    #
+    ###############################################################################
     def __init__(self, board, explorationStrategy, depth):
         self.window = Tk()
         self.window.title("Our Chess Board")
@@ -33,12 +49,16 @@ class chessGUI():
         self.window.mainloop()
 
 
-
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
     def computerMove(self):
         self.ourTree = None
         self.ourTree = decisionTree(self.board, self.explorationStrategy, self.depth, 'w')
 
-        print("The AI is selecting a move -- PLEASE WAIT, DON'T CLICK ANYTHING PLEASE")
+        print("****The AI is selecting a move -- PLEASE WAIT, DON'T CLICK ANYTHING PLEASE****")
         self.board = self.ourTree.alphaBetaPruning()
         print("The AI has selected a move!")
         if(self.board != None and self.board.isBlackInCheckmate()):
@@ -51,7 +71,11 @@ class chessGUI():
 
 
 
-    
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################    
     def mouseClicked(self, event, coords, newBoard):
 
         # the program requires one initial click to begin
@@ -116,6 +140,11 @@ class chessGUI():
     # takes a board object, and will refresh the entire GUI to reflect that board
     # each square in the grid gets a 'Label' object, which holds the picture
     # also, a 'Button' is bound to each square so that it can be clicked on
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################  
     def initializePhotos(self, newBoard):
         self.board = newBoard
         for i in range(0,8):

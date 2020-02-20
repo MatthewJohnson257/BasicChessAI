@@ -1,13 +1,20 @@
-# chess.py
+###############################################################################
+#
+# Main file of the program.  Will process input, generate an initial chess 
+# board, and will create and call upon a chessGUI object
+#
+###############################################################################
 
 from piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
 from board import Board
-from tkinter import *           # used for GUI
 from chessGUI import chessGUI
+from tkinter import *           # used for GUI
 import argparse                 # used to process comand line inputs
 import sys                      # used to print error messages
 import copy
 
+
+# These are the input states for new boards
 
 inputA = [['_', '_', '_', '_', '_', '_', 'q', 'k'],
 ['_', '_', '_', '_', '_', '_', '_', '_'],
@@ -36,6 +43,7 @@ inputC = [['_', '_', '_', '_', '_', '_', '_', '_'],
 ['_', '_', '_', '_', '_', '_', '_', '_'],
 ['_', '_', '_', '_', '_', 'N', '_', '_']]
 
+# regular chess board
 inputFull = [['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
 ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
 ['_', '_', '_', '_', '_', '_', '_', '_'],
@@ -79,9 +87,13 @@ arguments = parser.parse_args()
 # error messages
 if(len(arguments.Arguments) != 2):
     sys.exit("    Error: Incorrect number of command line arguments supplied; 2 needed")
+if(arguments.Arguments[0] < 1 or arguments.Arguments[0] > 6):
+    sys.exit("    Error: Invalid value for first command line argument; must be in range(1,6)")
+if(arguments.Arguments[1] < 1 or arguments.Arguments[1] > 2):
+    sys.exit("    Error: Invalid value for second command line argument; must be in range(1,2)")
 
-usedBoard = arguments.Arguments[0]             # which given puzzle to solve
-explorationStrategy = arguments.Arguments[1]
+usedBoard = arguments.Arguments[0]              # which given puzzle to solve
+explorationStrategy = arguments.Arguments[1]    # which exploration strategy to use
 
 
 # determine which of the initial boards we are using
@@ -99,10 +111,11 @@ elif(usedBoard == 5):
 elif(usedBoard == 6):
     inputGrid = inputTest2
 
+# maximum depth used for the alpha beta pruning tree
 depth = 4
 
-boardDefault = Board(inputGrid, True)           # create initial Board object
-boardDefault.printBoard()                       # print to terminal the Board (text)
+boardDefault = Board(inputGrid, True)                  # create initial Board object
+boardDefault.printBoard()                              # print to terminal the Board (text)
 chessGUI(boardDefault, explorationStrategy, depth)     # create and launch chess GUI
 
 

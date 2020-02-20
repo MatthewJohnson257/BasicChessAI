@@ -36,8 +36,9 @@ class chessGUI():
     def computerMove(self):
         self.ourTree = None
         self.ourTree = decisionTree(self.board, 'w')
+
+        print("The AI is selecting a move -- PLEASE WAIT, DON'T CLICK ANYTHING PLEASE")
         self.board = self.ourTree.alphaBetaPruning()
-        #self.board.printBoard()
         print("The AI has selected a move!")
         self.initializePhotos(self.board)
 

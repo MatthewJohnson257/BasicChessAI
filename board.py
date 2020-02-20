@@ -288,7 +288,7 @@ class Board():
         return(boardList)
 
 
-
+    
 
 
     # takes in a board, and prints to output a character representation of that board

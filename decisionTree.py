@@ -1,33 +1,53 @@
 # decisionTree.py
-
+###############################################################################
+#
+# This file handles the logic of the H-minimax alpha beta pruning tree
+#
+###############################################################################
 class decisionTree():
 
+    ###############################################################################
+    #
+    # Constructor takes the initial board, which strategy to use, and the depth 
+    # to which to search
+    #
+    ###############################################################################
     def __init__(self, initialBoard, explorationStrategy, depth, initialColor = 'w'):
         
-        self.initialBoard = initialBoard
-        self.initialColor = initialColor
-        self.numberPrunes = 0
+        self.initialBoard = initialBoard        # current board
+        self.initialColor = initialColor        # AI color
+        self.numberPrunes = 0                   
         self.numberTerminalNodesExamined = 0
         self.explorationStrategy = explorationStrategy
         self.depth = depth
 
+    ###############################################################################
+    #
+    # Represents the function of an alpha beta maximizer node
+    #
+    ###############################################################################
     def maxNode(self, parentBoard, alpha, beta, color, depth):
         #print(self.numberTerminalNodesExamined)
         if(depth == self.depth):
             return(parentBoard.evalValue)
         else:
             v = -999999999      # used to represent negative infinity 
-                                # python doesn't have a MIN INT
+                                
+            # if the color of the player at the maximizer is white
             if(color == 'w'):
                 children = parentBoard.generateAllWhiteMoves(self.explorationStrategy)
                 tempChild = None
                 for x in children:
+
+                    # checks for an early checkmate and prioritizes that move
                     if(depth == 0):
                         if(x.isBlackInCheckmate()):
                             print("This is checkmate.")
                             return(x)
                     tempChild = x
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
+
+                    # calls minimizer node if maximum depth has not yet been reached
                     v = max(v, self.minNode(x, alpha, beta, 'b', depth + 1), parentBoard.evalValue)
                     if v >= beta:
                         self.numberPrunes = self.numberPrunes + 1
@@ -40,12 +60,16 @@ class decisionTree():
                     return(tempChild)
                 else:
                     return(v)
+
+            # if the color of the player at the maximizer is black
             else:
                 children = parentBoard.generateAllBlackMoves(self.explorationStrategy)
                 tempChild = None
                 for x in children:
                     tempChild = x
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
+
+                    # calls minimizer node if maximum depth has not yet been reached
                     v = max(v, self.minNode(x, alpha, beta, 'w', depth + 1), parentBoard.evalValue)
                     if v >= beta:
                         self.numberPrunes = self.numberPrunes + 1
@@ -60,12 +84,16 @@ class decisionTree():
                     return(v)
             
 
+    ###############################################################################
+    #
+    # Represents the function of an alpha beta minimizer node
+    #
+    ###############################################################################
     def minNode(self, parentBoard, alpha, beta, color, depth):
         if(depth == self.depth):
             return(parentBoard.evalValue)
         else:
             v = 999999999       # used to represent positive infinity
-                                # python doesn't have a MAX INT
 
             if(color == 'w'):
                 children = parentBoard.generateAllWhiteMoves(self.explorationStrategy)
@@ -73,6 +101,8 @@ class decisionTree():
                     if(x.isWhiteInCheckmate()):
                             return(x)
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
+
+                    # calls maximizer node if maximum depth has not yet been reached
                     v = min(v, self.maxNode(x, alpha, beta, 'b', depth + 1))
                     if v <= alpha:
                         self.numberPrunes = self.numberPrunes + 1
@@ -83,6 +113,8 @@ class decisionTree():
                 children = parentBoard.generateAllBlackMoves(self.explorationStrategy)
                 for x in children:
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
+
+                    # calls maximizer node if maximum depth has not yet been reached
                     v = min(v, self.maxNode(x, alpha, beta, 'w', depth + 1))
                     if v <= alpha:
                         self.numberPrunes = self.numberPrunes + 1
@@ -90,7 +122,13 @@ class decisionTree():
                     beta = min(v, beta)
                 return(v)
 
-    # starts the entire Alpha Beta Pruning process
+
+
+    ###############################################################################
+    #
+    # kicks off the entire Alpha Beta Pruning process, which a maximizer at top
+    #
+    ###############################################################################
     def alphaBetaPruning(self):
         nextBoard = self.maxNode(self.initialBoard, -9999999, 9999999, self.initialColor, 0)
         print("Number of prunes:", self.numberPrunes)

@@ -22,6 +22,7 @@ will solve puzzle C using exploration strategy one.  The command
 
 will solved puzzle A using exploration strategy two.
 
+For enabling EnPassant, uncomment the lines 484-489 and 507-515 in Piece.py under the subclass Pawn in the method move(). Then in chessGUI.py, uncomment lines 91-99 in the method computerMove()
 ----------------------------------IMPORTANT------------------------------------
 
 Use of the GUI is fairly intuitive - you will be prompted visually by the

@@ -1,7 +1,9 @@
-# piece.py
 ###############################################################################
 #
-#
+# This file handles functionality related to a an individual piece object. Each
+# different type of piece has a subclass that inherits from Piece.  Each has 
+# a method move() that returns a list of coordinates where that particular 
+# piece can make a valid move.
 #
 ###############################################################################
 
@@ -10,14 +12,15 @@ import copy
 
 ###############################################################################
 #
-#
+# Parent class for all types of pieces
 #
 ###############################################################################
 class Piece(ABC):
 
     ###############################################################################
     #
-    #
+    # Default super constructor for all piece types. Stores coordinates, type of
+    # piece, and its color
     #
     ###############################################################################
     def __init__(self, i, j, color, id): # STUB!! get rid of default values later
@@ -27,6 +30,8 @@ class Piece(ABC):
         self.j = j
         self.color = color
         self.id = id
+
+        # whether or not the piece is a king
         if self.id == 'k' or self.id == 'K':
             self.kink = True
         else:
@@ -34,11 +39,10 @@ class Piece(ABC):
         self.canMove = False
 
 
-    # this method returns a list of coordinates that a piece would be able to move to
-    # from its position if the rest of the board was completely empty
     ###############################################################################
     #
-    #
+    # this method returns a list of coordinates that a piece would be able to move to
+    # from its position that would represent a valid move
     #
     ###############################################################################
     def move(self):
@@ -49,7 +53,8 @@ class Piece(ABC):
 
     ###############################################################################
     #
-    #
+    # this method scans to figure out whether or not the white king would be put
+    # in check for a given move. Used to filter out invalid moves
     #
     ###############################################################################
     def isWhiteInCheck(self, grid, coordsList):
@@ -251,7 +256,8 @@ class Piece(ABC):
 
     ###############################################################################
     #
-    #
+    # this method scans to figure out whether or not the black king would be put
+    # in check for a given move. Used to filter out invalid moves
     #
     ###############################################################################
     def isBlackInCheck(self, grid, coordsList):
@@ -439,25 +445,25 @@ class Piece(ABC):
 
 ###############################################################################
 #
-#
+# Subclass for Pawn piece
 #
 ###############################################################################
 class Pawn(Piece):
 
     ###############################################################################
     #
-    #
+    # Useful for the initial double move, the Pawn constructor gives it an 
+    # additional instance variable
     #
     ###############################################################################
     def __init___(self, i, j, color, id):
         super(self, i, j, color, id)
         self.hasMoved = False
 
-    # this method returns a list of coordinates that a Pawn would be able to move to
-    # from its position if the rest of the board was completely empty
     ###############################################################################
     #
-    #
+    # this method returns a list of coordinates that a Pawn would be able to move to
+    # from its position for a valid move
     #
     ###############################################################################
     def move(self, board):
@@ -551,17 +557,17 @@ class Pawn(Piece):
 
 ###############################################################################
 #
-#
+# Subclass for Rook piece
 #
 ###############################################################################
 class Rook(Piece):
 
     ###############################################################################
     #
-    #
+    # this method returns a list of coordinates that a Rook would be able to move to
+    # from its position for a valid move
     #
     ###############################################################################
-    #This method moves the rook in legal spaces
     def move(self, board):
         coordsList = []
 
@@ -644,17 +650,17 @@ class Rook(Piece):
 
 ###############################################################################
 #
-#
+# Subclass for Knight piece
 #
 ###############################################################################
 class Knight(Piece):
 
     ###############################################################################
     #
-    #
+    # this method returns a list of coordinates that a Knight would be able to move to
+    # from its position for a valid move
     #
     ###############################################################################
-    #This method is for generating coordinates of all legal knight moves
     def move(self, board):
         coordsList = []
         x = self.i
@@ -706,17 +712,17 @@ class Knight(Piece):
 
 ###############################################################################
 #
-#
+# Subclass for Bishop piece
 #
 ###############################################################################
 class Bishop(Piece):
 
     ###############################################################################
     #
-    #
+    # this method returns a list of coordinates that a Bishop would be able to move to
+    # from its position for a valid move
     #
     ###############################################################################
-    #This method generates coordinates for all legal bishop moves
     def move(self, board):
         coordsList = []
         m = self.i
@@ -796,17 +802,17 @@ class Bishop(Piece):
 
 ###############################################################################
 #
-#
+# Subclass for Queen piece
 #
 ###############################################################################
 class Queen(Piece): #for queen you can reuse rook and bishop moves
 
     ###############################################################################
     #
-    #
+    # this method returns a list of coordinates that a Queen would be able to move to
+    # from its position for a valid move
     #
     ###############################################################################
-    #This move generates the coordinates of all legal queen movements
     def move(self, board):
         coordsList = []
 
@@ -934,17 +940,17 @@ class Queen(Piece): #for queen you can reuse rook and bishop moves
 
 ###############################################################################
 #
-#
+# Subclass for King piece
 #
 ###############################################################################
 class King(Piece):
 
     ###############################################################################
     #
-    #
+    # this method returns a list of coordinates that a King would be able to move to
+    # from its position for a valid move
     #
     ###############################################################################
-    #This method generates all legal king move coordinates
     def move(self, board):
         coordsList = []
         x = self.i

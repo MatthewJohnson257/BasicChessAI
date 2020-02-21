@@ -1,4 +1,3 @@
-# decisionTree.py
 ###############################################################################
 #
 # This file handles the logic of the H-minimax alpha beta pruning tree

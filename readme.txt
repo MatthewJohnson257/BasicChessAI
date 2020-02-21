@@ -14,11 +14,11 @@ The ExplorationStrategy argument is an int between 1 and 2 that determines
 which of our two exploration strategies will be employed by the AI.
 For example, the command
 
-    python3 traffic.py 3 1
+    python3 chess.py 3 1
 
 will solve puzzle C using exploration strategy one.  The command
 
-    python3 traffic.py 1 2
+    python3 chess.py 1 2
 
 will solved puzzle A using exploration strategy two.
 

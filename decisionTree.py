@@ -133,4 +133,5 @@ class decisionTree():
         nextBoard = self.maxNode(self.initialBoard, -9999999, 9999999, self.initialColor, 0)
         print("Number of prunes:", self.numberPrunes)
         print("Number of terminal nodes examined:", self.numberTerminalNodesExamined)
+        print("Evaluation score of the selected move:", nextBoard.evalValue)
         return(nextBoard)

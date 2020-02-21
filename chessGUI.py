@@ -21,7 +21,7 @@ class chessGUI():
 
     ###############################################################################
     #
-    # chessGUI constructor takes in a board, produces a single window for a 
+    # chessGUI constructor takes in a board, produces a single window for a
     # graphical representation of the board.  Initializes the backgrounds (blue or
     # purple) and starting images for the grids squares, and launches the windows
     #
@@ -32,7 +32,7 @@ class chessGUI():
 
         self.explorationStrategy = explorationStrategy  # used when AI finds moves
         self.selected = [False, 0, 0]                   # used when processing mouse clicks
-        
+
         self.board = board                              # starting board for GUI
         self.ourTree = None                             # alpha beta tree
         self.depth = depth
@@ -87,24 +87,34 @@ class chessGUI():
                     if(self.board.grid[i][j] != None):
                         if((self.board.grid[i][j].id == 'k' and self.board.isBlackInCheckmate()) or (self.board.grid[i][j].id == 'K' and self.board.isWhiteInCheckmate())):
                             self.backgrounds[i][j] = "red"
+        # uncomment for en passent 
+        #for x in range(0,8):
+            #for y in range(0,8):
+                #if(self.board.grid[x][y] != None and temp.grid[x][y] != None and self.board.grid[x][y].id != temp.grid[x][y].id):
+                    #if( (self.board.grid[x][y].id == 'p' and self.board.grid[x][y].enPassant == True)) :
+                        #self.board.grid[x-1][y] = None
+                        #self.board.grid[x][y].enPassant = False
+                    #if((self.board.grid[x][y].id == 'P' and self.board.grid[x][y].enPassant == True)) :
+                        #self.board.grid[x+1][y] = None
+                        #self.board.grid[x+1][y].enPassant = False
         self.initializePhotos(self.board)
 
 
 
     ###############################################################################
     #
-    # Handles an event when a mouse is clicked by the player, highlighting the 
+    # Handles an event when a mouse is clicked by the player, highlighting the
     # appropriate square(s) in the grid
     #
-    ###############################################################################    
+    ###############################################################################
     def mouseClicked(self, event, coords, newBoard):
 
         # the program requires one initial click before the AI can make a move
         if(self.isComputersTurn == True):
             self.isComputersTurn = False
             self.computerMove()
-        
-        
+
+
         # if it is the player's move:
         else:
 
@@ -114,13 +124,13 @@ class chessGUI():
                 # if the selected piece is not None and you didn't click the same place twice
                 if(self.board.grid[self.selected[1]][self.selected[2]] != None and self.board.grid[self.selected[1]][self.selected[2]].color == 'b'):
                     if(self.board.grid[self.selected[1]][self.selected[2]] != None and not (coords[0] == self.selected[1] and coords[1] == self.selected[2])):
-                        
+
                         # the coordinates of where you clicked
                         tempCoords = [coords[0], coords[1]]
 
                         # find the coordinates where the selected piece can move
                         viableCoords = self.board.grid[self.selected[1]][self.selected[2]].move(self.board)
-                        
+
                         # if it is a valid move, adjust the board and redraw the window to reflect that move
                         if(tempCoords in viableCoords):
 
@@ -180,7 +190,7 @@ class chessGUI():
     # each square in the grid gets a 'Label' object, which holds the picture.
     # Also, a 'Button' is bound to each square so that it can be clicked on
     #
-    ###############################################################################  
+    ###############################################################################
     def initializePhotos(self, newBoard):
         self.board = newBoard
         for i in range(0,8):

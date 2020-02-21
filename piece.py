@@ -10,14 +10,14 @@ import copy
 
 ###############################################################################
 #
-# 
+#
 #
 ###############################################################################
 class Piece(ABC):
 
     ###############################################################################
     #
-    # 
+    #
     #
     ###############################################################################
     def __init__(self, i, j, color, id): # STUB!! get rid of default values later
@@ -38,7 +38,7 @@ class Piece(ABC):
     # from its position if the rest of the board was completely empty
     ###############################################################################
     #
-    # 
+    #
     #
     ###############################################################################
     def move(self):
@@ -49,7 +49,7 @@ class Piece(ABC):
 
     ###############################################################################
     #
-    # 
+    #
     #
     ###############################################################################
     def isWhiteInCheck(self, grid, coordsList):
@@ -251,7 +251,7 @@ class Piece(ABC):
 
     ###############################################################################
     #
-    # 
+    #
     #
     ###############################################################################
     def isBlackInCheck(self, grid, coordsList):
@@ -439,14 +439,14 @@ class Piece(ABC):
 
 ###############################################################################
 #
-# 
+#
 #
 ###############################################################################
 class Pawn(Piece):
 
     ###############################################################################
     #
-    # 
+    #
     #
     ###############################################################################
     def __init___(self, i, j, color, id):
@@ -457,7 +457,7 @@ class Pawn(Piece):
     # from its position if the rest of the board was completely empty
     ###############################################################################
     #
-    # 
+    #
     #
     ###############################################################################
     def move(self, board):
@@ -473,22 +473,20 @@ class Pawn(Piece):
                 if(board.grid[self.i+1][self.j] == None): #pawn can move forward normally
                     coordsList.append([self.i + 1, self.j])
                 if(self.j > 0 and board.grid[self.i+1][self.j-1] != None and board.grid[self.i+1][self.j-1].color != self.color and board.grid[self.i+1][self.j-1].kink != True): #pawn captures
-                    coordsList.append([self.i + 1, self.j - 1])
+                    coordsList.append([self.i + 1, self.j - 1]) #pawn captures and moves to its left diagonal
                 if(self.j < 7 and board.grid[self.i+1][self.j+1] != None and board.grid[self.i+1][self.j+1].color != self.color and board.grid[self.i+1][self.j+1].kink != True): #pawn captures
-                    coordsList.append([self.i + 1, self.j + 1])
+                    coordsList.append([self.i + 1, self.j + 1]) #pawn captures and moves to its right diagonal
                 if(self.i == 1 and board.grid[self.i+2][self.j] == None):
-                    coordsList.append([self.i + 2, self.j])
+                    coordsList.append([self.i + 2, self.j]) #pawn moves two steps
                     if( (self.j > 0 and board.grid[self.i+2][self.j-1] == 'P') or (self.j < 7 and board.grid[self.i+2][self.j+1] == 'P' )):
                         self.hasMoved = True
-                # if(self.i == 4 and self.j > 0 and board.grid[self.i+1][self.j-1] == None and board.grid[self.i][self.j-1].id == 'P' and board.grid[self.i][self.j-1].hasMoved == True ):
-                #     coordsList.append([self.i+1, self.j-1])
-                #     if(self.j < 6 and board.grid[self.i][self.j-2] == 'p'):
-                #         board.grid[self.i][self.j-1].hasMoved == True
-                #     else:
-                #         board.grid[self.i][self.j-1].hasMoved == False
-                # if(self.i == 4 and self.j < 7 and board.grid[self.i+1][self.j+1] == None and board.grid[self.i][self.j+1].id == 'P' and board.grid[self.i][self.j+1].hasMoved == True ):
-                #     coordsList.append([self.i+1, self.j+1])
-                #     board.grid[self.i][self.j-1].hasMoved == False
+                #uncomment for en passent
+                #if(self.i == 4 and self.j > 0 and board.grid[self.i+1][self.j-1] == None and board.grid[self.i][self.j-1] != None and board.grid[self.i][self.j-1].id == 'P' and board.grid[self.i][self.j-1].hasMoved == True ):
+                #    coordsList.append([self.i+1, self.j-1])
+                #    board.grid[self.i][self.j-1].hasMoved == False
+                #if(self.i == 4 and self.j < 7 and board.grid[self.i+1][self.j+1] == None and board.grid[self.i][self.j+1] != None and board.grid[self.i][self.j+1].id == 'P' and board.grid[self.i][self.j+1].hasMoved == True ):
+                #    coordsList.append([self.i+1, self.j+1])
+                #    board.grid[self.i][self.j+1].hasMoved == False
 
 
 
@@ -498,23 +496,24 @@ class Pawn(Piece):
                 if(board.grid[self.i-1][self.j] == None): #pawn can move forward normally
                     coordsList.append([self.i - 1, self.j])
                 if(self.j > 0 and board.grid[self.i-1][self.j-1] != None and board.grid[self.i-1][self.j-1].color != self.color and board.grid[self.i-1][self.j-1].kink != True): #pawn captures
-                    coordsList.append([self.i - 1, self.j - 1])
+                    coordsList.append([self.i - 1, self.j - 1]) #pawn captures and moves to left diagonal
                 if(self.j < 7 and board.grid[self.i-1][self.j+1] != None and board.grid[self.i-1][self.j+1].color != self.color and board.grid[self.i-1][self.j+1].kink != True): #pawn captures
-                    coordsList.append([self.i - 1, self.j + 1])
+                    coordsList.append([self.i - 1, self.j + 1]) #pawn captures and moves to right diagonal
                 if(self.i == 1 and board.grid[self.i+2][self.j] == None):
-                    coordsList.append([self.i + 2, self.j])
+                    coordsList.append([self.i + 2, self.j]) #pawn moves two steps
                     if( (self.j > 0 and board.grid[self.i+2][self.j-1] == 'P') or (self.j < 7 and board.grid[self.i+2][self.j+1] == 'P' )):
                         self.hasMoved = True
-                # if(self.i == 4 and self.j > 0 and board.grid[self.i+1][self.j-1] == None and board.grid[self.i][self.j-1].id == 'P' and board.grid[self.i][self.j-1].hasMoved == True ):
-                #     coordsList.append([self.i+1, self.j-1])
-                #     if(self.j < 6 and board.grid[self.i][self.j-2] == 'p'):
-                #         board.grid[self.i][self.j-1].hasMoved == True
-                #     else:
-                #         board.grid[self.i][self.j-1].hasMoved == False
-                # if(self.i == 4 and self.j < 7 and board.grid[self.i+1][self.j+1] == None and board.grid[self.i][self.j+1].id == 'P' and board.grid[self.i][self.j+1].hasMoved == True ):
-                #     coordsList.append([self.i+1, self.j+1])
-                #     board.grid[self.i][self.j-1].hasMoved == False
-
+                #uncomment for en passent
+                #if(self.i == 3 and self.j > 0 and board.grid[self.i][self.j-1] != None and board.grid[self.i-1][self.j-1] == None and board.grid[self.i][self.j-1].id == 'p' and board.grid[self.i][self.j-1].hasMoved == True ):
+                    #coordsList.append([self.i-1, self.j-1])
+                    #self.enPassant = True
+                    #board.grid[self.i][self.j-1].hasMoved == False
+                #if(self.i == 3 and self.j < 7 and board.grid[self.i][self.j+1] != None and board.grid[self.i-1][self.j+1] == None and board.grid[self.i][self.j+1].id == 'p' and board.grid[self.i][self.j+1].hasMoved == True ):
+                    #coordsList.append([self.i-1, self.j+1])
+                    #self.enPassant = True
+                    #if(self.j > 0):
+                        #board.grid[self.i][self.j+1].hasMoved == False
+        #Remove all coordinates that will keep king in check
         if(self.color == 'w'):
             inCheckList = self.isWhiteInCheck(board.grid, coordsList)
             for x in range(len(inCheckList)):
@@ -531,7 +530,7 @@ class Pawn(Piece):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
             count = 0
-        if(self.canMove == False):
+        if(self.canMove == False): #code for checking if any pawn can move, helps with coding check mate
             for x in range(len(coordsList)):
                 if coordsList[x] is None:
                     count = count + 1
@@ -552,21 +551,22 @@ class Pawn(Piece):
 
 ###############################################################################
 #
-# 
+#
 #
 ###############################################################################
 class Rook(Piece):
 
     ###############################################################################
     #
-    # 
+    #
     #
     ###############################################################################
+    #This method moves the rook in legal spaces
     def move(self, board):
         coordsList = []
 
         m = self.i
-        x = m + 0  #cause i was lazy to deep copy and dont wanna copy by reference
+        x = m + 0  #alternative to deepcopy
         n = self.j
         while(x < 7): #move rook to all legal downward rows
             x = x + 1
@@ -589,7 +589,7 @@ class Rook(Piece):
             else:
                 break
 
-        x = n + 0   #cause i was lazy to deep copy and dont wanna copy by reference
+        x = n + 0   #alternative to deepcopy
         while(x < 7): #move rook to all legal rightward columns
             x = x + 1
             if(board.grid[m][x] == None):
@@ -600,7 +600,7 @@ class Rook(Piece):
             else:
                 break
 
-        x = n + 0 #cause i was lazy to deep copy and dont wanna copy by reference
+        x = n + 0  #alternative to deepcopy
         while(x > 0): # move rook to all legal leftward columns
             x = x - 1
             if(board.grid[m][x] == None):
@@ -611,7 +611,7 @@ class Rook(Piece):
             else:
                 break
         # print("Stub: Move Rook")
-
+        #Remove all coordinates that will keep king in check
         if(self.color == 'w'):
             inCheckList = self.isWhiteInCheck(board.grid, coordsList)
             for x in range(len(inCheckList)):
@@ -630,7 +630,7 @@ class Rook(Piece):
             coordsList = list(filter(lambda a: a != None, coordsList))
             if len(coordsList) != 0:
                 self.canMove = True
-        if(self.canMove == False):
+        if(self.canMove == False): #code for checking if any rook can move, helps with coding check mate
             for x in range(len(coordsList)):
                 if coordsList[x] is None:
                     count = count + 1
@@ -644,16 +644,17 @@ class Rook(Piece):
 
 ###############################################################################
 #
-# 
+#
 #
 ###############################################################################
 class Knight(Piece):
 
     ###############################################################################
     #
-    # 
+    #
     #
     ###############################################################################
+    #This method is for generating coordinates of all legal knight moves
     def move(self, board):
         coordsList = []
         x = self.i
@@ -675,7 +676,7 @@ class Knight(Piece):
         if( x > 0 and y < 6 and ((board.grid[x-1][y+2] == None) or (board.grid[x-1][y+2].color != self.color and board.grid[x-1][y+2].kink != True))):
             coordsList.append([x-1,y+2])
 
-
+        #Remove all coordinates that will keep king in check
         if(self.color == 'w'):
             inCheckList = self.isWhiteInCheck(board.grid, coordsList)
             for x in range(len(inCheckList)):
@@ -690,7 +691,7 @@ class Knight(Piece):
                 if(inCheckList[x] == False):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
-        if(self.canMove == False):
+        if(self.canMove == False): #code for checking if any knight can move, helps with coding check mate
             for x in range(len(coordsList)):
                 if coordsList[x] is None:
                     count = count + 1
@@ -705,20 +706,21 @@ class Knight(Piece):
 
 ###############################################################################
 #
-# 
+#
 #
 ###############################################################################
 class Bishop(Piece):
 
     ###############################################################################
     #
-    # 
+    #
     #
     ###############################################################################
+    #This method generates coordinates for all legal bishop moves
     def move(self, board):
         coordsList = []
         m = self.i
-        x = m + 0  #cause i was lazy to deep copy and dont wanna copy by reference
+        x = m + 0   #alternative to deepcopy
         n = self.j
         z = n + 0
         while(x < 7 and z < 7): #move bishop to all right diagonals upwards
@@ -743,7 +745,7 @@ class Bishop(Piece):
                 break
             else:
                 break
-        x = m + 0   #cause i was lazy to deep copy and dont wanna copy by reference
+        x = m + 0    #alternative to deepcopy
         z = n + 0   #switching pointers for rows and columns
         while(x < 7 and z > 0): #move bishop
             x = x + 1
@@ -755,7 +757,7 @@ class Bishop(Piece):
                 break
             else:
                 break
-        x = m + 0 #cause i was lazy to deep copy and dont wanna copy by reference
+        x = m + 0  #alternative to deepcopy
         z = n + 0
         while(x > 0 and z < 7): # move bishop
             x = x - 1
@@ -767,8 +769,8 @@ class Bishop(Piece):
                 break
             else:
                 break
-        # print("Stub: Move Bishop")
-
+        # testing purpose: print("Stub: Move Bishop")
+        #Remove all coordinates that will keep king in check
         if(self.color == 'w'):
             inCheckList = self.isWhiteInCheck(board.grid, coordsList)
             for x in range(len(inCheckList)):
@@ -781,7 +783,7 @@ class Bishop(Piece):
                 if(inCheckList[x] == False):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
-        if(self.canMove == False):
+        if(self.canMove == False): #code for checking if any bishop can move, helps with coding check mate
             for x in range(len(coordsList)):
                 if coordsList[x] is None:
                     count = count + 1
@@ -794,21 +796,22 @@ class Bishop(Piece):
 
 ###############################################################################
 #
-# 
+#
 #
 ###############################################################################
 class Queen(Piece): #for queen you can reuse rook and bishop moves
 
     ###############################################################################
     #
-    # 
+    #
     #
     ###############################################################################
+    #This move generates the coordinates of all legal queen movements
     def move(self, board):
         coordsList = []
 
         m = self.i
-        x = m + 0  #cause i was lazy to deep copy and dont wanna copy by reference
+        x = m + 0  # #alternative to deepcopy
         n = self.j
         while(x < 7): #move rook to all legal downward rows
             x = x + 1
@@ -903,7 +906,7 @@ class Queen(Piece): #for queen you can reuse rook and bishop moves
                 break
             else:
                 break
-
+        #Remove all coordinates that will keep king in check
         if(self.color == 'w'):
             inCheckList = self.isWhiteInCheck(board.grid, coordsList)
             for x in range(len(inCheckList)):
@@ -916,7 +919,7 @@ class Queen(Piece): #for queen you can reuse rook and bishop moves
                 if(inCheckList[x] == False):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
-        if(self.canMove == False):
+        if(self.canMove == False): #code for checking if any queen can move, helps with coding check mate
             for x in range(len(coordsList)):
                 if coordsList[x] is None:
                     count = count + 1
@@ -931,16 +934,17 @@ class Queen(Piece): #for queen you can reuse rook and bishop moves
 
 ###############################################################################
 #
-# 
+#
 #
 ###############################################################################
 class King(Piece):
 
     ###############################################################################
     #
-    # 
+    #
     #
     ###############################################################################
+    #This method generates all legal king move coordinates
     def move(self, board):
         coordsList = []
         x = self.i
@@ -961,8 +965,8 @@ class King(Piece):
             coordsList.append([x-1,y-1])
         if( (x > 0) and (y < 7) and ((board.grid[x-1][y+1] ==  None) or (board.grid[x-1][y+1].color != self.color and board.grid[x-1][y+1].kink != True))):
             coordsList.append([x-1,y+1])
-        # print("Stub: Move King")
-
+        #Testing purposes print("Stub: Move King")
+        #Remove all coordinates that will keep king in check
         if(self.color == 'w'):
             inCheckList = self.isWhiteInCheck(board.grid, coordsList)
             for x in range(len(inCheckList)):
@@ -975,7 +979,7 @@ class King(Piece):
                 if(inCheckList[x] == False):
                     coordsList[x] = None
             coordsList = list(filter(lambda a: a != None, coordsList))
-        if(self.canMove == False):
+        if(self.canMove == False): #code for checking if any king can move, helps with coding check mate
             for x in range(len(coordsList)):
                 if coordsList[x] is None:
                     count = count + 1

@@ -28,7 +28,7 @@ class decisionTree():
     def maxNode(self, parentBoard, alpha, beta, color, depth):
         #print(self.numberTerminalNodesExamined)
         if(depth == self.depth):
-            return(parentBoard.evalValue)
+            return(parentBoard)
         else:
             v = -999999999      # used to represent negative infinity 
                                 
@@ -47,7 +47,9 @@ class decisionTree():
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
 
                     # calls minimizer node if maximum depth has not yet been reached
-                    v = max(v, self.minNode(x, alpha, beta, 'b', depth + 1), parentBoard.evalValue)
+                    v = max(v, self.minNode(x, alpha, beta, 'b', depth + 1).evalValue, parentBoard.evalValue)
+                    if(v == x.evalValue):
+                        return(tempChild)
                     if v >= beta:
                         self.numberPrunes = self.numberPrunes + 1
                         if(depth == 0):
@@ -90,7 +92,7 @@ class decisionTree():
     ###############################################################################
     def minNode(self, parentBoard, alpha, beta, color, depth):
         if(depth == self.depth):
-            return(parentBoard.evalValue)
+            return(parentBoard)
         else:
             v = 999999999       # used to represent positive infinity
 
@@ -102,7 +104,7 @@ class decisionTree():
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
 
                     # calls maximizer node if maximum depth has not yet been reached
-                    v = min(v, self.maxNode(x, alpha, beta, 'b', depth + 1))
+                    v = min(v, self.maxNode(x, alpha, beta, 'b', depth + 1).evalValue)
                     if v <= alpha:
                         self.numberPrunes = self.numberPrunes + 1
                         return(v)
@@ -114,7 +116,7 @@ class decisionTree():
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
 
                     # calls maximizer node if maximum depth has not yet been reached
-                    v = min(v, self.maxNode(x, alpha, beta, 'w', depth + 1))
+                    v = min(v, self.maxNode(x, alpha, beta, 'w', depth + 1).evalValue)
                     if v <= alpha:
                         self.numberPrunes = self.numberPrunes + 1
                         return(v)

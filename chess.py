@@ -112,7 +112,7 @@ elif(usedBoard == 6):
     inputGrid = inputTest2
 
 # maximum depth used for the alpha beta pruning tree
-depth = 4
+depth = 1
 
 boardDefault = Board(inputGrid, True)                  # create initial Board object
 boardDefault.printBoard()                              # print to terminal the Board (text)

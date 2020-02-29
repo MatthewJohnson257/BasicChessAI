@@ -9,31 +9,31 @@ class boardState():
 
 
     pEval = [[  0,  0,  0,  0,  0,  0,  0,  0],
-             [50, 50, 50, 50, 50, 50, 50, 50],
-             [10, 10, 20, 30, 30, 20, 10, 10],
-             [5, 5, 10, 25, 25, 10, 5, 5],
-             [0, 0, 0, 20, 20, 0, 0, 0],
-             [5, -5, -10, 0, 0, -10, -5, 5],
-             [5, 10, 10, -20, -20, 10, 10, 5],
-             [0, 0, 0, 0, 0, 0, 0, 0]]
+             [ 50, 50, 50, 50, 50, 50, 50, 50],
+             [ 10, 10, 20, 30, 30, 20, 10, 10],
+             [  5,  5, 10, 25, 25, 10,  5,  5],
+             [  0,  0,  0, 20, 20,  0,  0,  0],
+             [  5, -5,-10,  0,  0,-10, -5,  5],
+             [  5, 10, 10,-20,-20, 10, 10,  5],
+             [  0,  0,  0,  0,  0,  0,  0,  0]]
 
-    PEval = [[0, 0, 0, 0, 0, 0, 0, 0],
-             [5, 10, 10, -20, -20, 10, 10, 5],
-             [5, -5, -10, 0, 0, -10, -5, 5],
-             [0, 0, 0, 20, 20, 0, 0, 0],
-             [5, 5, 10, 25, 25, 10, 5, 5],
-             [10, 10, 20, 30, 30, 20, 10, 10],
-             [50, 50, 50, 50, 50, 50, 50, 50],
-             [0, 0, 0, 0, 0, 0, 0, 0]]
+    PEval = [[  0,  0,  0,  0,  0,  0,  0,  0],
+             [  5, 10, 10,-20,-20, 10, 10,  5],
+             [  5, -5,-10,  0,  0,-10, -5,  5],
+             [  0,  0,  0, 20, 20,  0,  0,  0],
+             [  5,  5, 10, 25, 25, 10,  5,  5],
+             [ 10, 10, 20, 30, 30, 20, 10, 10],
+             [ 50, 50, 50, 50, 50, 50, 50, 50],
+             [  0,  0,  0,  0,  0,  0,  0,  0]]
 
-    nEval = [[-50, -40, -30, -30, -30, -30, -40, -50],
-             [-40, -20, 0, 0, 0, 0, -20, -40],
-             [-30, 0, 10, 15, 15, 10, 0, -30],
-             [-30, 5, 15, 20, 20, 15, 5, -30],
-             [-30, 0, 15, 20, 20, 15, 0, -30],
-             [-30, 5, 10, 15, 15, 10, 5, -30],
-             [-40, -20, 0, 5, 5, 0, -20, -40],
-             [-50, -40, -30, -30, -30, -30, -40, -50]]
+    nEval = [[-50,-40,-30,-30,-30,-30,-40,-50],
+             [-40,-20,  0,  0,  0,  0,-20,-40],
+             [-30,  0, 10, 15, 15, 10,  0,-30],
+             [-30,  5, 15, 20, 20, 15,  5,-30],
+             [-30,  0, 15, 20, 20, 15,  0,-30],
+             [-30,  5, 10, 15, 15, 10,  5,-30],
+             [-40,-20,  0,  5,  5,  0,-20,-40],
+             [-50,-40,-30,-30,-30,-30,-40,-50]]
 
     NEval = [[-50, -40, -30, -30, -30, -30, -40, -50],
              [-40, -20, 0, 5, 5, 0, -20, -40],
@@ -147,40 +147,40 @@ class boardState():
                 if self.grid[i][j] != '_':
                     if self.grid[i][j] == 'P':
                         whiteCount = whiteCount + 100
-                        self.whiteMobility = self.whiteMobility + Board.pEval[i][j]
+                        self.whiteMobility = self.whiteMobility + boardState.pEval[i][j]
                     elif self.grid[i][j] == 'N':
                         whiteCount = whiteCount + 320
-                        self.whiteMobility = self.whiteMobility + Board.nEval[i][j]
+                        self.whiteMobility = self.whiteMobility + boardState.nEval[i][j]
                     elif self.grid[i][j] == 'B':
                         whiteCount = whiteCount + 330
-                        self.whiteMobility = self.whiteMobility + Board.bEval[i][j]
+                        self.whiteMobility = self.whiteMobility + boardState.bEval[i][j]
                     elif self.grid[i][j] == 'Q':
                         whiteCount = whiteCount + 900
-                        self.whiteMobility = self.whiteMobility + Board.qEval[i][j]
+                        self.whiteMobility = self.whiteMobility + boardState.qEval[i][j]
                     elif self.grid[i][j] == 'R':
                         whiteCount = whiteCount + 500
-                        self.whiteMobility = self.whiteMobility + Board.rEval[i][j]
+                        self.whiteMobility = self.whiteMobility + boardState.rEval[i][j]
                     elif self.grid[i][j] == 'K':
                         whiteCount = whiteCount + 20000
-                        self.whiteMobility = self.whiteMobility + Board.kEval[i][j]
+                        self.whiteMobility = self.whiteMobility + boardState.kEval[i][j]
                     elif self.grid[i][j] == 'p':
                         blackCount = blackCount + 100
-                        self.blackMobility = self.blackMobility + Board.rEval[i][j]
+                        self.blackMobility = self.blackMobility + boardState.rEval[i][j]
                     elif self.grid[i][j] == 'n':
                         blackCount = blackCount + 320
-                        self.blackMobility = self.blackMobility + Board.rEval[i][j]
+                        self.blackMobility = self.blackMobility + boardState.rEval[i][j]
                     elif self.grid[i][j] == 'b':
                         blackCount = blackCount + 330
-                        self.blackMobility = self.blackMobility + Board.rEval[i][j]
+                        self.blackMobility = self.blackMobility + boardState.rEval[i][j]
                     elif self.grid[i][j] == 'q':
                         blackCount = blackCount + 900
-                        self.blackMobility = self.blackMobility + Board.rEval[i][j]
+                        self.blackMobility = self.blackMobility + boardState.rEval[i][j]
                     elif self.grid[i][j] == 'r':
                         blackCount = blackCount + 500
-                        self.blackMobility = self.blackMobility + Board.rEval[i][j]
+                        self.blackMobility = self.blackMobility + boardState.rEval[i][j]
                     elif self.grid[i][j] == 'k':
                         blackCount = blackCount + 20000
-                        self.blackMobility = self.blackMobility + Board.rEval[i][j]
+                        self.blackMobility = self.blackMobility + boardState.rEval[i][j]
 
         if(self.isWhiteInCheckmate()): 
             return(-100000)

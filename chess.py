@@ -44,14 +44,14 @@ inputC = [['_', '_', '_', '_', '_', '_', '_', '_'],
 ['_', '_', '_', '_', '_', 'N', '_', '_']]
 
 # regular chess board
-inputFull = [['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
-['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
-['_', '_', '_', '_', '_', '_', '_', '_'],
-['_', '_', '_', '_', '_', '_', '_', '_'],
-['_', '_', '_', '_', '_', '_', '_', '_'],
-['_', '_', '_', '_', '_', '_', '_', '_'],
-['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
-['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']]
+inputFull = [['l', 'h', 'b', 'q', 'u', 'b', 'h', 'r'],
+             ['f', 'f', 'f', 'f', 'f', 'f', 'f', 'f'],
+             ['_', '_', '_', '_', '_', '_', '_', '_'],
+             ['_', '_', '_', '_', '_', '_', '_', '_'],
+             ['_', '_', '_', '_', '_', '_', '_', '_'],
+             ['_', '_', '_', '_', '_', '_', '_', '_'],
+             ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F'],
+             ['L', 'H', 'B', 'Q', 'U', 'B', 'H', 'R']]
 
 inputTest1 = [['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
 ['p', 'p', 'N', 'p', 'p', 'p', '_', 'p'],
@@ -114,7 +114,7 @@ elif(usedBoard == 6):
 # maximum depth used for the alpha beta pruning tree
 depth = 1
 
-boardDefault = Board(inputGrid, True)                  # create initial Board object
+boardDefault = Board(inputGrid)                        # create initial Board object
 boardDefault.printBoard()                              # print to terminal the Board (text)
 chessGUI(boardDefault, explorationStrategy, depth)     # create and launch chess GUI
 

@@ -11,13 +11,12 @@ class decisionTree():
     # to which to search
     #
     ###############################################################################
-    def __init__(self, initialBoard, explorationStrategy, depth, initialColor = 'w'):
+    def __init__(self, initialBoard, depth, initialColor = 'w'):
         
         self.initialBoard = initialBoard        # current board
         self.initialColor = initialColor        # AI color
         self.numberPrunes = 0                   
         self.numberTerminalNodesExamined = 0
-        self.explorationStrategy = explorationStrategy
         self.depth = depth
 
     ###############################################################################
@@ -34,7 +33,7 @@ class decisionTree():
                                 
             # if the color of the player at the maximizer is white
             if(color == 'w'):
-                children = parentBoard.generateAllWhiteMoves(self.explorationStrategy)
+                children = parentBoard.generateAllWhiteMoves()
                 tempChild = None
                 for x in children:
 
@@ -64,7 +63,7 @@ class decisionTree():
 
             # if the color of the player at the maximizer is black
             else:
-                children = parentBoard.generateAllBlackMoves(self.explorationStrategy)
+                children = parentBoard.generateAllBlackMoves()
                 tempChild = None
                 for x in children:
                     tempChild = x
@@ -97,7 +96,7 @@ class decisionTree():
             v = 999999999       # used to represent positive infinity
 
             if(color == 'w'):
-                children = parentBoard.generateAllWhiteMoves(self.explorationStrategy)
+                children = parentBoard.generateAllWhiteMoves()
                 for x in children:
                     if(x.isWhiteInCheckmate()):
                             return(x)
@@ -111,7 +110,7 @@ class decisionTree():
                     beta = min(v, beta)
                 return(v)
             else:
-                children = parentBoard.generateAllBlackMoves(self.explorationStrategy)
+                children = parentBoard.generateAllBlackMoves()
                 for x in children:
                     self.numberTerminalNodesExamined = self.numberTerminalNodesExamined + 1
 

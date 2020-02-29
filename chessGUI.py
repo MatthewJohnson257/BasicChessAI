@@ -26,11 +26,9 @@ class chessGUI():
     # purple) and starting images for the grids squares, and launches the windows
     #
     ###############################################################################
-    def __init__(self, board, explorationStrategy, depth):
+    def __init__(self, board, depth):
         self.window = Tk()                              # window object
         self.window.title("Our Chess Board")
-
-        self.explorationStrategy = explorationStrategy  # used when AI finds moves
         self.selected = [False, 0, 0]                   # used when processing mouse clicks
 
         self.board = board                              # starting board for GUI
@@ -72,7 +70,7 @@ class chessGUI():
         self.ourTree = None
 
         # create alpha beta tree
-        self.ourTree = decisionTree(self.board, self.explorationStrategy, self.depth, 'w')
+        self.ourTree = decisionTree(self.board, self.depth, 'w')
 
         print("****The AI is selecting a move -- PLEASE WAIT, DON'T CLICK ANYTHING PLEASE****")
 
@@ -87,16 +85,6 @@ class chessGUI():
                     if(self.board.grid[i][j] != None):
                         if((self.board.grid[i][j].id == 'k' and self.board.isBlackInCheckmate()) or (self.board.grid[i][j].id == 'K' and self.board.isWhiteInCheckmate())):
                             self.backgrounds[i][j] = "red"
-        # uncomment for en passent 
-        #for x in range(0,8):
-            #for y in range(0,8):
-                #if(self.board.grid[x][y] != None and temp.grid[x][y] != None and self.board.grid[x][y].id != temp.grid[x][y].id):
-                    #if( (self.board.grid[x][y].id == 'p' and self.board.grid[x][y].enPassant == True)) :
-                        #self.board.grid[x-1][y] = None
-                        #self.board.grid[x][y].enPassant = False
-                    #if((self.board.grid[x][y].id == 'P' and self.board.grid[x][y].enPassant == True)) :
-                        #self.board.grid[x+1][y] = None
-                        #self.board.grid[x+1][y].enPassant = False
         self.initializePhotos(self.board)
 
 
@@ -195,81 +183,80 @@ class chessGUI():
         self.board = newBoard
         for i in range(0,8):
             for j in range(0,8):
-                if(newBoard.grid[i][j] != None):
-                    if(newBoard.grid[i][j].id == 'P'):
-                        self.images[i][j] = PhotoImage(file = "whitepawn.png")
-                        self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
-                        self.labels[i][j].grid(row = i, column = j)
-                        data = [i, j]
-                        self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                    elif(newBoard.grid[i][j].id == 'p'):
-                        self.images[i][j] = PhotoImage(file = "blackpawn.png")
-                        self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
-                        self.labels[i][j].grid(row = i, column = j)
-                        data = [i, j]
-                        self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                    elif(newBoard.grid[i][j].id == 'N'):
-                        self.images[i][j] = PhotoImage(file = "whiteknight.png")
-                        self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
-                        self.labels[i][j].grid(row = i, column = j)
-                        data = [i, j]
-                        self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                    elif(newBoard.grid[i][j].id == 'n'):
-                        self.images[i][j] = PhotoImage(file = "blackknight.png")
-                        self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
-                        self.labels[i][j].grid(row = i, column = j)
-                        data = [i, j]
-                        self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                    elif(newBoard.grid[i][j].id == 'B'):
-                        self.images[i][j] = PhotoImage(file = "whitebishop.png")
-                        self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
-                        self.labels[i][j].grid(row = i, column = j)
-                        data = [i, j]
-                        self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                    elif(newBoard.grid[i][j].id == 'b'):
-                        self.images[i][j] = PhotoImage(file = "blackbishop.png")
-                        self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
-                        self.labels[i][j].grid(row = i, column = j)
-                        data = [i, j]
-                        self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                    elif(newBoard.grid[i][j].id == 'Q'):
-                        self.images[i][j] = PhotoImage(file = "whitequeen.png")
-                        self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
-                        self.labels[i][j].grid(row = i, column = j)
-                        data = [i, j]
-                        self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                    elif(newBoard.grid[i][j].id == 'q'):
-                        self.images[i][j] = PhotoImage(file = "blackqueen.png")
-                        self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
-                        self.labels[i][j].grid(row = i, column = j)
-                        data = [i, j]
-                        self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                    elif(newBoard.grid[i][j].id == 'K'):
-                        self.images[i][j] = PhotoImage(file = "whiteking.png")
-                        self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
-                        self.labels[i][j].grid(row = i, column = j)
-                        data = [i, j]
-                        self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                    elif(newBoard.grid[i][j].id == 'k'):
-                        self.images[i][j] = PhotoImage(file = "blackking.png")
-                        self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
-                        self.labels[i][j].grid(row = i, column = j)
-                        data = [i, j]
-                        self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                    elif(newBoard.grid[i][j].id == 'R'):
-                        self.images[i][j] = PhotoImage(file = "whiterook.png")
-                        self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
-                        self.labels[i][j].grid(row = i, column = j)
-                        data = [i, j]
-                        self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                    elif(newBoard.grid[i][j].id == 'r'):
-                        self.images[i][j] = PhotoImage(file = "blackrook.png")
-                        self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
-                        self.labels[i][j].grid(row = i, column = j)
-                        data = [i, j]
-                        self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                else:
+                if(newBoard.grid[i][j] == '_'):
                     self.images[i][j] = PhotoImage(file = "blanksquare.png")
+                    self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
+                    self.labels[i][j].grid(row = i, column = j)
+                    data = [i, j]
+                    self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
+                elif(newBoard.grid[i][j] == 'P' or newBoard.grid[i][j] == 'F' or newBoard.grid[i][j] == 'S'):
+                    self.images[i][j] = PhotoImage(file = "whitepawn.png")
+                    self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
+                    self.labels[i][j].grid(row = i, column = j)
+                    data = [i, j]
+                    self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
+                elif(newBoard.grid[i][j] == 'p' or newBoard.grid[i][j] == 'f' or newBoard.grid[i][j] == 's'):
+                    self.images[i][j] = PhotoImage(file = "blackpawn.png")
+                    self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
+                    self.labels[i][j].grid(row = i, column = j)
+                    data = [i, j]
+                    self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
+                elif(newBoard.grid[i][j] == 'H'):
+                    self.images[i][j] = PhotoImage(file = "whiteknight.png")
+                    self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
+                    self.labels[i][j].grid(row = i, column = j)
+                    data = [i, j]
+                    self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
+                elif(newBoard.grid[i][j] == 'h'):
+                    self.images[i][j] = PhotoImage(file = "blackknight.png")
+                    self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
+                    self.labels[i][j].grid(row = i, column = j)
+                    data = [i, j]
+                    self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
+                elif(newBoard.grid[i][j] == 'B'):
+                    self.images[i][j] = PhotoImage(file = "whitebishop.png")
+                    self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
+                    self.labels[i][j].grid(row = i, column = j)
+                    data = [i, j]
+                    self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
+                elif(newBoard.grid[i][j] == 'b'):
+                    self.images[i][j] = PhotoImage(file = "blackbishop.png")
+                    self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
+                    self.labels[i][j].grid(row = i, column = j)
+                    data = [i, j]
+                    self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
+                elif(newBoard.grid[i][j] == 'Q'):
+                    self.images[i][j] = PhotoImage(file = "whitequeen.png")
+                    self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
+                    self.labels[i][j].grid(row = i, column = j)
+                    data = [i, j]
+                    self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
+                elif(newBoard.grid[i][j] == 'q'):
+                    self.images[i][j] = PhotoImage(file = "blackqueen.png")
+                    self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
+                    self.labels[i][j].grid(row = i, column = j)
+                    data = [i, j]
+                    self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
+                elif(newBoard.grid[i][j] == 'K' or newBoard.grid[i][j] == 'U'):
+                    self.images[i][j] = PhotoImage(file = "whiteking.png")
+                    self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
+                    self.labels[i][j].grid(row = i, column = j)
+                    data = [i, j]
+                    self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
+                elif(newBoard.grid[i][j] == 'k' or newBoard.grid[i][j] == 'u'):
+                    self.images[i][j] = PhotoImage(file = "blackking.png")
+                    self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
+                    self.labels[i][j].grid(row = i, column = j)
+                    data = [i, j]
+                    self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
+                elif(newBoard.grid[i][j] == 'O' or newBoard.grid[i][j] == 'L' or newBoard.grid[i][j] == 'R'):
+                    self.images[i][j] = PhotoImage(file = "whiterook.png")
+                    self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
+                    self.labels[i][j].grid(row = i, column = j)
+                    data = [i, j]
+                    self.labels[i][j].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
+                elif(newBoard.grid[i][j] == 'o' or newBoard.grid[i][j] == 'l' or newBoard.grid[i][j] == 'r'):
+                    self.images[i][j] = PhotoImage(file = "blackrook.png")
                     self.labels[i][j] = Label(self.window, image = self.images[i][j], bg = self.backgrounds[i][j])
                     self.labels[i][j].grid(row = i, column = j)
                     data = [i, j]

@@ -7,6 +7,8 @@
 
 from piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
 from board import Board
+from boardState import boardState
+from whiteComputerGUI import whiteComputerGUI
 from chessGUI import chessGUI
 from tkinter import *           # used for GUI
 import argparse                 # used to process comand line inputs
@@ -98,13 +100,13 @@ explorationStrategy = arguments.Arguments[1]    # which exploration strategy to 
 
 # determine which of the initial boards we are using
 inputGrid = None
-if(usedBoard == 1):
+if(usedBoard == 4):
     inputGrid = inputA
 elif(usedBoard == 2):
     inputGrid = inputB
 elif(usedBoard == 3):
     inputGrid = inputC
-elif(usedBoard == 4):
+elif(usedBoard == 1):
     inputGrid = inputFull
 elif(usedBoard == 5):
     inputGrid = inputTest1
@@ -114,9 +116,9 @@ elif(usedBoard == 6):
 # maximum depth used for the alpha beta pruning tree
 depth = 1
 
-boardDefault = Board(inputGrid)                        # create initial Board object
+boardDefault = boardState(inputGrid)                        # create initial Board object
 boardDefault.printBoard()                              # print to terminal the Board (text)
-chessGUI(boardDefault, explorationStrategy, depth)     # create and launch chess GUI
+whiteComputerGUI(boardDefault, depth)     # create and launch chess GUI
 
 
 

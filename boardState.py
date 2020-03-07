@@ -4,6 +4,7 @@
 #
 ############################################################################### 
 
+import copy
 
 class boardState():
 
@@ -228,6 +229,10 @@ class boardState():
     ###############################################################################
     def generateAllWhiteMoves(self):
         boardList = []
+        # for i in range(8):
+        #     for j in range(8):
+        #         if(self.grid[i][j] == 'P'):
+
         return(boardList)
 
 
@@ -240,6 +245,391 @@ class boardState():
     def generateAllBlackMoves(self):
         boardList = []
         return(boardList)
+
+
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def fPawnWhiteMoves(self, i , j):
+        pawnMoveList = []
+        tempGrid = []
+
+        # test if pawn can move two paces forward
+        if(self.grid[i-1][j] == '_' and self.grid[i-2][j] == '_'):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i-2][j] = 'S'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # if the pawn can move one space forward
+        if(self.grid[i-1][j] == '_'):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i-1][j] = 'P'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # if the pawn can capture piece to the diagonal left
+        if(j != 0 and (self.grid[i-1][j-1]).islower()):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i-1][j-1] = 'P'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # if the pawn can capture piece to the diagonal right
+        if(j != 7 and (self.grid[i-1][j+1]).islower()):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i-1][j+1] = 'P'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # for x in pawnMoveList:
+        #     x.printBoard()
+
+        return(pawnMoveList)
+
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def fPawnBlackMoves(self, i , j):
+        pawnMoveList = []
+        tempGrid = []
+
+        # test if pawn can move two paces forward
+        if(self.grid[i+1][j] == '_' and self.grid[i+2][j] == '_'):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i+2][j] = 's'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # if the pawn can move one space forward
+        if(self.grid[i+1][j] == '_'):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i+1][j] = 'p'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # if the pawn can capture piece to the diagonal left
+        if(j != 0 and (self.grid[i+1][j-1]).isupper()):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i+1][j-1] = 'p'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # if the pawn can capture piece to the diagonal right
+        if(j != 7 and (self.grid[i+1][j+1]).isupper()):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i+1][j+1] = 'p'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # for x in pawnMoveList:
+        #     x.printBoard()
+
+        return(pawnMoveList)
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def sPawnWhiteMoves(self, i , j):
+        pawnMoveList = []
+        tempGrid = []
+
+        # if the pawn can move one space forward
+        if(self.grid[i-1][j] == '_'):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i-1][j] = 'P'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # if the pawn can capture piece to the diagonal left
+        if(j != 0 and (self.grid[i-1][j-1]).islower()):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i-1][j-1] = 'P'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # if the pawn can capture piece to the diagonal right
+        if(j != 7 and (self.grid[i-1][j+1]).islower()):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i-1][j+1] = 'P'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # for x in pawnMoveList:
+        #     x.printBoard()
+
+        return(pawnMoveList)
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def sPawnBlackMoves(self, i , j):
+        pawnMoveList = []
+        tempGrid = []
+
+        # if the pawn can move one space forward
+        if(self.grid[i+1][j] == '_'):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i+1][j] = 'p'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # if the pawn can capture piece to the diagonal left
+        if(j != 0 and (self.grid[i+1][j-1]).isupper()):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i+1][j-1] = 'p'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # if the pawn can capture piece to the diagonal right
+        if(j != 7 and (self.grid[i+1][j+1]).isupper()):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i+1][j+1] = 'p'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # for x in pawnMoveList:
+        #     x.printBoard()
+
+        return(pawnMoveList)
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def pPawnWhiteMoves(self, i , j):
+        pawnMoveList = []
+        tempGrid = []
+
+        # if the pawn can move one space forward
+        if(self.grid[i-1][j] == '_'):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i-1][j] = 'P'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # if the pawn can capture piece to the diagonal left
+        if(j != 0 and (self.grid[i-1][j-1]).islower()):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i-1][j-1] = 'P'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # if the pawn can capture piece to the diagonal right
+        if(j != 7 and (self.grid[i-1][j+1]).islower()):
+            tempGrid = copy.deepcopy(self.grid)
+            tempGrid[i][j] = '_'
+            tempGrid[i-1][j+1] = 'P'
+            pawnMoveList.append(boardState(tempGrid))
+
+        # if the pawn will be promoted to a queen
+        if()
+
+        # for x in pawnMoveList:
+        #     x.printBoard()
+
+        return(pawnMoveList)
+
+
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def pPawnBlackMoves(self, i , j):
+        stub = 1
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def qQueenWhiteMoves(self, i , j):
+        stub = 1
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def qQueenBlackMoves(self, i , j):
+        stub = 1
+
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def uKingWhiteMoves(self, i , j):
+        stub = 1
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def uKingBlackMoves(self, i , j):
+        stub = 1
+
+
+
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def kKingWhiteMoves(self, i , j):
+        stub = 1
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def kKingBlackMoves(self, i , j):
+        stub = 1
+
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def bBishopWhiteMoves(self, i , j):
+        stub = 1
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def bBishopBlackMoves(self, i , j):
+        stub = 1
+
+
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def oRookWhiteMoves(self, i , j):
+        stub = 1
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def oRookBlackMoves(self, i , j):
+        stub = 1
+
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def lRookWhiteMoves(self, i , j):
+        stub = 1
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def lRookBlackMoves(self, i , j):
+        stub = 1
+
+
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def rRookWhiteMoves(self, i , j):
+        stub = 1
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def rRookBlackMoves(self, i , j):
+        stub = 1
+
+
+
+
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def hKnightWhiteMoves(self, i , j):
+        stub = 1
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def hKnightBlackMoves(self, i , j):
+        stub = 1
+
+
+
+
+
+
+
+
+
+
+
 
 
 

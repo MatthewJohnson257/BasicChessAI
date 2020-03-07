@@ -50,7 +50,50 @@ class debugGUI():
             self.labels[self.selected[1]][self.selected[2]].config(bg = "gold")
             viableCoords = []
             if(self.board.grid[self.selected[1]][self.selected[2]] == 'P'):
-                viableCoords = self.board.PCoords(self.selected[1], self.selected[2])
+                viableCoords = self.board.pPawnWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'p'):
+                viableCoords = self.board.pPawnBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'F'):
+                viableCoords = self.board.fPawnWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'f'):
+                viableCoords = self.board.fPawnBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'S'):
+                viableCoords = self.board.sPawnWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 's'):
+                viableCoords = self.board.sPawnBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'Q'):
+                viableCoords = self.board.qQueenWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'q'):
+                viableCoords = self.board.qQueenBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'K'):
+                viableCoords = self.board.kKingWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'k'):
+                viableCoords = self.board.kKingBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'U'):
+                viableCoords = self.board.uKingWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'u'):
+                viableCoords = self.board.uKingBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'B'):
+                viableCoords = self.board.bBishopWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'b'):
+                viableCoords = self.board.bBishopBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'O'):
+                viableCoords = self.board.oRookWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'o'):
+                viableCoords = self.board.oRookBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'L'):
+                viableCoords = self.board.lRookWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'l'):
+                viableCoords = self.board.lRookBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'R'):
+                viableCoords = self.board.rRookWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'r'):
+                viableCoords = self.board.rRookBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'H'):
+                viableCoords = self.board.hKnightWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'h'):
+                viableCoords = self.board.hKnightBlackMoves(self.selected[1], self.selected[2])
+
 
             for z in viableCoords:
                 self.labels[z[0]][z[1]].config(bg = "palegreen3")
@@ -63,6 +106,7 @@ class debugGUI():
                 for j in range(8):
                     self.labels[i][j].config(bg = self.backgrounds[i][j])
             
+            # if you didn't select the same square twice
             if(coords[0] != self.selected[1] or coords[1] != self.selected[2]):
 
                 # move the piece; it can move anywhere.  Even a blank square can move!

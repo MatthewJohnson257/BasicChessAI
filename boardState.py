@@ -36,50 +36,50 @@ class boardState():
              [-40,-20,  0,  5,  5,  0,-20,-40],
              [-50,-40,-30,-30,-30,-30,-40,-50]]
 
-    NEval = [[-50, -40, -30, -30, -30, -30, -40, -50],
-             [-40, -20, 0, 5, 5, 0, -20, -40],
-             [-30, 5, 10, 15, 15, 10, 5, -30],
-             [-30, 0, 15, 20, 20, 15, 0, -30],
-             [-30, 5, 15, 20, 20, 15, 5, -30],
-             [-30, 0, 10, 15, 15, 10, 0, -30],
-             [-40, -20, 0, 0, 0, 0, -20, -40],
-             [-50, -40, -30, -30, -30, -30, -40, -50]]
+    NEval = [[-50,-40,-30,-30,-30,-30,-40,-50],
+             [-40,-20,  0,  5,  5,  0,-20,-40],
+             [-30,  5, 10, 15, 15, 10,  5,-30],
+             [-30,  0, 15, 20, 20, 15,  0,-30],
+             [-30,  5, 15, 20, 20, 15,  5,-30],
+             [-30,  0, 10, 15, 15, 10,  0,-30],
+             [-40,-20,  0,  0,  0,  0,-20,-40],
+             [-50,-40,-30,-30,-30,-30,-40,-50]]
 
-    bEval = [[-20, -10, -10, -10, -10, -10, -10, -20],
-             [-10, 0, 0, 0, 0, 0, 0, -10],
-             [-10, 0, 5, 10, 10, 5, 0, -10],
-             [-10, 5, 5, 10, 10, 5, 5, -10],
-             [-10, 0, 10, 10, 10, 10, 0, -10],
-             [-10, 10, 10, 10, 10, 10, 10, -10],
-             [-10, 5, 0, 0, 0, 0, 5, -10],
-             [-20, -10, -10, -10, -10, -10, -10, -20]]
+    bEval = [[-20,-10,-10,-10,-10,-10,-10,-20],
+             [-10,  0,  0,  0,  0,  0,  0,-10],
+             [-10,  0,  5, 10, 10,  5,  0,-10],
+             [-10,  5,  5, 10, 10,  5,  5,-10],
+             [-10,  0, 10, 10, 10, 10,  0,-10],
+             [-10, 10, 10, 10, 10, 10, 10,-10],
+             [-10,  5,  0,  0,  0,  0,  5,-10],
+             [-20,-10,-10,-10,-10,-10,-10,-20]]
 
-    BEval = [[-20, -10, -10, -10, -10, -10, -10, -20],
-             [-10, 5, 0, 0, 0, 0, 5, -10],
-             [-10, 10, 10, 10, 10, 10, 10, -10],
-             [-10, 0, 10, 10, 10, 10, 0, -10],
-             [-10, 5, 5, 10, 10, 5, 5, -10],
-             [-10, 0, 5, 10, 10, 5, 0, -10],
-             [-10, 0, 0, 0, 0, 0, 0, -10],
-             [-20, -10, -10, -10, -10, -10, -10, -20]]
+    BEval = [[-20,-10,-10,-10,-10,-10,-10,-20],
+             [-10,  5,  0,  0,  0,  0,  5,-10],
+             [-10, 10, 10, 10, 10, 10, 10,-10],
+             [-10,  0, 10, 10, 10, 10,  0,-10],
+             [-10,  5,  5, 10, 10,  5,  5,-10],
+             [-10,  0,  5, 10, 10,  5,  0,-10],
+             [-10,  0,  0,  0,  0,  0,  0,-10],
+             [-20,-10,-10,-10,-10,-10,-10,-20]]
 
-    rEval = [[0, 0, 0, 0, 0, 0, 0, 0],
-             [5, 10, 10, 10, 10, 10, 10, 5],
-             [-5, 0, 0, 0, 0, 0, 0, -5],
-             [-5, 0, 0, 0, 0, 0, 0, -5],
-             [-5, 0, 0, 0, 0, 0, 0, -5],
-             [-5, 0, 0, 0, 0, 0, 0, -5],
-             [-5, 0, 0, 0, 0, 0, 0, -5],
-             [0, 0, 0, 5, 5, 0, 0, 0]]
+    rEval = [[  0,  0,  0,  0,  0,  0,  0,  0],
+             [  5, 10, 10, 10, 10, 10, 10,  5],
+             [ -5,  0,  0,  0,  0,  0,  0, -5],
+             [ -5,  0,  0,  0,  0,  0,  0, -5],
+             [ -5,  0,  0,  0,  0,  0,  0, -5],
+             [ -5,  0,  0,  0,  0,  0,  0, -5],
+             [ -5,  0,  0,  0,  0,  0,  0, -5],
+             [  0,  0,  0,  5,  5,  0,  0,  0]]
 
-    REval = [[0, 0, 0, 5, 5, 0, 0, 0],
-             [-5, 0, 0, 0, 0, 0, 0, -5],
-             [-5, 0, 0, 0, 0, 0, 0, -5],
-             [-5, 0, 0, 0, 0, 0, 0, -5],
-             [-5, 0, 0, 0, 0, 0, 0, -5],
-             [-5, 0, 0, 0, 0, 0, 0, -5],
-             [5, 10, 10, 10, 10, 10, 10, 5],
-             [0, 0, 0, 0, 0, 0, 0, 0]]
+    REval = [[  0,  0,  0,  5,  5,  0,  0,  0],
+             [ -5,  0,  0,  0,  0,  0,  0, -5],
+             [ -5,  0,  0,  0,  0,  0,  0, -5],
+             [ -5,  0,  0,  0,  0,  0,  0, -5],
+             [ -5,  0,  0,  0,  0,  0,  0, -5],
+             [ -5,  0,  0,  0,  0,  0,  0, -5],
+             [  5, 10, 10, 10, 10, 10, 10,  5],
+             [  0,  0,  0,  0,  0,  0,  0,  0]]
 
     qEval = [[-20, -10, -10, -5, -5, -10, -10, -20],
              [-10, 0, 0, 0, 0, 0, 0, -10],
@@ -256,41 +256,25 @@ class boardState():
     #
     ###############################################################################
     def fPawnWhiteMoves(self, i , j):
-        pawnMoveList = []
-        tempGrid = []
+        pawnCoordList = []
 
         # test if pawn can move two paces forward
         if(self.grid[i-1][j] == '_' and self.grid[i-2][j] == '_'):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i-2][j] = 'S'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i-2, j, 0])
 
         # if the pawn can move one space forward
         if(self.grid[i-1][j] == '_'):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i-1][j] = 'P'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i-1, j, 0])
 
         # if the pawn can capture piece to the diagonal left
         if(j != 0 and (self.grid[i-1][j-1]).islower()):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i-1][j-1] = 'P'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i-1, j-1, 0])
 
         # if the pawn can capture piece to the diagonal right
         if(j != 7 and (self.grid[i-1][j+1]).islower()):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i-1][j+1] = 'P'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i-1, j+1, 0])
 
-        # for x in pawnMoveList:
-        #     x.printBoard()
-
-        return(pawnMoveList)
+        return(pawnCoordList)
 
 
 
@@ -301,41 +285,25 @@ class boardState():
     #
     ###############################################################################
     def fPawnBlackMoves(self, i , j):
-        pawnMoveList = []
-        tempGrid = []
+        pawnCoordList = []
 
         # test if pawn can move two paces forward
         if(self.grid[i+1][j] == '_' and self.grid[i+2][j] == '_'):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i+2][j] = 's'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i+2, j, 0])
 
         # if the pawn can move one space forward
         if(self.grid[i+1][j] == '_'):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i+1][j] = 'p'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i+1, j, 0])
 
         # if the pawn can capture piece to the diagonal left
         if(j != 0 and (self.grid[i+1][j-1]).isupper()):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i+1][j-1] = 'p'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i+1, j-1, 0])
 
         # if the pawn can capture piece to the diagonal right
         if(j != 7 and (self.grid[i+1][j+1]).isupper()):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i+1][j+1] = 'p'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i+1, j+1, 0])
 
-        # for x in pawnMoveList:
-        #     x.printBoard()
-
-        return(pawnMoveList)
+        return(pawnCoordList)
 
 
 
@@ -345,34 +313,21 @@ class boardState():
     #
     ###############################################################################
     def sPawnWhiteMoves(self, i , j):
-        pawnMoveList = []
-        tempGrid = []
+        pawnCoordList = []
 
         # if the pawn can move one space forward
         if(self.grid[i-1][j] == '_'):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i-1][j] = 'P'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i-1, j, 0])
 
         # if the pawn can capture piece to the diagonal left
         if(j != 0 and (self.grid[i-1][j-1]).islower()):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i-1][j-1] = 'P'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i-1, j-1, 0])
 
         # if the pawn can capture piece to the diagonal right
         if(j != 7 and (self.grid[i-1][j+1]).islower()):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i-1][j+1] = 'P'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i-1, j+1, 0])
 
-        # for x in pawnMoveList:
-        #     x.printBoard()
-
-        return(pawnMoveList)
+        return(pawnCoordList)
 
 
 
@@ -382,34 +337,22 @@ class boardState():
     #
     ###############################################################################
     def sPawnBlackMoves(self, i , j):
-        pawnMoveList = []
-        tempGrid = []
+        pawnCoordList = []
 
         # if the pawn can move one space forward
         if(self.grid[i+1][j] == '_'):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i+1][j] = 'p'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i+1, j, 0])
 
         # if the pawn can capture piece to the diagonal left
         if(j != 0 and (self.grid[i+1][j-1]).isupper()):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i+1][j-1] = 'p'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i+1, j-1, 0])
 
         # if the pawn can capture piece to the diagonal right
         if(j != 7 and (self.grid[i+1][j+1]).isupper()):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i+1][j+1] = 'p'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i+1, j+1, 0])
 
-        # for x in pawnMoveList:
-        #     x.printBoard()
 
-        return(pawnMoveList)
+        return(pawnCoordList)
 
 
     ###############################################################################
@@ -418,37 +361,38 @@ class boardState():
     #
     ###############################################################################
     def pPawnWhiteMoves(self, i , j):
-        pawnMoveList = []
-        tempGrid = []
+        pawnCoordList = []
 
         # if the pawn can move one space forward
         if(self.grid[i-1][j] == '_'):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i-1][j] = 'P'
-            pawnMoveList.append(boardState(tempGrid))
+            pawnCoordList.append([i-1, j, 0])
 
         # if the pawn can capture piece to the diagonal left
-        if(j != 0 and (self.grid[i-1][j-1]).islower()):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i-1][j-1] = 'P'
-            pawnMoveList.append(boardState(tempGrid))
+        if(j != 0 and i != 1 and (self.grid[i-1][j-1]).islower()):
+            pawnCoordList.append([i-1, j-1, 0])
 
         # if the pawn can capture piece to the diagonal right
-        if(j != 7 and (self.grid[i-1][j+1]).islower()):
-            tempGrid = copy.deepcopy(self.grid)
-            tempGrid[i][j] = '_'
-            tempGrid[i-1][j+1] = 'P'
-            pawnMoveList.append(boardState(tempGrid))
+        if(j != 7 and i != 1 and (self.grid[i-1][j+1]).islower()):
+            pawnCoordList.append([i-1, j+1, 0])
 
         # if the pawn will be promoted to a queen
-        
+        if(i == 1):
+            if(j != 0 and (self.grid[i-1][j-1]).islower()):
+                pawnCoordList.append([i-1, j-1, 1])
+            if(j != 7 and (self.grid[i-1][j+1]).islower()):
+                pawnCoordList.append([i-1, j+1, 1])
+            if(self.grid[i-1][j] == '_'):
+                pawnCoordList.append([i-1, j, 1])
 
-        # for x in pawnMoveList:
-        #     x.printBoard()
+        # en passant up left
+        if(i == 3 and j != 0 and self.grid[i][j-1] == 's'):
+            pawnCoordList.append([i-1, j-1, 4])
 
-        return(pawnMoveList)
+        # en passant up right
+        if(i == 3 and j != 7 and self.grid[i][j+1] == 's'):
+            pawnCoordList.append([i-1, j+1, 5])
+
+        return(pawnCoordList)
 
 
 
@@ -460,7 +404,8 @@ class boardState():
     #
     ###############################################################################
     def pPawnBlackMoves(self, i , j):
-        stub = 1
+        coords = []
+        return(coords)
 
 
 
@@ -470,7 +415,8 @@ class boardState():
     #
     ###############################################################################
     def qQueenWhiteMoves(self, i , j):
-        stub = 1
+        coords = []
+        return(coords)
 
     ###############################################################################
     #
@@ -478,7 +424,8 @@ class boardState():
     #
     ###############################################################################
     def qQueenBlackMoves(self, i , j):
-        stub = 1
+        coords = []
+        return(coords)
 
 
 
@@ -497,8 +444,8 @@ class boardState():
     #
     ###############################################################################
     def uKingBlackMoves(self, i , j):
-        stub = 1
-
+        coords = []
+        return(coords)
 
 
 
@@ -510,7 +457,8 @@ class boardState():
     #
     ###############################################################################
     def kKingWhiteMoves(self, i , j):
-        stub = 1
+        coords = []
+        return(coords)
 
     ###############################################################################
     #
@@ -518,8 +466,8 @@ class boardState():
     #
     ###############################################################################
     def kKingBlackMoves(self, i , j):
-        stub = 1
-
+        coords = []
+        return(coords)
 
 
 
@@ -529,7 +477,10 @@ class boardState():
     #
     ###############################################################################
     def bBishopWhiteMoves(self, i , j):
-        stub = 1
+        coords = []
+        return(coords)
+
+
 
     ###############################################################################
     #
@@ -537,8 +488,8 @@ class boardState():
     #
     ###############################################################################
     def bBishopBlackMoves(self, i , j):
-        stub = 1
-
+        coords = []
+        return(coords)
 
 
 
@@ -549,16 +500,16 @@ class boardState():
     #
     ###############################################################################
     def oRookWhiteMoves(self, i , j):
-        stub = 1
-
+        coords = []
+        return(coords)
     ###############################################################################
     #
     # 
     #
     ###############################################################################
     def oRookBlackMoves(self, i , j):
-        stub = 1
-
+        coords = []
+        return(coords)
 
 
 
@@ -568,7 +519,8 @@ class boardState():
     #
     ###############################################################################
     def lRookWhiteMoves(self, i , j):
-        stub = 1
+        coords = []
+        return(coords)
 
     ###############################################################################
     #
@@ -576,8 +528,8 @@ class boardState():
     #
     ###############################################################################
     def lRookBlackMoves(self, i , j):
-        stub = 1
-
+        coords = []
+        return(coords)
 
 
 
@@ -588,7 +540,8 @@ class boardState():
     #
     ###############################################################################
     def rRookWhiteMoves(self, i , j):
-        stub = 1
+        coords = []
+        return(coords)
 
     ###############################################################################
     #
@@ -596,8 +549,8 @@ class boardState():
     #
     ###############################################################################
     def rRookBlackMoves(self, i , j):
-        stub = 1
-
+        coords = []
+        return(coords)
 
 
 
@@ -610,7 +563,8 @@ class boardState():
     #
     ###############################################################################
     def hKnightWhiteMoves(self, i , j):
-        stub = 1
+        coords = []
+        return(coords)
 
     ###############################################################################
     #
@@ -618,8 +572,8 @@ class boardState():
     #
     ###############################################################################
     def hKnightBlackMoves(self, i , j):
-        stub = 1
-
+        coords = []
+        return(coords)
 
 
 
@@ -657,30 +611,50 @@ class boardState():
 
 
 
+    
+
     ###############################################################################
     #
-    # PCoords
+    # 
     #
     ###############################################################################
-    def PCoords(self, i , j):
-        coordsList = []
+    def convertCoordsToBoards(self, i, j, coords):
+        boardList = []
+        tempGrid = []
 
-        # if the pawn can move one space forward
-        if(self.grid[i-1][j] == '_'):
-            coordsList.append([i-1, j])
+        for x in coords:
+            tempGrid = copy.deepcopy(self.grid)
 
-        # if the pawn can capture piece to the diagonal left
-        if(j != 0 and (self.grid[i-1][j-1]).islower()):
-            coordsList.append([i-1, j-1])
+            # regular move
+            if(coords[2] == 0):
+                stub = 1
+            
+            # pawn promotion
+            elif(coords[2] == 1):
+                stub = 1
 
-        # if the pawn can capture piece to the diagonal right
-        if(j != 7 and (self.grid[i-1][j+1]).islower()):
-            coordsList.append([i-1, j+1])
+            # en passant down left
+            elif(coords[2] == 2):
+                stub = 1
 
-        # if the pawn will be promoted to a queen
-        
+            # en passant down right
+            elif(coords[2] == 3):
+                stub = 1
 
-        # for x in pawnMoveList:
-        #     x.printBoard()
+            # en passant up left
+            elif(coords[2] == 4):
+                stub = 1
+            
+            # en passant up right
+            elif(coords[2] == 5):
+                stub = 1
 
-        return(coordsList)
+            # castle left
+            elif(coords[2] == 6):
+                stub = 1
+
+            # castle right
+            elif(coords[2] == 7):
+                stub = 1
+
+        #return(boardList)

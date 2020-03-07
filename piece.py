@@ -682,7 +682,7 @@ class Knight(Piece):
         if( x > 0 and y < 6 and ((board.grid[x-1][y+2] == None) or (board.grid[x-1][y+2].color != self.color and board.grid[x-1][y+2].kink != True))):
             coordsList.append([x-1,y+2])
 
-        #Remove all coordinates that will keep king in check
+        # Remove all coordinates that will keep king in check
         if(self.color == 'w'):
             inCheckList = self.isWhiteInCheck(board.grid, coordsList)
             for x in range(len(inCheckList)):

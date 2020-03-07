@@ -411,18 +411,18 @@ class boardState():
             pawnCoordList.append([i+1, j, 0])
 
         # if the pawn can capture piece to the diagonal left
-        if(j != 0 and i != 6 and (self.grid[i+1][j-1]).islower()):
+        if(j != 0 and i != 6 and (self.grid[i+1][j-1]).isupper()):
             pawnCoordList.append([i+1, j-1, 0])
 
         # if the pawn can capture piece to the diagonal right
-        if(j != 7 and i != 6 and (self.grid[i+1][j+1]).islower()):
+        if(j != 7 and i != 6 and (self.grid[i+1][j+1]).isupper()):
             pawnCoordList.append([i+1, j+1, 0])
 
         # if the pawn will be promoted to a queen
         if(i == 6):
-            if(j != 0 and (self.grid[i+1][j-1]).islower()):
+            if(j != 0 and (self.grid[i+1][j-1]).isupper()):
                 pawnCoordList.append([i+1, j-1, 1])
-            if(j != 7 and (self.grid[i+1][j+1]).islower()):
+            if(j != 7 and (self.grid[i+1][j+1]).isupper()):
                 pawnCoordList.append([i+1, j+1, 1])
             if(self.grid[i+1][j] == '_'):
                 pawnCoordList.append([i+1, j, 1])
@@ -468,7 +468,8 @@ class boardState():
     #
     ###############################################################################
     def uKingWhiteMoves(self, i , j):
-        stub = 1
+        coords = []
+        return(coords)
 
     ###############################################################################
     #
@@ -533,7 +534,37 @@ class boardState():
     ###############################################################################
     def oRookWhiteMoves(self, i , j):
         coords = []
+        tempI = i
+        tempJ = j
+        
+        # upwards moves
+        while(tempI > 0):
+            tempI = tempI - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+    
+        # leftwards moves
+        tempI = i
+        tempJ = j
+        while(tempJ > 0):
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+
         return(coords)
+
+
     ###############################################################################
     #
     # 
@@ -596,6 +627,25 @@ class boardState():
     ###############################################################################
     def hKnightWhiteMoves(self, i , j):
         coords = []
+
+        if( i < 6 and j < 7 and ((self.grid[i+2][j+1] == '_' or (self.grid[i+2][j+1]).islower()))):
+            coords.append([i+2,j+1])
+        if( i < 6 and j > 0 and ((self.grid[i+2][j-1] == '_' or (self.grid[i+2][j-1]).islower()))):
+            coords.append([i+2,j-1])
+        if( i < 7 and j < 6 and ((self.grid[i+1][j+2] == '_' or (self.grid[i+1][j+2]).islower()))):
+            coords.append([i+1,j+2])
+        if( i < 7 and j > 1 and ((self.grid[i+1][j-2] == '_' or (self.grid[i+1][j-2]).islower()))):
+            coords.append([i+1,j-2])
+        if( i > 1 and j < 7 and ((self.grid[i-2][j+1] == '_' or (self.grid[i-2][j+1]).islower()))):
+            coords.append([i-2,j+1])
+        if( i > 1 and j > 0 and ((self.grid[i-2][j-1] == '_' or (self.grid[i-2][j-1]).islower()))):
+            coords.append([i-2,j-1])
+        if( i > 0 and j > 1 and ((self.grid[i-1][j-2] == '_' or (self.grid[i-1][j-2]).islower()))):
+            coords.append([i-1,j-2])
+        if( i > 0 and j < 6 and ((self.grid[i-1][j+2] == '_' or (self.grid[i-1][j+2]).islower()))):
+            coords.append([i-1,j+2])
+
+
         return(coords)
 
     ###############################################################################
@@ -605,14 +655,25 @@ class boardState():
     ###############################################################################
     def hKnightBlackMoves(self, i , j):
         coords = []
+
+        if( i < 6 and j < 7 and ((self.grid[i+2][j+1] == '_' or (self.grid[i+2][j+1]).isupper()))):
+            coords.append([i+2,j+1])
+        if( i < 6 and j > 0 and ((self.grid[i+2][j-1] == '_' or (self.grid[i+2][j-1]).isupper()))):
+            coords.append([i+2,j-1])
+        if( i < 7 and j < 6 and ((self.grid[i+1][j+2] == '_' or (self.grid[i+1][j+2]).isupper()))):
+            coords.append([i+1,j+2])
+        if( i < 7 and j > 1 and ((self.grid[i+1][j-2] == '_' or (self.grid[i+1][j-2]).isupper()))):
+            coords.append([i+1,j-2])
+        if( i > 1 and j < 7 and ((self.grid[i-2][j+1] == '_' or (self.grid[i-2][j+1]).isupper()))):
+            coords.append([i-2,j+1])
+        if( i > 1 and j > 0 and ((self.grid[i-2][j-1] == '_' or (self.grid[i-2][j-1]).isupper()))):
+            coords.append([i-2,j-1])
+        if( i > 0 and j > 1 and ((self.grid[i-1][j-2] == '_' or (self.grid[i-1][j-2]).isupper()))):
+            coords.append([i-1,j-2])
+        if( i > 0 and j < 6 and ((self.grid[i-1][j+2] == '_' or (self.grid[i-1][j+2]).isupper()))):
+            coords.append([i-1,j+2])
+
         return(coords)
-
-
-
-
-
-
-
 
 
 

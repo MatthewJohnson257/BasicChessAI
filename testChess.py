@@ -1,12 +1,12 @@
 # testChess.py
 
 from boardState import boardState
-
+from debugGUI import debugGUI
 
 inputFull = [['l', 'h', 'b', 'q', 'u', 'b', 'h', 'r'],
              ['f', 'f', 'f', 'f', 'f', 'f', 'f', 'f'],
-             ['_', '_', '_', '_', '_', '_', '_', '_'],
-             ['_', '_', '_', '_', '_', '_', '_', '_'],
+             ['_', '_', 'p', '_', 'p', '_', '_', '_'],
+             ['_', '_', '_', 'P', '_', '_', '_', '_'],
              ['_', '_', '_', '_', '_', '_', '_', '_'],
              ['_', '_', '_', '_', '_', '_', '_', '_'],
              ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F'],
@@ -18,3 +18,4 @@ ourBoard = boardState(inputFull)
 ourBoard.printBoard()
 # ourBoard.fPawnWhiteMoves(6, 4)
 ourBoard.fPawnBlackMoves(1, 2)
+debugGUI(ourBoard)

@@ -443,7 +443,7 @@ class boardState():
             pawnMoveList.append(boardState(tempGrid))
 
         # if the pawn will be promoted to a queen
-        if()
+        
 
         # for x in pawnMoveList:
         #     x.printBoard()
@@ -653,3 +653,34 @@ class boardState():
         print("    ◘----------------◘")
 
     
+
+
+
+
+    ###############################################################################
+    #
+    # PCoords
+    #
+    ###############################################################################
+    def PCoords(self, i , j):
+        coordsList = []
+
+        # if the pawn can move one space forward
+        if(self.grid[i-1][j] == '_'):
+            coordsList.append([i-1, j])
+
+        # if the pawn can capture piece to the diagonal left
+        if(j != 0 and (self.grid[i-1][j-1]).islower()):
+            coordsList.append([i-1, j-1])
+
+        # if the pawn can capture piece to the diagonal right
+        if(j != 7 and (self.grid[i-1][j+1]).islower()):
+            coordsList.append([i-1, j+1])
+
+        # if the pawn will be promoted to a queen
+        
+
+        # for x in pawnMoveList:
+        #     x.printBoard()
+
+        return(coordsList)

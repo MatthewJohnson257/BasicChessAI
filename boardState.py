@@ -260,19 +260,19 @@ class boardState():
 
         # test if pawn can move two paces forward
         if(self.grid[i-1][j] == '_' and self.grid[i-2][j] == '_'):
-            pawnCoordList.append([i-2, j, 0])
+            pawnCoordList.append([i-2, j, 8])
 
         # if the pawn can move one space forward
         if(self.grid[i-1][j] == '_'):
-            pawnCoordList.append([i-1, j, 0])
+            pawnCoordList.append([i-1, j, 8])
 
         # if the pawn can capture piece to the diagonal left
         if(j != 0 and (self.grid[i-1][j-1]).islower()):
-            pawnCoordList.append([i-1, j-1, 0])
+            pawnCoordList.append([i-1, j-1, 8])
 
         # if the pawn can capture piece to the diagonal right
         if(j != 7 and (self.grid[i-1][j+1]).islower()):
-            pawnCoordList.append([i-1, j+1, 0])
+            pawnCoordList.append([i-1, j+1, 8])
 
         return(pawnCoordList)
 
@@ -289,19 +289,19 @@ class boardState():
 
         # test if pawn can move two paces forward
         if(self.grid[i+1][j] == '_' and self.grid[i+2][j] == '_'):
-            pawnCoordList.append([i+2, j, 0])
+            pawnCoordList.append([i+2, j, 9])
 
         # if the pawn can move one space forward
         if(self.grid[i+1][j] == '_'):
-            pawnCoordList.append([i+1, j, 0])
+            pawnCoordList.append([i+1, j, 9])
 
         # if the pawn can capture piece to the diagonal left
         if(j != 0 and (self.grid[i+1][j-1]).isupper()):
-            pawnCoordList.append([i+1, j-1, 0])
+            pawnCoordList.append([i+1, j-1, 9])
 
         # if the pawn can capture piece to the diagonal right
         if(j != 7 and (self.grid[i+1][j+1]).isupper()):
-            pawnCoordList.append([i+1, j+1, 0])
+            pawnCoordList.append([i+1, j+1, 9])
 
         return(pawnCoordList)
 
@@ -317,15 +317,15 @@ class boardState():
 
         # if the pawn can move one space forward
         if(self.grid[i-1][j] == '_'):
-            pawnCoordList.append([i-1, j, 0])
+            pawnCoordList.append([i-1, j, 10])
 
         # if the pawn can capture piece to the diagonal left
         if(j != 0 and (self.grid[i-1][j-1]).islower()):
-            pawnCoordList.append([i-1, j-1, 0])
+            pawnCoordList.append([i-1, j-1, 10])
 
         # if the pawn can capture piece to the diagonal right
         if(j != 7 and (self.grid[i-1][j+1]).islower()):
-            pawnCoordList.append([i-1, j+1, 0])
+            pawnCoordList.append([i-1, j+1, 10])
 
         return(pawnCoordList)
 
@@ -341,16 +341,15 @@ class boardState():
 
         # if the pawn can move one space forward
         if(self.grid[i+1][j] == '_'):
-            pawnCoordList.append([i+1, j, 0])
+            pawnCoordList.append([i+1, j, 11])
 
         # if the pawn can capture piece to the diagonal left
         if(j != 0 and (self.grid[i+1][j-1]).isupper()):
-            pawnCoordList.append([i+1, j-1, 0])
+            pawnCoordList.append([i+1, j-1, 11])
 
         # if the pawn can capture piece to the diagonal right
         if(j != 7 and (self.grid[i+1][j+1]).isupper()):
-            pawnCoordList.append([i+1, j+1, 0])
-
+            pawnCoordList.append([i+1, j+1, 11])
 
         return(pawnCoordList)
 
@@ -448,96 +447,10 @@ class boardState():
     ###############################################################################
     def qQueenWhiteMoves(self, i , j):
         coords = []
-        return(coords)
 
-    ###############################################################################
-    #
-    # 
-    #
-    ###############################################################################
-    def qQueenBlackMoves(self, i , j):
-        coords = []
-        return(coords)
-
-
-
-
-    ###############################################################################
-    #
-    # 
-    #
-    ###############################################################################
-    def uKingWhiteMoves(self, i , j):
-        coords = []
-        return(coords)
-
-    ###############################################################################
-    #
-    # 
-    #
-    ###############################################################################
-    def uKingBlackMoves(self, i , j):
-        coords = []
-        return(coords)
-
-
-
-
-
-    ###############################################################################
-    #
-    # 
-    #
-    ###############################################################################
-    def kKingWhiteMoves(self, i , j):
-        coords = []
-        return(coords)
-
-    ###############################################################################
-    #
-    # 
-    #
-    ###############################################################################
-    def kKingBlackMoves(self, i , j):
-        coords = []
-        return(coords)
-
-
-
-    ###############################################################################
-    #
-    # 
-    #
-    ###############################################################################
-    def bBishopWhiteMoves(self, i , j):
-        coords = []
-        return(coords)
-
-
-
-    ###############################################################################
-    #
-    # 
-    #
-    ###############################################################################
-    def bBishopBlackMoves(self, i , j):
-        coords = []
-        return(coords)
-
-
-
-
-    ###############################################################################
-    #
-    # 
-    #
-    ###############################################################################
-    def oRookWhiteMoves(self, i , j):
-        coords = []
+        # upwards moves
         tempI = i
         tempJ = j
-        
-        # upwards moves
         while(tempI > 0):
             tempI = tempI - 1
             if(self.grid[tempI][tempJ] == '_'):
@@ -561,6 +474,489 @@ class boardState():
             else:
                 break
 
+        # downwards moves
+        tempI = i
+        tempJ = j 
+        while(tempI < 7):
+            tempI = tempI + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # rightwards moves
+        tempI = i
+        tempJ = j
+        while(tempJ < 7):
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # upward right diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI > 0 and tempJ < 7):
+            tempI = tempI - 1
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # upward left diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI > 0 and tempJ > 0):
+            tempI = tempI - 1
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # downward right diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI < 7 and tempJ < 7):
+            tempI = tempI + 1
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # downward left diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI < 7 and tempJ > 0):
+            tempI = tempI + 1
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        
+        return(coords)
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def qQueenBlackMoves(self, i , j):
+        coords = []
+
+        # upwards moves
+        tempI = i
+        tempJ = j
+        while(tempI > 0):
+            tempI = tempI - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+    
+        # leftwards moves
+        tempI = i
+        tempJ = j
+        while(tempJ > 0):
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # downwards moves
+        tempI = i
+        tempJ = j 
+        while(tempI < 7):
+            tempI = tempI + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # rightwards moves
+        tempI = i
+        tempJ = j
+        while(tempJ < 7):
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # upward right diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI > 0 and tempJ < 7):
+            tempI = tempI - 1
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # upward left diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI > 0 and tempJ > 0):
+            tempI = tempI - 1
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # downward right diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI < 7 and tempJ < 7):
+            tempI = tempI + 1
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # downward left diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI < 7 and tempJ > 0):
+            tempI = tempI + 1
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        return(coords)
+
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def uKingWhiteMoves(self, i , j):
+        coords = []
+
+        # regular moves 
+        if(self.grid[i][j-1] == '_' or (self.grid[i][j-1]).islower()):
+            coords.append([i, j-1, 12])
+        if(self.grid[i-1][j-1] == '_' or (self.grid[i-1][j-1]).islower()):
+            coords.append([i-1, j-1, 12])
+        if(self.grid[i-1][j] == '_' or (self.grid[i-1][j]).islower()):
+            coords.append([i-1, j, 12])
+        if(self.grid[i-1][j+1] == '_' or (self.grid[i-1][j+1]).islower()):
+            coords.append([i-1, j+1, 12])
+        if(self.grid[i][j+1] == '_' or (self.grid[i][j+1]).islower()):
+            coords.append([i, j+1, 12])
+
+        # castle left
+        if(self.grid[7][0] == 'L' and self.grid[7][1] == '_' and self.grid[7][2] == '_' and self.grid[7][3] == '_'):
+            coords.append([7, 2, 6])
+
+        # castle right
+        if(self.grid[7][7] == 'O' and self.grid[7][6] == '_' and self.grid[7][5] == '_'):
+            coords.append([7, 6, 7])
+
+
+        return(coords)
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def uKingBlackMoves(self, i , j):
+        coords = []
+
+        # regular moves
+        if(self.grid[i][j-1] == '_' or (self.grid[i][j-1]).isupper()):
+            coords.append([i, j-1, 13])
+        if(self.grid[i+1][j-1] == '_' or (self.grid[i+1][j-1]).isupper()):
+            coords.append([i+1, j-1, 13])
+        if(self.grid[i+1][j] == '_' or (self.grid[i+1][j]).isupper()):
+            coords.append([i+1, j, 13])
+        if(self.grid[i+1][j+1] == '_' or (self.grid[i+1][j+1]).isupper()):
+            coords.append([i+1, j+1, 13])
+        if(self.grid[i][j+1] == '_' or (self.grid[i][j+1]).isupper()):
+            coords.append([i, j+1, 13])
+
+        # castle left
+        if(self.grid[0][0] == 'l' and self.grid[0][1] == '_' and self.grid[0][2] == '_' and self.grid[0][2] == '_'):
+            coords.append([0, 2, 6])
+        
+        # castle right
+        if(self.grid[0][7] == 'o' and self.grid[0][6] == '_' and self.grid[0][5] == '_'):
+            coords.append([0, 6, 7])
+
+
+        return(coords)
+
+
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def kKingWhiteMoves(self, i , j):
+        coords = []
+
+        if(self.grid[i][j-1] == '_' or (self.grid[i][j-1]).islower()):
+            coords.append([i, j-1, 0])
+        if(self.grid[i-1][j-1] == '_' or (self.grid[i-1][j-1]).islower()):
+            coords.append([i-1, j-1, 0])
+        if(self.grid[i-1][j] == '_' or (self.grid[i-1][j]).islower()):
+            coords.append([i-1, j, 0])
+        if(self.grid[i-1][j+1] == '_' or (self.grid[i-1][j+1]).islower()):
+            coords.append([i-1, j+1, 0])
+        if(self.grid[i][j+1] == '_' or (self.grid[i][j+1]).islower()):
+            coords.append([i, j+1, 0])
+        if(self.grid[i+1][j+1] == '_' or (self.grid[i+1][j+1]).islower()):
+            coords.append([i+1, j+1, 0])
+        if(self.grid[i+1][j] == '_' or (self.grid[i+1][j]).islower()):
+            coords.append([i+1, j, 0])
+        if(self.grid[i+1][j-1] == '_' or (self.grid[i+1][j-1]).islower()):
+            coords.append([i+1, j-1, 0])
+        
+        return(coords)
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def kKingBlackMoves(self, i , j):
+        coords = []
+        return(coords)
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def bBishopWhiteMoves(self, i , j):
+        coords = []
+
+        # upward right diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI > 0 and tempJ < 7):
+            tempI = tempI - 1
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # upward left diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI > 0 and tempJ > 0):
+            tempI = tempI - 1
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # downward right diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI < 7 and tempJ < 7):
+            tempI = tempI + 1
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # downward left diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI < 7 and tempJ > 0):
+            tempI = tempI + 1
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+    
+        return(coords)
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def bBishopBlackMoves(self, i , j):
+        coords = []
+
+        # upward right diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI > 0 and tempJ < 7):
+            tempI = tempI - 1
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # upward left diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI > 0 and tempJ > 0):
+            tempI = tempI - 1
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # downward right diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI < 7 and tempJ < 7):
+            tempI = tempI + 1
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # downward left diagonal
+        tempI = i
+        tempJ = j 
+        while(tempI < 7 and tempJ > 0):
+            tempI = tempI + 1
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+
+        return(coords)
+
+
+
+
+    ###############################################################################
+    #
+    # 
+    #
+    ###############################################################################
+    def oRookWhiteMoves(self, i , j):
+        coords = []
+        
+        # upwards moves
+        tempI = i
+        tempJ = j
+        while(tempI > 0):
+            tempI = tempI - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 14])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 14])
+                break
+            else:
+                break
+    
+        # leftwards moves
+        tempI = i
+        tempJ = j
+        while(tempJ > 0):
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 14])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 14])
+                break
+            else:
+                break
+
 
         return(coords)
 
@@ -572,6 +968,33 @@ class boardState():
     ###############################################################################
     def oRookBlackMoves(self, i , j):
         coords = []
+        
+        # leftwards moves
+        tempI = i
+        tempJ = j
+        while(tempJ > 0):
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 15])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 15])
+                break
+            else:
+                break
+
+        # downwards moves
+        tempI = i
+        tempJ = j 
+        while(tempI < 7):
+            tempI = tempI + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 15])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 15])
+                break
+            else:
+                break
+
         return(coords)
 
 
@@ -583,6 +1006,33 @@ class boardState():
     ###############################################################################
     def lRookWhiteMoves(self, i , j):
         coords = []
+
+        # upwards moves
+        tempI = i
+        tempJ = j
+        while(tempI > 0):
+            tempI = tempI - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 16])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 16])
+                break
+            else:
+                break
+
+        # rightwards moves
+        tempI = i
+        tempJ = j
+        while(tempJ < 7):
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 16])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 16])
+                break
+            else:
+                break
+
         return(coords)
 
     ###############################################################################
@@ -592,6 +1042,33 @@ class boardState():
     ###############################################################################
     def lRookBlackMoves(self, i , j):
         coords = []
+
+        # rightwards moves
+        tempI = i
+        tempJ = j
+        while(tempJ < 7):
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 17])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 17])
+                break
+            else:
+                break
+
+        # downwards moves
+        tempI = i
+        tempJ = j 
+        while(tempI < 7):
+            tempI = tempI + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 17])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 17])
+                break
+            else:
+                break
+
         return(coords)
 
 
@@ -604,6 +1081,59 @@ class boardState():
     ###############################################################################
     def rRookWhiteMoves(self, i , j):
         coords = []
+
+        # upwards moves
+        tempI = i
+        tempJ = j
+        while(tempI > 0):
+            tempI = tempI - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+    
+        # leftwards moves
+        tempI = i
+        tempJ = j
+        while(tempJ > 0):
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # downwards moves
+        tempI = i
+        tempJ = j 
+        while(tempI < 7):
+            tempI = tempI + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # rightwards moves
+        tempI = i
+        tempJ = j
+        while(tempJ < 7):
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).islower()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
         return(coords)
 
     ###############################################################################
@@ -613,9 +1143,60 @@ class boardState():
     ###############################################################################
     def rRookBlackMoves(self, i , j):
         coords = []
+
+        # upwards moves
+        tempI = i
+        tempJ = j
+        while(tempI > 0):
+            tempI = tempI - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+    
+        # leftwards moves
+        tempI = i
+        tempJ = j
+        while(tempJ > 0):
+            tempJ = tempJ - 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # downwards moves
+        tempI = i
+        tempJ = j 
+        while(tempI < 7):
+            tempI = tempI + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
+        # rightwards moves
+        tempI = i
+        tempJ = j
+        while(tempJ < 7):
+            tempJ = tempJ + 1
+            if(self.grid[tempI][tempJ] == '_'):
+                coords.append([tempI, tempJ, 0])
+            elif((self.grid[tempI][tempJ]).isupper()):
+                coords.append([tempI, tempJ, 0])
+                break
+            else:
+                break
+
         return(coords)
-
-
 
 
 

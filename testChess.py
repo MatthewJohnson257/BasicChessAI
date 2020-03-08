@@ -2,6 +2,7 @@
 
 from boardState import boardState
 from debugGuiA import debugGuiA
+from debugGuiB import debugGuiB
 
 inputFull = [['l', 'h', 'b', 'q', 'u', 'b', 'h', 'o'],
              ['f', 'f', 'f', 'f', 'f', 'f', 'f', 'f'],
@@ -18,4 +19,5 @@ ourBoard = boardState(inputFull)
 ourBoard.printBoard()
 # ourBoard.fPawnWhiteMoves(6, 4)
 ourBoard.fPawnBlackMoves(1, 2)
-debugGuiA(ourBoard)
+#debugGuiA(ourBoard)
+debugGuiB(ourBoard)

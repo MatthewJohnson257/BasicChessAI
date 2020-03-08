@@ -1228,21 +1228,21 @@ class boardState():
         coords = []
 
         if( i < 6 and j < 7 and ((self.grid[i+2][j+1] == '_' or (self.grid[i+2][j+1]).islower()))):
-            coords.append([i+2,j+1])
+            coords.append([i+2,j+1, 0])
         if( i < 6 and j > 0 and ((self.grid[i+2][j-1] == '_' or (self.grid[i+2][j-1]).islower()))):
-            coords.append([i+2,j-1])
+            coords.append([i+2,j-1, 0])
         if( i < 7 and j < 6 and ((self.grid[i+1][j+2] == '_' or (self.grid[i+1][j+2]).islower()))):
-            coords.append([i+1,j+2])
+            coords.append([i+1,j+2, 0])
         if( i < 7 and j > 1 and ((self.grid[i+1][j-2] == '_' or (self.grid[i+1][j-2]).islower()))):
-            coords.append([i+1,j-2])
+            coords.append([i+1,j-2, 0])
         if( i > 1 and j < 7 and ((self.grid[i-2][j+1] == '_' or (self.grid[i-2][j+1]).islower()))):
-            coords.append([i-2,j+1])
+            coords.append([i-2,j+1, 0])
         if( i > 1 and j > 0 and ((self.grid[i-2][j-1] == '_' or (self.grid[i-2][j-1]).islower()))):
-            coords.append([i-2,j-1])
+            coords.append([i-2,j-1, 0])
         if( i > 0 and j > 1 and ((self.grid[i-1][j-2] == '_' or (self.grid[i-1][j-2]).islower()))):
-            coords.append([i-1,j-2])
+            coords.append([i-1,j-2, 0])
         if( i > 0 and j < 6 and ((self.grid[i-1][j+2] == '_' or (self.grid[i-1][j+2]).islower()))):
-            coords.append([i-1,j+2])
+            coords.append([i-1,j+2, 0])
 
 
         return(coords)
@@ -1256,21 +1256,21 @@ class boardState():
         coords = []
 
         if( i < 6 and j < 7 and ((self.grid[i+2][j+1] == '_' or (self.grid[i+2][j+1]).isupper()))):
-            coords.append([i+2,j+1])
+            coords.append([i+2,j+1, 0])
         if( i < 6 and j > 0 and ((self.grid[i+2][j-1] == '_' or (self.grid[i+2][j-1]).isupper()))):
-            coords.append([i+2,j-1])
+            coords.append([i+2,j-1, 0])
         if( i < 7 and j < 6 and ((self.grid[i+1][j+2] == '_' or (self.grid[i+1][j+2]).isupper()))):
-            coords.append([i+1,j+2])
+            coords.append([i+1,j+2, 0])
         if( i < 7 and j > 1 and ((self.grid[i+1][j-2] == '_' or (self.grid[i+1][j-2]).isupper()))):
-            coords.append([i+1,j-2])
+            coords.append([i+1,j-2, 0])
         if( i > 1 and j < 7 and ((self.grid[i-2][j+1] == '_' or (self.grid[i-2][j+1]).isupper()))):
-            coords.append([i-2,j+1])
+            coords.append([i-2,j+1, 0])
         if( i > 1 and j > 0 and ((self.grid[i-2][j-1] == '_' or (self.grid[i-2][j-1]).isupper()))):
-            coords.append([i-2,j-1])
+            coords.append([i-2,j-1, 0])
         if( i > 0 and j > 1 and ((self.grid[i-1][j-2] == '_' or (self.grid[i-1][j-2]).isupper()))):
-            coords.append([i-1,j-2])
+            coords.append([i-1,j-2, 0])
         if( i > 0 and j < 6 and ((self.grid[i-1][j+2] == '_' or (self.grid[i-1][j+2]).isupper()))):
-            coords.append([i-1,j+2])
+            coords.append([i-1,j+2, 0])
 
         return(coords)
 
@@ -1318,14 +1318,14 @@ class boardState():
             tempGrid = copy.deepcopy(self.grid)
 
             # regular move
-            if(coords[2] == 0):
+            if(x[2] == 0):
                 tempGrid[x[0]][x[1]] = tempGrid[i][j]
                 tempGrid[i][j] = '_'
                 boardList.append(boardState(tempGrid))
             
             else:
                 # pawn promotion
-                if(coords[2] == 1):
+                if(x[2] == 1):
 
                     # white pawn
                     if(i == 1):
@@ -1339,35 +1339,35 @@ class boardState():
                     boardList.append(boardState(tempGrid))
 
                 # en passant down left
-                elif(coords[2] == 2):
+                elif(x[2] == 2):
                     tempGrid[x[0]][x[1]] = 'p'
                     tempGrid[i][j-1] = '_'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))
 
                 # en passant down right
-                elif(coords[2] == 3):
+                elif(x[2] == 3):
                     tempGrid[x[0]][x[1]] = 'p'
                     tempGrid[i][j+1] = '_'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))
 
                 # en passant up left
-                elif(coords[2] == 4):
+                elif(x[2] == 4):
                     tempGrid[x[0]][x[1]] = 'P'
                     tempGrid[i][j-1] = '_'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))
                 
                 # en passant up right
-                elif(coords[2] == 5):
+                elif(x[2] == 5):
                     tempGrid[x[0]][x[1]] = 'P'
                     tempGrid[i][j+1] = '_'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))
 
                 # castle left
-                elif(coords[2] == 6):
+                elif(x[2] == 6):
 
                     # white king
                     if(i == 7):
@@ -1384,7 +1384,7 @@ class boardState():
                     boardList.append(boardState(tempGrid))
 
                 # castle right
-                elif(coords[2] == 7):
+                elif(x[2] == 7):
                     
                     # white king
                     if(i == 7):
@@ -1401,61 +1401,61 @@ class boardState():
                     boardList.append(boardState(tempGrid))
 
                 # F pawn move
-                elif(coords[2] == 8):
+                elif(x[2] == 8):
                     tempGrid[x[0]][x[1]] = 'S'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))
 
                 # f pawn move
-                elif(coords[2] == 9):
+                elif(x[2] == 9):
                     tempGrid[x[0]][x[1]] = 's'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))
 
                 # S pawn move
-                elif(coords[2] == 10):
+                elif(x[2] == 10):
                     tempGrid[x[0]][x[1]] = 'P'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))
 
                 # s pawn move
-                elif(coords[2] == 11):
+                elif(x[2] == 11):
                     tempGrid[x[0]][x[1]] = 'p'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))
 
                 # U king move
-                elif(coords[2] == 12):
+                elif(x[2] == 12):
                     tempGrid[x[0]][x[1]] = 'K'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))
 
                 # u king move
-                elif(coords[2] == 13):
+                elif(x[2] == 13):
                     tempGrid[x[0]][x[1]] = 'k'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))
 
                 # O rook move
-                elif(coords[2] == 14):
+                elif(x[2] == 14):
                     tempGrid[x[0]][x[1]] = 'R'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))
 
                 # o rook move
-                elif(coords[2] == 15):
+                elif(x[2] == 15):
                     tempGrid[x[0]][x[1]] = 'r'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))
 
                 # L rook move
-                elif(coords[2] == 16):
+                elif(x[2] == 16):
                     tempGrid[x[0]][x[1]] = 'R'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))
 
                 # l rook move
-                elif(coords[2] == 17):
+                elif(x[2] == 17):
                     tempGrid[x[0]][x[1]] = 'r'
                     tempGrid[i][j] = '_'
                     boardList.append(boardState(tempGrid))

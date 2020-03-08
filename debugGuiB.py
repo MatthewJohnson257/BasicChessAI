@@ -106,26 +106,65 @@ class debugGuiB():
                 for j in range(8):
                     self.labels[i][j].config(bg = self.backgrounds[i][j])
             
+            viableCoords = []
+            if(self.board.grid[self.selected[1]][self.selected[2]] == 'P'):
+                viableCoords = self.board.pPawnWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'p'):
+                viableCoords = self.board.pPawnBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'F'):
+                viableCoords = self.board.fPawnWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'f'):
+                viableCoords = self.board.fPawnBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'S'):
+                viableCoords = self.board.sPawnWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 's'):
+                viableCoords = self.board.sPawnBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'Q'):
+                viableCoords = self.board.qQueenWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'q'):
+                viableCoords = self.board.qQueenBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'K'):
+                viableCoords = self.board.kKingWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'k'):
+                viableCoords = self.board.kKingBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'U'):
+                viableCoords = self.board.uKingWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'u'):
+                viableCoords = self.board.uKingBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'B'):
+                viableCoords = self.board.bBishopWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'b'):
+                viableCoords = self.board.bBishopBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'O'):
+                viableCoords = self.board.oRookWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'o'):
+                viableCoords = self.board.oRookBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'L'):
+                viableCoords = self.board.lRookWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'l'):
+                viableCoords = self.board.lRookBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'R'):
+                viableCoords = self.board.rRookWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'r'):
+                viableCoords = self.board.rRookBlackMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'H'):
+                viableCoords = self.board.hKnightWhiteMoves(self.selected[1], self.selected[2])
+            elif(self.board.grid[self.selected[1]][self.selected[2]] == 'h'):
+                viableCoords = self.board.hKnightBlackMoves(self.selected[1], self.selected[2])
+
+
             # if you didn't select the same square twice
             if(coords[0] != self.selected[1] or coords[1] != self.selected[2]):
 
-                # move the piece; it can move anywhere.  Even a blank square can move!
-                self.images[coords[0]][coords[1]] = self.images[self.selected[1]][self.selected[2]]
-                self.labels[coords[0]][coords[1]] = Label(self.window, image = self.images[coords[0]][coords[1]], bg = self.backgrounds[coords[0]][coords[1]])
-                self.labels[coords[0]][coords[1]].grid(row = coords[0], column = coords[1])
-                data = [coords[0], coords[1]]
+                # if the selected square represents a valid move
+                for y in viableCoords:
+                    if(coords[0] == y[0] and coords[1] == y[1]):
+                        
+                        nextBoard = self.board.convertCoordsToBoards(self.selected[1], self.selected[2], [y])
 
-                self.labels[coords[0]][coords[1]].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                self.board.grid[coords[0]][coords[1]] = self.board.grid[self.selected[1]][self.selected[2]]
-                
+                        # reset entire board
+                        self.initializePhotos(nextBoard[0])
 
-                # set old position to blank
-                self.images[self.selected[1]][self.selected[2]] = PhotoImage(file = "blanksquare.png")
-                self.labels[self.selected[1]][self.selected[2]] = Label(self.window, image = self.images[self.selected[1]][self.selected[2]], bg = self.backgrounds[self.selected[1]][self.selected[2]])
-                self.labels[self.selected[1]][self.selected[2]].grid(row = self.selected[1], column = self.selected[2])
-                data = [self.selected[1], self.selected[2]]
-                self.labels[self.selected[1]][self.selected[2]].bind("<Button-1>", lambda event, arg=data: self.mouseClicked(event, arg, newBoard))
-                self.board.grid[self.selected[1]][self.selected[2]] = '_'
 
 
 

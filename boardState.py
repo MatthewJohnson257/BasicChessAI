@@ -199,15 +199,73 @@ class boardState():
 
     ###############################################################################
     #
+    # Given a character and its coordinates, make call upon appropriate
+    # corresponding move method for that particular piece
+    #
+    ###############################################################################
+    def move(self, i, j, letter):
+        if(letter == '_'):
+            return([])
+        elif(letter == 'P'):
+            return(self.pPawnWhiteMoves(i, j))
+        elif(letter == 'p'):
+            return(self.pPawnBlackMoves(i, j))
+        elif(letter == 'F'):
+            return(self.fPawnWhiteMoves(i, j))
+        elif(letter == 'f'):
+            return(self.fPawnBlackMoves(i, j))
+        elif(letter == 'S'):
+            return(self.sPawnWhiteMoves(i, j))
+        elif(letter == 's'):
+            return(self.sPawnBlackMoves(i, j))
+        elif(letter == 'Q'):
+            return(self.qQueenWhiteMoves(i, j))
+        elif(letter == 'q'):
+            return(self.qQueenBlackMoves(i, j))
+        elif(letter == 'K'):
+            return(self.kKingWhiteMoves(i, j))
+        elif(letter == 'k'):
+            return(self.kKingBlackMoves(i, j))
+        elif(letter == 'U'):
+            return(self.uKingWhiteMoves(i, j))
+        elif(letter == 'u'):
+            return(self.uKingBlackMoves(i, j))
+        elif(letter == 'B'):
+            return(self.bBishopWhiteMoves(i, j))
+        elif(letter == 'b'):
+            return(self.bBishopBlackMoves(i, j))
+        elif(letter == 'O'):
+            return(self.oRookWhiteMoves(i, j))
+        elif(letter == 'o'):
+            return(self.oRookBlackMoves(i, j))
+        elif(letter == 'L'):
+            return(self.lRookWhiteMoves(i, j))
+        elif(letter == 'l'):
+            return(self.lRookBlackMoves(i, j))
+        elif(letter == 'R'):
+            return(self.rRookWhiteMoves(i, j))
+        elif(letter == 'r'):
+            return(self.rRookBlackMoves(i, j))
+        elif(letter == 'H'):
+            return(self.hKnightWhiteMoves(i, j))
+        elif(letter == 'h'):
+            return(self.hKnightBlackMoves(i, j))
+
+
+    ###############################################################################
+    #
     # 
     #
     ###############################################################################
     def isWhiteInCheckmate(self):
-        tempList = self.generateAllWhiteMoves()
-        if(len(tempList) == 0):
-            return(True)
-        else:
-            return(False)
+        for i in range(8):
+            for j in range(8):
+                stub = 1
+        # tempList = self.generateAllWhiteMoves()
+        # if(len(tempList) == 0):
+        #     return(True)
+        # else:
+        #     return(False)
 
     ###############################################################################
     #
@@ -215,11 +273,12 @@ class boardState():
     #
     ###############################################################################
     def isBlackInCheckmate(self):
-        tempList = self.generateAllBlackMoves()
-        if(len(tempList) == 0):
-            return(True)
-        else:
-            return(False)
+        stub = 1
+        # tempList = self.generateAllBlackMoves()
+        # if(len(tempList) == 0):
+        #     return(True)
+        # else:
+        #     return(False)
 
 
     ###############################################################################

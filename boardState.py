@@ -188,8 +188,8 @@ class boardState():
         if(self.isBlackInCheckmate()):
             return(100000)
 
-        self.mobility = 0.5*self.mobility
-        self.bMobility = 0.5*self.bMobility
+        #self.mobility = 0.5*self.mobility
+        #self.bMobility = 0.5*self.bMobility
         totalEvaluation = whiteCount - blackCount + self.whiteMobility + self.blackMobility
         
         #print("Eval: ", totalEvaluation)

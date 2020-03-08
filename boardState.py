@@ -754,21 +754,21 @@ class boardState():
     def kKingWhiteMoves(self, i , j):
         coords = []
 
-        if(self.grid[i][j-1] == '_' or (self.grid[i][j-1]).islower()):
+        if(j > 0 and (self.grid[i][j-1] == '_' or (self.grid[i][j-1]).islower())):
             coords.append([i, j-1, 0])
-        if(self.grid[i-1][j-1] == '_' or (self.grid[i-1][j-1]).islower()):
+        if(i > 0 and j > 0 and (self.grid[i-1][j-1] == '_' or (self.grid[i-1][j-1]).islower())):
             coords.append([i-1, j-1, 0])
-        if(self.grid[i-1][j] == '_' or (self.grid[i-1][j]).islower()):
+        if(i > 0 and (self.grid[i-1][j] == '_' or (self.grid[i-1][j]).islower())):
             coords.append([i-1, j, 0])
-        if(self.grid[i-1][j+1] == '_' or (self.grid[i-1][j+1]).islower()):
+        if(i > 0 and j < 7 and (self.grid[i-1][j+1] == '_' or (self.grid[i-1][j+1]).islower())):
             coords.append([i-1, j+1, 0])
-        if(self.grid[i][j+1] == '_' or (self.grid[i][j+1]).islower()):
+        if(j < 7 and (self.grid[i][j+1] == '_' or (self.grid[i][j+1]).islower())):
             coords.append([i, j+1, 0])
-        if(self.grid[i+1][j+1] == '_' or (self.grid[i+1][j+1]).islower()):
+        if(i < 7 and j < 7 and (self.grid[i+1][j+1] == '_' or (self.grid[i+1][j+1]).islower())):
             coords.append([i+1, j+1, 0])
-        if(self.grid[i+1][j] == '_' or (self.grid[i+1][j]).islower()):
+        if(i < 7 and (self.grid[i+1][j] == '_' or (self.grid[i+1][j]).islower())):
             coords.append([i+1, j, 0])
-        if(self.grid[i+1][j-1] == '_' or (self.grid[i+1][j-1]).islower()):
+        if(i < 7 and j > 0 and (self.grid[i+1][j-1] == '_' or (self.grid[i+1][j-1]).islower())):
             coords.append([i+1, j-1, 0])
         
         return(coords)
@@ -780,6 +780,24 @@ class boardState():
     ###############################################################################
     def kKingBlackMoves(self, i , j):
         coords = []
+
+        if(j > 0 and (self.grid[i][j-1] == '_' or (self.grid[i][j-1]).isupper())):
+            coords.append([i, j-1, 0])
+        if(i > 0 and j > 0 and (self.grid[i-1][j-1] == '_' or (self.grid[i-1][j-1]).isupper())):
+            coords.append([i-1, j-1, 0])
+        if(i > 0 and (self.grid[i-1][j] == '_' or (self.grid[i-1][j]).isupper())):
+            coords.append([i-1, j, 0])
+        if(i > 0 and j < 7 and (self.grid[i-1][j+1] == '_' or (self.grid[i-1][j+1]).isupper())):
+            coords.append([i-1, j+1, 0])
+        if(j < 7 and (self.grid[i][j+1] == '_' or (self.grid[i][j+1]).isupper())):
+            coords.append([i, j+1, 0])
+        if(i < 7 and j < 7 and (self.grid[i+1][j+1] == '_' or (self.grid[i+1][j+1]).isupper())):
+            coords.append([i+1, j+1, 0])
+        if(i < 7 and (self.grid[i+1][j] == '_' or (self.grid[i+1][j]).isupper())):
+            coords.append([i+1, j, 0])
+        if(i < 7 and j > 0 and (self.grid[i+1][j-1] == '_' or (self.grid[i+1][j-1]).isupper())):
+            coords.append([i+1, j-1, 0])
+
         return(coords)
 
 

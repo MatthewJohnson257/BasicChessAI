@@ -149,7 +149,7 @@ class boardState():
                     if self.grid[i][j] == 'P':
                         whiteCount = whiteCount + 100
                         self.whiteMobility = self.whiteMobility + boardState.pEval[i][j]
-                    elif self.grid[i][j] == 'N':
+                    elif self.grid[i][j] == 'H':
                         whiteCount = whiteCount + 320
                         self.whiteMobility = self.whiteMobility + boardState.nEval[i][j]
                     elif self.grid[i][j] == 'B':
@@ -167,7 +167,7 @@ class boardState():
                     elif self.grid[i][j] == 'p':
                         blackCount = blackCount + 100
                         self.blackMobility = self.blackMobility + boardState.rEval[i][j]
-                    elif self.grid[i][j] == 'n':
+                    elif self.grid[i][j] == 'h':
                         blackCount = blackCount + 320
                         self.blackMobility = self.blackMobility + boardState.rEval[i][j]
                     elif self.grid[i][j] == 'b':
@@ -220,6 +220,375 @@ class boardState():
             return(True)
         else:
             return(False)
+
+
+    ###############################################################################
+    #
+    # Given a boardState, verify whether or not the black king is in check
+    #
+    ###############################################################################
+    def isWhiteInCheck(self, testBoard):
+        kingI = -1
+        kingJ = -1
+
+        # find the coordinates of the white king
+        for i in range(8):
+            for j in range(8):
+                if(testBoard.grid[i][j] == 'K' or testBoard.grid[i][j] == 'U'):
+                    kingI = i
+                    kingJ = j
+                    break
+        
+        # checks pawn to the upper left
+        if(kingI > 0 and kingJ > 0 and (testBoard.grid[kingI - 1][kingJ - 1] in ['p', 'f', 's'])):
+            return(True)
+
+        # check pawn to the upper right
+        if(kingI > 0 and kingJ < 0 and (testBoard.grid[kingI - 1][kingJ + 1] in ['p', 'f', 's'])):
+            return(True)
+
+        # check all surroundings for kings
+        if(kingJ > 0 and (testBoard.grid[kingI][kingJ-1] == 'k' or testBoard.grid[kingI][kingJ-1] == 'u')):
+            return(True)
+        if(kingI > 0 and kingJ > 0 and (testBoard.grid[kingI-1][kingJ-1] == 'k' or testBoard.grid[kingI-1][kingJ-1] == 'u')):
+            return(True)
+        if(kingI > 0 and (testBoard.grid[kingI-1][kingJ] == 'k' or testBoard.grid[kingI-1][kingJ] == 'u')):
+            return(True)
+        if(kingI > 0 and kingJ < 7 and (testBoard.grid[kingI-1][kingJ+1] == 'k' or testBoard.grid[kingI-1][kingJ+1] == 'u')):
+            return(True)
+        if(kingJ < 7 and (testBoard.grid[kingI][kingJ+1] == 'k' or testBoard.grid[kingI][kingJ+1] == 'u')):
+            return(True)
+        if(kingI < 7 and kingJ < 7 and (testBoard.grid[kingI+1][kingJ+1] == 'k' or testBoard.grid[kingI+1][kingJ+1] == 'u')):
+            return(True)
+        if(kingI < 7 and (testBoard.grid[kingI+1][kingJ] == 'k' or testBoard.grid[kingI+1][kingJ] == 'u')):
+            return(True)
+        if(kingI < 7 and kingJ > 0 and (testBoard.grid[kingI+1][kingJ-1] == 'k' or testBoard.grid[kingI+1][kingJ-1] == 'u')):
+            return(True)
+
+
+        # check from horizontal left
+        tempI = kingI
+        tempJ = kingJ
+        while(tempJ > 0):
+            tempJ = tempJ - 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['q', 'l', 'o', 'r']):
+                return(True)
+            else:
+                break
+        
+        # check from horizontal right
+        tempI = kingI
+        tempJ = kingJ
+        while(tempJ < 7):
+            tempJ = tempJ + 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['q', 'l', 'o', 'r']):
+                return(True)
+            else:
+                break
+
+        # check from vertical above
+        tempI = kingI
+        tempJ = kingJ
+        while(tempI > 0):
+            tempI = tempI - 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['q', 'l', 'o', 'r']):
+                return(True)
+            else:
+                break
+        
+        # check from vertical above
+        tempI = kingI
+        tempJ = kingJ
+        while(tempI < 7):
+            tempI = tempI + 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['q', 'l', 'o', 'r']):
+                return(True)
+            else:
+                break
+
+
+        # check from diagonal upper left
+        tempI = kingI
+        tempJ = kingJ
+        while(tempI > 0 and tempJ > 0):
+            tempI = tempI - 1
+            tempJ = tempJ - 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['q', 'b']):
+                return(True)
+            else:
+                break
+
+        # check from diagonal upper right
+        tempI = kingI
+        tempJ = kingJ
+        while(tempI > 0 and tempJ < 7):
+            tempI = tempI - 1
+            tempJ = tempJ + 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['q', 'b']):
+                return(True)
+            else:
+                break
+
+        # check from diagonal lower left
+        tempI = kingI
+        tempJ = kingJ
+        while(tempI < 7 and tempJ > 0):
+            tempI = tempI + 1
+            tempJ = tempJ - 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['q', 'b']):
+                return(True)
+            else:
+                break
+
+        # check from diagonal lower right
+        tempI = kingI
+        tempJ = kingJ
+        while(tempI < 7 and tempJ < 7):
+            tempI = tempI + 1
+            tempJ = tempJ + 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['q', 'b']):
+                return(True)
+            else:
+                break
+        
+        # check from knight
+        if(kingI < 6 and kingJ < 7 and testBoard.grid[kingI + 2][kingJ + 1] == 'h'):
+                return(True)
+        if(kingI < 6 and kingJ > 0 and testBoard.grid[kingI + 2][kingJ - 1] == 'h'):
+            return(True)
+        if(kingI < 7 and kingJ < 6 and testBoard.grid[kingI + 1][kingJ + 2] == 'h'):
+            return(True)
+        if(kingI < 7 and kingJ > 1 and testBoard.grid[kingI + 1][kingJ - 2] == 'h'):
+            return(True)
+        if(kingI > 1 and kingJ < 7 and testBoard.grid[kingI - 2][kingJ + 1] == 'h'):
+            return(True)
+        if(kingI > 1 and kingJ > 0 and testBoard.grid[kingI - 2][kingJ - 1] == 'h'):
+            return(True)
+        if(kingI > 0 and kingJ > 1 and testBoard.grid[kingI - 1][kingJ - 2] == 'h'):
+            return(True)
+        if(kingI > 0 and kingJ < 1 and testBoard.grid[kingI - 1][kingJ + 2] == 'h'):
+            return(True)
+
+
+        # the white king is not in check
+        return(False)
+
+    ###############################################################################
+    #
+    # Given a boardState, verify whether or not the black king is in check
+    #
+    ###############################################################################
+    def isBlackInCheck(self):
+        kingI = -1
+        kingJ = -1
+
+        # find the coordinates of the white king
+        for i in range(8):
+            for j in range(8):
+                if(testBoard.grid[i][j] == 'k' or testBoard.grid[i][j] == 'u'):
+                    kingI = i
+                    kingJ = j
+                    break
+        
+        # checks pawn to the lower left
+        if(kingI < 7 and kingJ > 0 and (testBoard.grid[kingI + 1][kingJ - 1] in ['P', 'F', 'S'])):
+            return(True)
+
+        # check pawn to the lower right
+        if(kingI < 7 and kingJ < 7 and (testBoard.grid[kingI + 1][kingJ + 1] in ['P', 'F', 'S'])):
+            return(True)
+
+        # check all surroundings for kings
+        if(kingJ > 0 and (testBoard.grid[kingI][kingJ-1] in ['K', 'U'])):
+            return(True)
+        if(kingI > 0 and kingJ > 0 and (testBoard.grid[kingI-1][kingJ-1] in ['K', 'U'])):
+            return(True)
+        if(kingI > 0 and (testBoard.grid[kingI-1][kingJ] in ['K', 'U'])):
+            return(True)
+        if(kingI > 0 and kingJ < 7 and (testBoard.grid[kingI-1][kingJ+1] in ['K', 'U'])):
+            return(True)
+        if(kingJ < 7 and (testBoard.grid[kingI][kingJ+1] in ['K', 'U'])):
+            return(True)
+        if(kingI < 7 and kingJ < 7 and (testBoard.grid[kingI+1][kingJ+1] in ['K', 'U'])):
+            return(True)
+        if(kingI < 7 and (testBoard.grid[kingI+1][kingJ] in ['K', 'U'])):
+            return(True)
+        if(kingI < 7 and kingJ > 0 and (testBoard.grid[kingI+1][kingJ-1] in ['K', 'U'])):
+            return(True)
+
+
+        # check from horizontal left
+        tempI = kingI
+        tempJ = kingJ
+        while(tempJ > 0):
+            tempJ = tempJ - 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['Q', 'L', 'O', 'R']):
+                return(True)
+            else:
+                break
+        
+        # check from horizontal right
+        tempI = kingI
+        tempJ = kingJ
+        while(tempJ < 7):
+            tempJ = tempJ + 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['Q', 'L', 'O', 'R']):
+                return(True)
+            else:
+                break
+
+        # check from vertical above
+        tempI = kingI
+        tempJ = kingJ
+        while(tempI > 0):
+            tempI = tempI - 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['Q', 'L', 'O', 'R']):
+                return(True)
+            else:
+                break
+        
+        # check from vertical above
+        tempI = kingI
+        tempJ = kingJ
+        while(tempI < 7):
+            tempI = tempI + 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['Q', 'L', 'O', 'R']):
+                return(True)
+            else:
+                break
+
+
+        # check from diagonal upper left
+        tempI = kingI
+        tempJ = kingJ
+        while(tempI > 0 and tempJ > 0):
+            tempI = tempI - 1
+            tempJ = tempJ - 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['Q', 'B']):
+                return(True)
+            else:
+                break
+
+        # check from diagonal upper right
+        tempI = kingI
+        tempJ = kingJ
+        while(tempI > 0 and tempJ < 7):
+            tempI = tempI - 1
+            tempJ = tempJ + 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['Q', 'B']):
+                return(True)
+            else:
+                break
+
+        # check from diagonal lower left
+        tempI = kingI
+        tempJ = kingJ
+        while(tempI < 7 and tempJ > 0):
+            tempI = tempI + 1
+            tempJ = tempJ - 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['Q', 'B']):
+                return(True)
+            else:
+                break
+
+        # check from diagonal lower right
+        tempI = kingI
+        tempJ = kingJ
+        while(tempI < 7 and tempJ < 7):
+            tempI = tempI + 1
+            tempJ = tempJ + 1
+            if(testBoard.grid[tempI][tempJ] == '_'):
+                continue
+            elif((testBoard.grid[tempI][tempJ]).isupper()):
+                break
+            elif(testBoard.grid[tempI][tempJ] in ['Q', 'B']):
+                return(True)
+            else:
+                break
+        
+        # check from knight
+        if(kingI < 6 and kingJ < 7 and testBoard.grid[kingI + 2][kingJ + 1] == 'H'):
+                return(True)
+        if(kingI < 6 and kingJ > 0 and testBoard.grid[kingI + 2][kingJ - 1] == 'H'):
+            return(True)
+        if(kingI < 7 and kingJ < 6 and testBoard.grid[kingI + 1][kingJ + 2] == 'H'):
+            return(True)
+        if(kingI < 7 and kingJ > 1 and testBoard.grid[kingI + 1][kingJ - 2] == 'H'):
+            return(True)
+        if(kingI > 1 and kingJ < 7 and testBoard.grid[kingI - 2][kingJ + 1] == 'H'):
+            return(True)
+        if(kingI > 1 and kingJ > 0 and testBoard.grid[kingI - 2][kingJ - 1] == 'H'):
+            return(True)
+        if(kingI > 0 and kingJ > 1 and testBoard.grid[kingI - 1][kingJ - 2] == 'H'):
+            return(True)
+        if(kingI > 0 and kingJ < 1 and testBoard.grid[kingI - 1][kingJ + 2] == 'H'):
+            return(True)
+
+
+        # the black king is not in check
+        return(False)
+
+    
         
 
     ###############################################################################
@@ -252,7 +621,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of an F pawn, not considering
+    # leaving king in check
     #
     ###############################################################################
     def fPawnWhiteMoves(self, i , j):
@@ -281,7 +651,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of an f pawn, not considering
+    # leaving king in check 
     #
     ###############################################################################
     def fPawnBlackMoves(self, i , j):
@@ -309,7 +680,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of an S pawn, not considering
+    # leaving king in check 
     #
     ###############################################################################
     def sPawnWhiteMoves(self, i , j):
@@ -333,7 +705,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of an s pawn, not considering
+    # leaving king in check 
     #
     ###############################################################################
     def sPawnBlackMoves(self, i , j):
@@ -356,7 +729,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of a P pawn, not considering
+    # leaving king in check 
     #
     ###############################################################################
     def pPawnWhiteMoves(self, i , j):
@@ -399,7 +773,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of a p pawn, not considering
+    # leaving king in check 
     #
     ###############################################################################
     def pPawnBlackMoves(self, i , j):
@@ -442,7 +817,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of a Q queen, not considering
+    # leaving king in check  
     #
     ###############################################################################
     def qQueenWhiteMoves(self, i , j):
@@ -561,7 +937,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of a q queen, not considering
+    # leaving king in check  
     #
     ###############################################################################
     def qQueenBlackMoves(self, i , j):
@@ -682,7 +1059,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of a U king, not considering
+    # leaving king in check   
     #
     ###############################################################################
     def uKingWhiteMoves(self, i , j):
@@ -713,7 +1091,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of a u king, not considering
+    # leaving king in check   
     #
     ###############################################################################
     def uKingBlackMoves(self, i , j):
@@ -748,7 +1127,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of a K king, not considering
+    # leaving king in check   
     #
     ###############################################################################
     def kKingWhiteMoves(self, i , j):
@@ -775,7 +1155,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of a k king, not considering
+    # leaving king in check  
     #
     ###############################################################################
     def kKingBlackMoves(self, i , j):
@@ -804,7 +1185,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of a B bishop, not considering
+    # leaving king in check  
     #
     ###############################################################################
     def bBishopWhiteMoves(self, i , j):
@@ -873,7 +1255,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of a b bishop, not considering
+    # leaving king in check  
     #
     ###############################################################################
     def bBishopBlackMoves(self, i , j):
@@ -943,7 +1326,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of an O rook, not considering
+    # leaving king in check  
     #
     ###############################################################################
     def oRookWhiteMoves(self, i , j):
@@ -981,7 +1365,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of an o rook, not considering
+    # leaving king in check 
     #
     ###############################################################################
     def oRookBlackMoves(self, i , j):
@@ -1019,7 +1404,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of an L rook, not considering
+    # leaving king in check 
     #
     ###############################################################################
     def lRookWhiteMoves(self, i , j):
@@ -1055,7 +1441,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of an l rook, not considering
+    # leaving king in check 
     #
     ###############################################################################
     def lRookBlackMoves(self, i , j):
@@ -1094,7 +1481,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of an R rook, not considering
+    # leaving king in check 
     #
     ###############################################################################
     def rRookWhiteMoves(self, i , j):
@@ -1156,7 +1544,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of an r rook, not considering
+    # leaving king in check 
     #
     ###############################################################################
     def rRookBlackMoves(self, i , j):
@@ -1221,7 +1610,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of an H knight, not considering
+    # leaving king in check 
     #
     ###############################################################################
     def hKnightWhiteMoves(self, i , j):
@@ -1249,7 +1639,8 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Generate all viable coordinates for the moves of an h knight, not considering
+    # leaving king in check 
     #
     ###############################################################################
     def hKnightBlackMoves(self, i , j):
@@ -1307,7 +1698,9 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Takes viable coordinates for any piece moving, can converts a list of those
+    # coordinates into a list of corresponding new boardStates that reflect 
+    # those moves after they take place
     #
     ###############################################################################
     def convertCoordsToBoards(self, i, j, coords):

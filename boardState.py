@@ -128,7 +128,7 @@ class boardState():
         self.blackInCheck = blackInCheck
         self.whiteMobility = 0                  # used for eval function            
         self.blackMobility = 0                  # used for eval function
-        self.evalValue = self.evaluationFunction()
+        self.evalValue = 0    #self.evaluationFunction()
 
 
 
@@ -260,12 +260,13 @@ class boardState():
     def isWhiteInCheckmate(self):
         for i in range(8):
             for j in range(8):
-                stub = 1
-        # tempList = self.generateAllWhiteMoves()
-        # if(len(tempList) == 0):
-        #     return(True)
-        # else:
-        #     return(False)
+                coordList = self.move(i, j, self.grid[i][j])
+                boardList = self.convertCoordsToBoards(i, j, coordList)
+                for x in boardList:
+                    if(x.isWhiteInCheck() == False):
+                        return(False)
+        return(True)
+        
 
     ###############################################################################
     #
@@ -273,12 +274,14 @@ class boardState():
     #
     ###############################################################################
     def isBlackInCheckmate(self):
-        stub = 1
-        # tempList = self.generateAllBlackMoves()
-        # if(len(tempList) == 0):
-        #     return(True)
-        # else:
-        #     return(False)
+        for i in range(8):
+            for j in range(8):
+                coordList = self.move(i, j, self.grid[i][j])
+                boardList = self.convertCoordsToBoards(i, j, coordList)
+                for x in boardList:
+                    if(x.isBlackInCheck() == False):
+                        return(False)
+        return(True)
 
 
     ###############################################################################

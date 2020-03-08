@@ -1,9 +1,9 @@
-# debugGuiA
+# debugGuiB
 
 import copy
 from tkinter import *
 
-class debugGuiA():
+class debugGuiB():
 
     def __init__(self, board):
         self.window = Tk()                              # window object

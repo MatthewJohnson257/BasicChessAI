@@ -1319,34 +1319,146 @@ class boardState():
 
             # regular move
             if(coords[2] == 0):
-                stub = 1
+                tempGrid[x[0]][x[1]] = tempGrid[i][j]
+                tempGrid[i][j] = '_'
+                boardList.append(boardState(tempGrid))
             
-            # pawn promotion
-            elif(coords[2] == 1):
-                stub = 1
+            else:
+                # pawn promotion
+                if(coords[2] == 1):
 
-            # en passant down left
-            elif(coords[2] == 2):
-                stub = 1
+                    # white pawn
+                    if(i == 1):
+                        tempGrid[x[0]][x[1]] = 'Q'
 
-            # en passant down right
-            elif(coords[2] == 3):
-                stub = 1
+                    # black pawn
+                    else:
+                        tempGrid[x[0]][x[1]] = 'q'
+                    
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
 
-            # en passant up left
-            elif(coords[2] == 4):
-                stub = 1
-            
-            # en passant up right
-            elif(coords[2] == 5):
-                stub = 1
+                # en passant down left
+                elif(coords[2] == 2):
+                    tempGrid[x[0]][x[1]] = 'p'
+                    tempGrid[i][j-1] = '_'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
 
-            # castle left
-            elif(coords[2] == 6):
-                stub = 1
+                # en passant down right
+                elif(coords[2] == 3):
+                    tempGrid[x[0]][x[1]] = 'p'
+                    tempGrid[i][j+1] = '_'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
 
-            # castle right
-            elif(coords[2] == 7):
-                stub = 1
+                # en passant up left
+                elif(coords[2] == 4):
+                    tempGrid[x[0]][x[1]] = 'P'
+                    tempGrid[i][j-1] = '_'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
+                
+                # en passant up right
+                elif(coords[2] == 5):
+                    tempGrid[x[0]][x[1]] = 'P'
+                    tempGrid[i][j+1] = '_'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
 
-        #return(boardList)
+                # castle left
+                elif(coords[2] == 6):
+
+                    # white king
+                    if(i == 7):
+                        tempGrid[x[0]][x[1]] = 'K'
+                        tempGrid[i][j-1] = 'R'
+
+                    # black king
+                    else:
+                        tempGrid[x[0]][x[1]] = 'k'
+                        tempGrid[i][j-1] = 'r'
+
+                    tempGrid[i][0] = '_'
+                    tempGrid[i][j] = '_' 
+                    boardList.append(boardState(tempGrid))
+
+                # castle right
+                elif(coords[2] == 7):
+                    
+                    # white king
+                    if(i == 7):
+                        tempGrid[x[0]][x[1]] = 'K'
+                        tempGrid[i][j+1] = 'R'
+
+                    # black king
+                    else:
+                        tempGrid[x[0]][x[1]] = 'k'
+                        tempGrid[i][j+1] = 'r'
+                    
+                    tempGrid[i][7] = '_'
+                    tempGrid[i][j] = '_' 
+                    boardList.append(boardState(tempGrid))
+
+                # F pawn move
+                elif(coords[2] == 8):
+                    tempGrid[x[0]][x[1]] = 'S'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
+
+                # f pawn move
+                elif(coords[2] == 9):
+                    tempGrid[x[0]][x[1]] = 's'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
+
+                # S pawn move
+                elif(coords[2] == 10):
+                    tempGrid[x[0]][x[1]] = 'P'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
+
+                # s pawn move
+                elif(coords[2] == 11):
+                    tempGrid[x[0]][x[1]] = 'p'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
+
+                # U king move
+                elif(coords[2] == 12):
+                    tempGrid[x[0]][x[1]] = 'K'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
+
+                # u king move
+                elif(coords[2] == 13):
+                    tempGrid[x[0]][x[1]] = 'k'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
+
+                # O rook move
+                elif(coords[2] == 14):
+                    tempGrid[x[0]][x[1]] = 'R'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
+
+                # o rook move
+                elif(coords[2] == 15):
+                    tempGrid[x[0]][x[1]] = 'r'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
+
+                # L rook move
+                elif(coords[2] == 16):
+                    tempGrid[x[0]][x[1]] = 'R'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
+
+                # l rook move
+                elif(coords[2] == 17):
+                    tempGrid[x[0]][x[1]] = 'r'
+                    tempGrid[i][j] = '_'
+                    boardList.append(boardState(tempGrid))
+
+
+        return(boardList)

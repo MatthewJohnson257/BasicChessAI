@@ -193,6 +193,7 @@ class boardState():
         totalEvaluation = whiteCount - blackCount + self.whiteMobility + self.blackMobility
         
         #print("Eval: ", totalEvaluation)
+        self.evalValue = totalEvaluation
         return(totalEvaluation)
 
 
@@ -289,42 +290,42 @@ class boardState():
     # Given a boardState, verify whether or not the black king is in check
     #
     ###############################################################################
-    def isWhiteInCheck(self, testBoard):
+    def isWhiteInCheck(self):
         kingI = -1
         kingJ = -1
 
         # find the coordinates of the white king
         for i in range(8):
             for j in range(8):
-                if(testBoard.grid[i][j] == 'K' or testBoard.grid[i][j] == 'U'):
+                if(self.grid[i][j] == 'K' or self.grid[i][j] == 'U'):
                     kingI = i
                     kingJ = j
                     break
         
         # checks pawn to the upper left
-        if(kingI > 0 and kingJ > 0 and (testBoard.grid[kingI - 1][kingJ - 1] in ['p', 'f', 's'])):
+        if(kingI > 0 and kingJ > 0 and (self.grid[kingI - 1][kingJ - 1] in ['p', 'f', 's'])):
             return(True)
 
         # check pawn to the upper right
-        if(kingI > 0 and kingJ < 0 and (testBoard.grid[kingI - 1][kingJ + 1] in ['p', 'f', 's'])):
+        if(kingI > 0 and kingJ < 0 and (self.grid[kingI - 1][kingJ + 1] in ['p', 'f', 's'])):
             return(True)
 
         # check all surroundings for kings
-        if(kingJ > 0 and (testBoard.grid[kingI][kingJ-1] == 'k' or testBoard.grid[kingI][kingJ-1] == 'u')):
+        if(kingJ > 0 and (self.grid[kingI][kingJ-1] == 'k' or self.grid[kingI][kingJ-1] == 'u')):
             return(True)
-        if(kingI > 0 and kingJ > 0 and (testBoard.grid[kingI-1][kingJ-1] == 'k' or testBoard.grid[kingI-1][kingJ-1] == 'u')):
+        if(kingI > 0 and kingJ > 0 and (self.grid[kingI-1][kingJ-1] == 'k' or self.grid[kingI-1][kingJ-1] == 'u')):
             return(True)
-        if(kingI > 0 and (testBoard.grid[kingI-1][kingJ] == 'k' or testBoard.grid[kingI-1][kingJ] == 'u')):
+        if(kingI > 0 and (self.grid[kingI-1][kingJ] == 'k' or self.grid[kingI-1][kingJ] == 'u')):
             return(True)
-        if(kingI > 0 and kingJ < 7 and (testBoard.grid[kingI-1][kingJ+1] == 'k' or testBoard.grid[kingI-1][kingJ+1] == 'u')):
+        if(kingI > 0 and kingJ < 7 and (self.grid[kingI-1][kingJ+1] == 'k' or self.grid[kingI-1][kingJ+1] == 'u')):
             return(True)
-        if(kingJ < 7 and (testBoard.grid[kingI][kingJ+1] == 'k' or testBoard.grid[kingI][kingJ+1] == 'u')):
+        if(kingJ < 7 and (self.grid[kingI][kingJ+1] == 'k' or self.grid[kingI][kingJ+1] == 'u')):
             return(True)
-        if(kingI < 7 and kingJ < 7 and (testBoard.grid[kingI+1][kingJ+1] == 'k' or testBoard.grid[kingI+1][kingJ+1] == 'u')):
+        if(kingI < 7 and kingJ < 7 and (self.grid[kingI+1][kingJ+1] == 'k' or self.grid[kingI+1][kingJ+1] == 'u')):
             return(True)
-        if(kingI < 7 and (testBoard.grid[kingI+1][kingJ] == 'k' or testBoard.grid[kingI+1][kingJ] == 'u')):
+        if(kingI < 7 and (self.grid[kingI+1][kingJ] == 'k' or self.grid[kingI+1][kingJ] == 'u')):
             return(True)
-        if(kingI < 7 and kingJ > 0 and (testBoard.grid[kingI+1][kingJ-1] == 'k' or testBoard.grid[kingI+1][kingJ-1] == 'u')):
+        if(kingI < 7 and kingJ > 0 and (self.grid[kingI+1][kingJ-1] == 'k' or self.grid[kingI+1][kingJ-1] == 'u')):
             return(True)
 
 
@@ -333,11 +334,11 @@ class boardState():
         tempJ = kingJ
         while(tempJ > 0):
             tempJ = tempJ - 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['q', 'l', 'o', 'r']):
+            elif(self.grid[tempI][tempJ] in ['q', 'l', 'o', 'r']):
                 return(True)
             else:
                 break
@@ -347,11 +348,11 @@ class boardState():
         tempJ = kingJ
         while(tempJ < 7):
             tempJ = tempJ + 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['q', 'l', 'o', 'r']):
+            elif(self.grid[tempI][tempJ] in ['q', 'l', 'o', 'r']):
                 return(True)
             else:
                 break
@@ -361,11 +362,11 @@ class boardState():
         tempJ = kingJ
         while(tempI > 0):
             tempI = tempI - 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['q', 'l', 'o', 'r']):
+            elif(self.grid[tempI][tempJ] in ['q', 'l', 'o', 'r']):
                 return(True)
             else:
                 break
@@ -375,11 +376,11 @@ class boardState():
         tempJ = kingJ
         while(tempI < 7):
             tempI = tempI + 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['q', 'l', 'o', 'r']):
+            elif(self.grid[tempI][tempJ] in ['q', 'l', 'o', 'r']):
                 return(True)
             else:
                 break
@@ -391,11 +392,11 @@ class boardState():
         while(tempI > 0 and tempJ > 0):
             tempI = tempI - 1
             tempJ = tempJ - 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['q', 'b']):
+            elif(self.grid[tempI][tempJ] in ['q', 'b']):
                 return(True)
             else:
                 break
@@ -406,11 +407,11 @@ class boardState():
         while(tempI > 0 and tempJ < 7):
             tempI = tempI - 1
             tempJ = tempJ + 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['q', 'b']):
+            elif(self.grid[tempI][tempJ] in ['q', 'b']):
                 return(True)
             else:
                 break
@@ -421,11 +422,11 @@ class boardState():
         while(tempI < 7 and tempJ > 0):
             tempI = tempI + 1
             tempJ = tempJ - 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['q', 'b']):
+            elif(self.grid[tempI][tempJ] in ['q', 'b']):
                 return(True)
             else:
                 break
@@ -436,31 +437,31 @@ class boardState():
         while(tempI < 7 and tempJ < 7):
             tempI = tempI + 1
             tempJ = tempJ + 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['q', 'b']):
+            elif(self.grid[tempI][tempJ] in ['q', 'b']):
                 return(True)
             else:
                 break
         
         # check from knight
-        if(kingI < 6 and kingJ < 7 and testBoard.grid[kingI + 2][kingJ + 1] == 'h'):
+        if(kingI < 6 and kingJ < 7 and self.grid[kingI + 2][kingJ + 1] == 'h'):
                 return(True)
-        if(kingI < 6 and kingJ > 0 and testBoard.grid[kingI + 2][kingJ - 1] == 'h'):
+        if(kingI < 6 and kingJ > 0 and self.grid[kingI + 2][kingJ - 1] == 'h'):
             return(True)
-        if(kingI < 7 and kingJ < 6 and testBoard.grid[kingI + 1][kingJ + 2] == 'h'):
+        if(kingI < 7 and kingJ < 6 and self.grid[kingI + 1][kingJ + 2] == 'h'):
             return(True)
-        if(kingI < 7 and kingJ > 1 and testBoard.grid[kingI + 1][kingJ - 2] == 'h'):
+        if(kingI < 7 and kingJ > 1 and self.grid[kingI + 1][kingJ - 2] == 'h'):
             return(True)
-        if(kingI > 1 and kingJ < 7 and testBoard.grid[kingI - 2][kingJ + 1] == 'h'):
+        if(kingI > 1 and kingJ < 7 and self.grid[kingI - 2][kingJ + 1] == 'h'):
             return(True)
-        if(kingI > 1 and kingJ > 0 and testBoard.grid[kingI - 2][kingJ - 1] == 'h'):
+        if(kingI > 1 and kingJ > 0 and self.grid[kingI - 2][kingJ - 1] == 'h'):
             return(True)
-        if(kingI > 0 and kingJ > 1 and testBoard.grid[kingI - 1][kingJ - 2] == 'h'):
+        if(kingI > 0 and kingJ > 1 and self.grid[kingI - 1][kingJ - 2] == 'h'):
             return(True)
-        if(kingI > 0 and kingJ < 1 and testBoard.grid[kingI - 1][kingJ + 2] == 'h'):
+        if(kingI > 0 and kingJ < 1 and self.grid[kingI - 1][kingJ + 2] == 'h'):
             return(True)
 
 
@@ -472,42 +473,42 @@ class boardState():
     # Given a boardState, verify whether or not the black king is in check
     #
     ###############################################################################
-    def isBlackInCheck(self, testBoard):
+    def isBlackInCheck(self):
         kingI = -1
         kingJ = -1
 
         # find the coordinates of the white king
         for i in range(8):
             for j in range(8):
-                if(testBoard.grid[i][j] == 'k' or testBoard.grid[i][j] == 'u'):
+                if(self.grid[i][j] == 'k' or self.grid[i][j] == 'u'):
                     kingI = i
                     kingJ = j
                     break
         
         # checks pawn to the lower left
-        if(kingI < 7 and kingJ > 0 and (testBoard.grid[kingI + 1][kingJ - 1] in ['P', 'F', 'S'])):
+        if(kingI < 7 and kingJ > 0 and (self.grid[kingI + 1][kingJ - 1] in ['P', 'F', 'S'])):
             return(True)
 
         # check pawn to the lower right
-        if(kingI < 7 and kingJ < 7 and (testBoard.grid[kingI + 1][kingJ + 1] in ['P', 'F', 'S'])):
+        if(kingI < 7 and kingJ < 7 and (self.grid[kingI + 1][kingJ + 1] in ['P', 'F', 'S'])):
             return(True)
 
         # check all surroundings for kings
-        if(kingJ > 0 and (testBoard.grid[kingI][kingJ-1] in ['K', 'U'])):
+        if(kingJ > 0 and (self.grid[kingI][kingJ-1] in ['K', 'U'])):
             return(True)
-        if(kingI > 0 and kingJ > 0 and (testBoard.grid[kingI-1][kingJ-1] in ['K', 'U'])):
+        if(kingI > 0 and kingJ > 0 and (self.grid[kingI-1][kingJ-1] in ['K', 'U'])):
             return(True)
-        if(kingI > 0 and (testBoard.grid[kingI-1][kingJ] in ['K', 'U'])):
+        if(kingI > 0 and (self.grid[kingI-1][kingJ] in ['K', 'U'])):
             return(True)
-        if(kingI > 0 and kingJ < 7 and (testBoard.grid[kingI-1][kingJ+1] in ['K', 'U'])):
+        if(kingI > 0 and kingJ < 7 and (self.grid[kingI-1][kingJ+1] in ['K', 'U'])):
             return(True)
-        if(kingJ < 7 and (testBoard.grid[kingI][kingJ+1] in ['K', 'U'])):
+        if(kingJ < 7 and (self.grid[kingI][kingJ+1] in ['K', 'U'])):
             return(True)
-        if(kingI < 7 and kingJ < 7 and (testBoard.grid[kingI+1][kingJ+1] in ['K', 'U'])):
+        if(kingI < 7 and kingJ < 7 and (self.grid[kingI+1][kingJ+1] in ['K', 'U'])):
             return(True)
-        if(kingI < 7 and (testBoard.grid[kingI+1][kingJ] in ['K', 'U'])):
+        if(kingI < 7 and (self.grid[kingI+1][kingJ] in ['K', 'U'])):
             return(True)
-        if(kingI < 7 and kingJ > 0 and (testBoard.grid[kingI+1][kingJ-1] in ['K', 'U'])):
+        if(kingI < 7 and kingJ > 0 and (self.grid[kingI+1][kingJ-1] in ['K', 'U'])):
             return(True)
 
 
@@ -516,11 +517,11 @@ class boardState():
         tempJ = kingJ
         while(tempJ > 0):
             tempJ = tempJ - 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['Q', 'L', 'O', 'R']):
+            elif(self.grid[tempI][tempJ] in ['Q', 'L', 'O', 'R']):
                 return(True)
             else:
                 break
@@ -530,11 +531,11 @@ class boardState():
         tempJ = kingJ
         while(tempJ < 7):
             tempJ = tempJ + 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['Q', 'L', 'O', 'R']):
+            elif(self.grid[tempI][tempJ] in ['Q', 'L', 'O', 'R']):
                 return(True)
             else:
                 break
@@ -544,11 +545,11 @@ class boardState():
         tempJ = kingJ
         while(tempI > 0):
             tempI = tempI - 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['Q', 'L', 'O', 'R']):
+            elif(self.grid[tempI][tempJ] in ['Q', 'L', 'O', 'R']):
                 return(True)
             else:
                 break
@@ -558,11 +559,11 @@ class boardState():
         tempJ = kingJ
         while(tempI < 7):
             tempI = tempI + 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['Q', 'L', 'O', 'R']):
+            elif(self.grid[tempI][tempJ] in ['Q', 'L', 'O', 'R']):
                 return(True)
             else:
                 break
@@ -574,11 +575,11 @@ class boardState():
         while(tempI > 0 and tempJ > 0):
             tempI = tempI - 1
             tempJ = tempJ - 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['Q', 'B']):
+            elif(self.grid[tempI][tempJ] in ['Q', 'B']):
                 return(True)
             else:
                 break
@@ -589,11 +590,11 @@ class boardState():
         while(tempI > 0 and tempJ < 7):
             tempI = tempI - 1
             tempJ = tempJ + 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['Q', 'B']):
+            elif(self.grid[tempI][tempJ] in ['Q', 'B']):
                 return(True)
             else:
                 break
@@ -604,11 +605,11 @@ class boardState():
         while(tempI < 7 and tempJ > 0):
             tempI = tempI + 1
             tempJ = tempJ - 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['Q', 'B']):
+            elif(self.grid[tempI][tempJ] in ['Q', 'B']):
                 return(True)
             else:
                 break
@@ -619,31 +620,31 @@ class boardState():
         while(tempI < 7 and tempJ < 7):
             tempI = tempI + 1
             tempJ = tempJ + 1
-            if(testBoard.grid[tempI][tempJ] == '_'):
+            if(self.grid[tempI][tempJ] == '_'):
                 continue
-            elif((testBoard.grid[tempI][tempJ]).isupper()):
+            elif((self.grid[tempI][tempJ]).isupper()):
                 break
-            elif(testBoard.grid[tempI][tempJ] in ['Q', 'B']):
+            elif(self.grid[tempI][tempJ] in ['Q', 'B']):
                 return(True)
             else:
                 break
         
         # check from knight
-        if(kingI < 6 and kingJ < 7 and testBoard.grid[kingI + 2][kingJ + 1] == 'H'):
+        if(kingI < 6 and kingJ < 7 and self.grid[kingI + 2][kingJ + 1] == 'H'):
                 return(True)
-        if(kingI < 6 and kingJ > 0 and testBoard.grid[kingI + 2][kingJ - 1] == 'H'):
+        if(kingI < 6 and kingJ > 0 and self.grid[kingI + 2][kingJ - 1] == 'H'):
             return(True)
-        if(kingI < 7 and kingJ < 6 and testBoard.grid[kingI + 1][kingJ + 2] == 'H'):
+        if(kingI < 7 and kingJ < 6 and self.grid[kingI + 1][kingJ + 2] == 'H'):
             return(True)
-        if(kingI < 7 and kingJ > 1 and testBoard.grid[kingI + 1][kingJ - 2] == 'H'):
+        if(kingI < 7 and kingJ > 1 and self.grid[kingI + 1][kingJ - 2] == 'H'):
             return(True)
-        if(kingI > 1 and kingJ < 7 and testBoard.grid[kingI - 2][kingJ + 1] == 'H'):
+        if(kingI > 1 and kingJ < 7 and self.grid[kingI - 2][kingJ + 1] == 'H'):
             return(True)
-        if(kingI > 1 and kingJ > 0 and testBoard.grid[kingI - 2][kingJ - 1] == 'H'):
+        if(kingI > 1 and kingJ > 0 and self.grid[kingI - 2][kingJ - 1] == 'H'):
             return(True)
-        if(kingI > 0 and kingJ > 1 and testBoard.grid[kingI - 1][kingJ - 2] == 'H'):
+        if(kingI > 0 and kingJ > 1 and self.grid[kingI - 1][kingJ - 2] == 'H'):
             return(True)
-        if(kingI > 0 and kingJ < 1 and testBoard.grid[kingI - 1][kingJ + 2] == 'H'):
+        if(kingI > 0 and kingJ < 1 and self.grid[kingI - 1][kingJ + 2] == 'H'):
             return(True)
 
 

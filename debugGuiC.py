@@ -3,6 +3,7 @@
 import copy
 from tkinter import *
 from boardState import boardState
+from adversarialTree import adversarialTree
 
 class debugGuiC():
 
@@ -12,6 +13,8 @@ class debugGuiC():
         self.selected = [False, 0, 0]                   # used when processing mouse clicks
         self.board = board                              # starting board for GUI
         self.ourTree = None
+
+        self.isComputersTurn = True                     # for taking turns
 
         # images in the GUI for different pieces
         self.images = [[None for x in range(8)] for y in range(8)]
@@ -46,7 +49,7 @@ class debugGuiC():
         self.ourTree = None
 
         # create adversarial search tree
-        self.ourTree = decisionTree(self.board, 4, 'w')
+        self.ourTree = adversarialTree(self.board, 4, 'w')
 
         print("****The AI is selecting a move -- PLEASE WAIT, DON'T CLICK ANYTHING PLEASE****")
 
@@ -74,42 +77,51 @@ class debugGuiC():
     ###############################################################################
     def mouseClicked(self, event, coords, newBoard):
 
-        if(self.selected[0] == False):
-            self.selected[1] = coords[0]
-            self.selected[2] = coords[1]
-            self.selected[0] = True
-
-            self.labels[self.selected[1]][self.selected[2]].config(bg = "gold")
-            viableCoords = []
-            viableCoords = self.board.move(self.selected[1], self.selected[2], self.board.grid[self.selected[1]][self.selected[2]])          
+        # the program requires one initial click before the AI can make a move
+        if(self.isComputersTurn == True):
+            self.isComputersTurn = False
+            self.computerMove()
 
 
-            for z in viableCoords:
-                self.labels[z[0]][z[1]].config(bg = "palegreen3")
-
+        # if it is the player's move:
         else:
-            self.selected[0] = False
 
-            # reset backgrounds
-            for i in range(8):
-                for j in range(8):
-                    self.labels[i][j].config(bg = self.backgrounds[i][j])
-            
-            viableCoords = []
-            viableCoords = self.board.move(self.selected[1], self.selected[2], self.board.grid[self.selected[1]][self.selected[2]])          
+            if(self.selected[0] == False):
+                self.selected[1] = coords[0]
+                self.selected[2] = coords[1]
+                self.selected[0] = True
+
+                self.labels[self.selected[1]][self.selected[2]].config(bg = "gold")
+                viableCoords = []
+                viableCoords = self.board.move(self.selected[1], self.selected[2], self.board.grid[self.selected[1]][self.selected[2]])          
 
 
-            # if you didn't select the same square twice
-            if(coords[0] != self.selected[1] or coords[1] != self.selected[2]):
+                for z in viableCoords:
+                    self.labels[z[0]][z[1]].config(bg = "palegreen3")
 
-                # if the selected square represents a valid move
-                for y in viableCoords:
-                    if(coords[0] == y[0] and coords[1] == y[1]):
-                        
-                        nextBoard = self.board.convertCoordsToBoards(self.selected[1], self.selected[2], [y])
+            else:
+                self.selected[0] = False
 
-                        # reset entire board
-                        self.initializePhotos(nextBoard[0])
+                # reset backgrounds
+                for i in range(8):
+                    for j in range(8):
+                        self.labels[i][j].config(bg = self.backgrounds[i][j])
+                
+                viableCoords = []
+                viableCoords = self.board.move(self.selected[1], self.selected[2], self.board.grid[self.selected[1]][self.selected[2]])          
+
+
+                # if you didn't select the same square twice
+                if(coords[0] != self.selected[1] or coords[1] != self.selected[2]):
+
+                    # if the selected square represents a valid move
+                    for y in viableCoords:
+                        if(coords[0] == y[0] and coords[1] == y[1]):
+                            
+                            nextBoard = self.board.convertCoordsToBoards(self.selected[1], self.selected[2], [y])
+
+                            # reset entire board
+                            self.initializePhotos(nextBoard[0])
 
 
 

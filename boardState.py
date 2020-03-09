@@ -254,7 +254,7 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Given a board, determine if the white king is in checkmate
     #
     ###############################################################################
     def isWhiteInCheckmate(self):
@@ -270,7 +270,7 @@ class boardState():
 
     ###############################################################################
     #
-    # 
+    # Given a board, determine if the black king is in checkmate
     #
     ###############################################################################
     def isBlackInCheckmate(self):
@@ -472,7 +472,7 @@ class boardState():
     # Given a boardState, verify whether or not the black king is in check
     #
     ###############################################################################
-    def isBlackInCheck(self):
+    def isBlackInCheck(self, testBoard):
         kingI = -1
         kingJ = -1
 
@@ -659,12 +659,19 @@ class boardState():
     #
     ###############################################################################
     def generateAllWhiteMoves(self):
-        boardList = []
-        # for i in range(8):
-        #     for j in range(8):
-        #         if(self.grid[i][j] == 'P'):
 
-        return(boardList)
+        ########################### NEED TO UPDATE THE S PAWNS ####################
+
+        boardList = []
+        for i in range(8):
+            for j in range(8):
+                if((self.grid[i][j]).isupper()):
+                    tempCoords = self.move(i, j, self.grid[i][j])
+                    tempBoards = self.convertCoordsToBoards(i, j, tempCoords)
+                    for x in tempBoards:
+                        if(x.isWhiteInCheck() == False):
+                            boardList.append(x)
+        return(boardList)       
 
 
 
@@ -674,7 +681,18 @@ class boardState():
     #
     ###############################################################################
     def generateAllBlackMoves(self):
+
+        ########################### NEED TO UPDATE THE S PAWNS ####################
+
         boardList = []
+        for i in range(8):
+            for j in range(8):
+                if((self.grid[i][j]).islower()):
+                    tempCoords = self.move(i, j, self.grid[i][j])
+                    tempBoards = self.convertCoordsToBoards(i, j, tempCoords)
+                    for x in tempBoards:
+                        if(x.isBlackInCheck() == False):
+                            boardList.append(x)
         return(boardList)
 
 

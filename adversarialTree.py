@@ -31,6 +31,8 @@ class adversarialTree():
             if(color == 'w'):
                 children = parentBoard.generateAllWhiteMoves()
                 tempChild = None
+                if(len(children) == 0):
+                    return(parentBoard)
                 for x in children:
 
                      # checks for an early checkmate and prioritizes that move
@@ -46,12 +48,17 @@ class adversarialTree():
                     if v >= beta:
                         return(x)
                     alpha = max(v, alpha)
-                return(tempChild)
+                if(tempChild != None):
+                    return(tempChild)
+                else:
+                    return(parentBoard)
 
             # if the color of the player at the maximizer is black
             else:
                 children = parentBoard.generateAllBlackMoves()
                 tempChild = None
+                if(len(children) == 0):
+                    return(parentBoard)
                 for x in children:
 
                     # checks for an early checkmate and prioritizes that move
@@ -68,7 +75,10 @@ class adversarialTree():
                     if v >= beta:
                         return(x)
                     alpha = max(v, alpha)
-                return(tempChild)
+                if(tempChild != None):
+                    return(tempChild)
+                else:
+                    return(parentBoard)
             
 
     ###############################################################################
@@ -85,6 +95,8 @@ class adversarialTree():
             if(color == 'w'):
                 children = parentBoard.generateAllWhiteMoves()
                 tempChild = None
+                if(len(children) == 0):
+                    return(parentBoard)
                 for x in children:
                     if(depth == 0):
                         if(x.isBlackInCheckmate()):
@@ -99,10 +111,15 @@ class adversarialTree():
                     if v <= alpha:
                         return(x)
                     beta = min(v, beta)
-                return(tempChild)
+                if(tempChild != None):
+                    return(tempChild)
+                else:
+                    return(parentBoard)
             else:
                 children = parentBoard.generateAllBlackMoves()
                 tempChild = None
+                if(len(children) == 0):
+                    return(parentBoard)
                 for x in children:
 
                     if(depth == 0):
@@ -117,7 +134,10 @@ class adversarialTree():
                     if v <= alpha:
                         return(x)
                     beta = min(v, beta)
-                return(tempChild)
+                if(tempChild != None):
+                    return(tempChild)
+                else:
+                    return(parentBoard)
 
 
     ###############################################################################

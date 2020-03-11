@@ -146,40 +146,40 @@ class boardState():
         for i in range(8):
             for j in range(8):
                 if self.grid[i][j] != '_':
-                    if self.grid[i][j] == 'P':
+                    if(self.grid[i][j] in ['P', 'F', 'S']):
                         whiteCount = whiteCount + 100
                         self.whiteMobility = self.whiteMobility + boardState.pEval[i][j]
-                    elif self.grid[i][j] == 'H':
+                    elif (self.grid[i][j] == 'H'):
                         whiteCount = whiteCount + 320
                         self.whiteMobility = self.whiteMobility + boardState.nEval[i][j]
-                    elif self.grid[i][j] == 'B':
+                    elif (self.grid[i][j] == 'B'):
                         whiteCount = whiteCount + 330
                         self.whiteMobility = self.whiteMobility + boardState.bEval[i][j]
-                    elif self.grid[i][j] == 'Q':
+                    elif (self.grid[i][j] == 'Q'):
                         whiteCount = whiteCount + 900
                         self.whiteMobility = self.whiteMobility + boardState.qEval[i][j]
-                    elif self.grid[i][j] == 'R':
+                    elif (self.grid[i][j] in ['R', 'L', 'O']):
                         whiteCount = whiteCount + 500
                         self.whiteMobility = self.whiteMobility + boardState.rEval[i][j]
-                    elif self.grid[i][j] == 'K':
+                    elif (self.grid[i][j] in ['K', 'U']):
                         whiteCount = whiteCount + 20000
                         self.whiteMobility = self.whiteMobility + boardState.kEval[i][j]
-                    elif self.grid[i][j] == 'p':
+                    elif (self.grid[i][j] in ['p', 'f', 's']):
                         blackCount = blackCount + 100
                         self.blackMobility = self.blackMobility + boardState.rEval[i][j]
-                    elif self.grid[i][j] == 'h':
+                    elif (self.grid[i][j] == 'h'):
                         blackCount = blackCount + 320
                         self.blackMobility = self.blackMobility + boardState.rEval[i][j]
-                    elif self.grid[i][j] == 'b':
+                    elif (self.grid[i][j] == 'b'):
                         blackCount = blackCount + 330
                         self.blackMobility = self.blackMobility + boardState.rEval[i][j]
-                    elif self.grid[i][j] == 'q':
+                    elif (self.grid[i][j] == 'q'):
                         blackCount = blackCount + 900
                         self.blackMobility = self.blackMobility + boardState.rEval[i][j]
-                    elif self.grid[i][j] == 'r':
+                    elif (self.grid[i][j] in ['r', 'l', 'o']):
                         blackCount = blackCount + 500
                         self.blackMobility = self.blackMobility + boardState.rEval[i][j]
-                    elif self.grid[i][j] == 'k':
+                    elif (self.grid[i][j] in ['k', 'u']):
                         blackCount = blackCount + 20000
                         self.blackMobility = self.blackMobility + boardState.rEval[i][j]
 

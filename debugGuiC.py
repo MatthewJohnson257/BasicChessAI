@@ -64,6 +64,8 @@ class debugGuiC():
                     if(self.board.grid[i][j] != None):
                         if((self.board.grid[i][j].id == 'k' and self.board.isBlackInCheckmate()) or (self.board.grid[i][j].id == 'K' and self.board.isWhiteInCheckmate())):
                             self.backgrounds[i][j] = "red"
+
+        #self.board.printBoard()
         self.initializePhotos(self.board)
 
 
@@ -122,6 +124,8 @@ class debugGuiC():
 
                             # reset entire board
                             self.initializePhotos(nextBoard[0])
+                    
+                            self.isComputersTurn = True
 
 
 

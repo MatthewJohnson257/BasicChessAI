@@ -32,6 +32,7 @@ class adversarialTree():
                 children = parentBoard.generateAllWhiteMoves()
                 tempChild = None
                 if(len(children) == 0):
+                    print("this happens 1")
                     return(parentBoard)
                 for x in children:
 
@@ -42,15 +43,23 @@ class adversarialTree():
                             return(x)
                                        
                     # calls minimizer node if maximum depth has not yet been reached
-                    v = max(v, self.minNode(x, alpha, beta, 'b', depth + 1).evaluationFunction(), parentBoard.evaluationFunction())
-                    if(v == x.evaluationFunction()):
+                    nextLevel = self.minNode(x, alpha, beta, 'b', depth + 1)
+                    v = max(v, nextLevel.evaluationFunction())#, parentBoard.evaluationFunction())
+                    #tempChild = x
+                    if(depth == 0):
+                        print("child processed, eval:", nextLevel.evalValue, "   v:", v)
+                    if(v == nextLevel.evalValue and depth == 0):
+                        print("THis should BE ALRIGHT")
                         tempChild = x
                     if v >= beta:
                         return(x)
                     alpha = max(v, alpha)
                 if(tempChild != None):
+                    #print("DODODODDODO")
                     return(tempChild)
                 else:
+                    if(depth == 0):
+                        print("this happens 2")
                     return(parentBoard)
 
             # if the color of the player at the maximizer is black
@@ -58,6 +67,7 @@ class adversarialTree():
                 children = parentBoard.generateAllBlackMoves()
                 tempChild = None
                 if(len(children) == 0):
+                    print("this happens 3")
                     return(parentBoard)
                 for x in children:
 
@@ -78,6 +88,7 @@ class adversarialTree():
                 if(tempChild != None):
                     return(tempChild)
                 else:
+                    print("this happens 4")
                     return(parentBoard)
             
 
@@ -96,6 +107,7 @@ class adversarialTree():
                 children = parentBoard.generateAllWhiteMoves()
                 tempChild = None
                 if(len(children) == 0):
+                    print("this happens 5")
                     return(parentBoard)
                 for x in children:
                     if(depth == 0):
@@ -105,7 +117,7 @@ class adversarialTree():
 
 
                     # calls maximizer node if maximum depth has not yet been reached
-                    v = min(v, self.maxNode(x, alpha, beta, 'b', depth + 1).evaluationFunction(), parentBoard.evaluationFunction())
+                    v = min(v, self.maxNode(x, alpha, beta, 'b', depth + 1).evaluationFunction())#, parentBoard.evaluationFunction())
                     if(v == x.evaluationFunction()):
                         tempChild = x
                     if v <= alpha:
@@ -114,11 +126,13 @@ class adversarialTree():
                 if(tempChild != None):
                     return(tempChild)
                 else:
+                    print("this happens 6")
                     return(parentBoard)
             else:
                 children = parentBoard.generateAllBlackMoves()
                 tempChild = None
                 if(len(children) == 0):
+                    print("this happens 7")
                     return(parentBoard)
                 for x in children:
 
@@ -128,7 +142,7 @@ class adversarialTree():
                             return(x)
 
                     # calls maximizer node if maximum depth has not yet been reached
-                    v = min(v, self.maxNode(x, alpha, beta, 'w', depth + 1).evaluationFunction(), parentBoard.evaluationFunction())
+                    v = min(v, self.maxNode(x, alpha, beta, 'w', depth + 1).evaluationFunction())#, parentBoard.evaluationFunction())
                     if(v == x.evaluationFunction()):
                         tempChild = x
                     if v <= alpha:
@@ -137,6 +151,7 @@ class adversarialTree():
                 if(tempChild != None):
                     return(tempChild)
                 else:
+                    #print("this happens 8")
                     return(parentBoard)
 
 
